@@ -1,13 +1,20 @@
 extends Node
 
-# World Objects
-# Map
-# Trucks
+# Meteor strikes
+# 3D world?
+# Constructing new world objects
+# Constructing roads
+# Tileset
+# Regions/Biomes
+# Factions
+# AI
+# Convoy interceptions
 
 const FLOOR_LAYER:int = 0
 
 signal world_ready
 signal new_object(world_object)
+signal removed_object(world_object)
 
 var world_objects:Array[WorldObject]
 
@@ -25,12 +32,16 @@ func _ready():
 	rates.append(ItemRate.new("Brick",0.5))
 	var producer = Producer.new(rates)
 	test.add_production(producer)
-	# test.add_production(producer1)
+	test.add_production(producer1)
 	world_objects.append(test)
 	
 	var second = WorldObject.new()
 	second.world_position = Vector2(315,72)
 	world_objects.append(second)
+	
+	var waffle = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new()
+	waffle.world_position = Vector2(172,162)
+	world_objects.append(waffle)
 	
 	initialize_astar()
 	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)
@@ -56,6 +67,10 @@ func _on_world_update_timeout():
 func add_world_object(object:WorldObject) -> void:
 	world_objects.append(object)
 	emit_signal("new_object", object)
+
+func remove_world_object(object:WorldObject) -> void:
+	world_objects.erase(object)
+	emit_signal("removed_object", object)
 
 func create_timer() -> Timer:
 	var timer = Timer.new()

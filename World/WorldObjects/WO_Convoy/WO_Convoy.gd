@@ -1,8 +1,5 @@
 extends WorldObject
 
-#var tile_position:Vector2 = Vector2(0,0)
-var vehicles:Array[Vehicle] = []
-
 var origin:WorldObject = null
 var destination:WorldObject = null
 
@@ -20,12 +17,23 @@ func name() -> String:
 	
 func map_texture() -> Texture2D:
 	return load("res://World/WorldObjects/WO_Convoy/truck.png")
-	
+
+func info() -> PackedStringArray:
+	var arr:PackedStringArray = [name()]
+	if origin != null:
+		arr.append(origin.name())
+	if destination != null:
+		arr.append(destination.name())
+	return arr
+
 func update()->void:
 	return
 	
-func options()->PackedStringArray:
-	return ["Return to origin"]
+func options()->Array[WorldObjectOption]:
+	return [WorldObjectOption.new("Return To Origin"),
+			#WorldObjectOption.new("Change Destination"),
+			WorldObjectOption.new("Speed Boost"),
+	]
 
 func init(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:WorldObject):
 	vehicles = _vehicles
@@ -37,7 +45,7 @@ func init(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:WorldObject)
 	new_destination(_destination)
 
 func new_destination(new_dest:WorldObject):
-	print("new destination: ", new_dest.name)
+	# print("new destination: ", new_dest.name)
 	timer.stop()
 	destination = new_dest
 	if destination.has_signal("moved_to"):
@@ -45,7 +53,7 @@ func new_destination(new_dest:WorldObject):
 	var tile_pos = Global.world.tilemap.local_to_map(world_position)
 	var dest_tile_pos = Global.world.tilemap.local_to_map(destination.world_position)
 	path = Global.world.astar.get_id_path(tile_pos, dest_tile_pos)
-	print("path: ", path)
+	# print("path: ", path)
 	path_index = 0
 	timer.start(max_speed)
 
@@ -75,6 +83,8 @@ func _destination_reached()->void:
 	path_index = 0
 	timer.queue_free()
 	emit_signal("destination_reached")
+	destination.add_vehicles(vehicles)
+	Global.world.remove_world_object(self)
 
 func destination_moved()->void:
 	new_destination(destination)
@@ -83,9 +93,9 @@ func map_sprite()->Texture2D:
 	# place each of the vehicles in formation. how? idk
 	return load("res://World/WorldObjects/WO_Convoy/truck.png")
 
-func option_chosen(option:String)->void:
-	print(option)
-	if option == "Return to origin":
+func option_chosen(option:WorldObjectOption)->void:
+	print(option.option_name)
+	if option.option_name == "Return To Origin":
 		new_destination(origin)
-	else:
+	if option.option_name == "Speed Boost":
 		pass

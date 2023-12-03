@@ -4,6 +4,7 @@ class_name WorldObject
 var world_position:Vector2
 var producers:Array[Producer]
 var storage:Dictionary
+var vehicles:Array[Vehicle]
 
 signal moved
 
@@ -12,6 +13,13 @@ func name() -> String:
 
 func map_texture() -> Texture2D:
 	return load("res://World/WorldObjects/WO_Test/wo.png")
+
+func info() -> PackedStringArray:
+	var arr:PackedStringArray = [name()]
+	for item in storage:
+		var s = item + ": " + str(storage[item])
+		arr.append(s)
+	return arr
 
 func update()->void:
 	for producer in producers:
@@ -33,11 +41,17 @@ func update()->void:
 func additional_updates() -> void:
 	pass
 
-func options()->PackedStringArray:
-	return ["1","2","3","4","5"]
+func options()->Array[WorldObjectOption]:
+	return []
+
+func option_chosen(option:WorldObjectOption) -> void:
+	return
 
 func add_production(producer:Producer) -> void:
 	producers.append(producer)
+
+func add_vehicles(new_vehicles:Array[Vehicle]) -> void:
+	vehicles.append_array(new_vehicles)
 
 func launch_convoy(vehicles:Array[Vehicle],destination:WorldObject)->void:
 	#print("launching convoy")

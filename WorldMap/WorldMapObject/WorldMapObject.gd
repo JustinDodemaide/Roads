@@ -1,6 +1,7 @@
 extends Node2D
 class_name WorldMapObject
 
+var map
 var world_object:WorldObject
 var selected:bool = false
 
@@ -20,14 +21,14 @@ func select() -> void:
 	deselect()
 	selected = true
 	for i in world_object.options():
-		$Options.text += i + "\n"
+		$Options.text += i.option_name + "\n"
 	$Stats.text = stats()
 	$Stats.visible = true
 	
 	# REMOVE LATER
 	var dest = Global.world.world_objects.back()
 	world_object.launch_convoy([],dest)
-	
+
 func deselect() -> void:
 	selected = false
 	$Options.text = ""
