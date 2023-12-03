@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7jeihhuf8v02"]
+
+[ext_resource type="Script" path="res://WorldMap/WorldMap.gd" id="1_qk3q1"]
+[ext_resource type="Script" path="res://WorldMap/WorldMapCamera.gd" id="2_d8j44"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vobcc"]
+
+[node name="WorldMap" type="Node"]
+script = ExtResource("1_qk3q1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("2_d8j44")
+
+[node name="Cursor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_vobcc")
+
+[node name="Options" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Stats" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
