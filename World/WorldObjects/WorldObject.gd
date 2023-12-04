@@ -6,6 +6,9 @@ var producers:Array[Producer]
 var storage:Dictionary
 var vehicles:Array[Vehicle]
 
+var level_id:int = 0
+# A level id of 0 means a level must be generated for this object
+
 signal moved
 
 func name() -> String:
@@ -53,8 +56,11 @@ func add_production(producer:Producer) -> void:
 func add_vehicles(new_vehicles:Array[Vehicle]) -> void:
 	vehicles.append_array(new_vehicles)
 
-func launch_convoy(vehicles:Array[Vehicle],destination:WorldObject)->void:
+func launch_convoy(v:Array[Vehicle],destination:WorldObject)->void:
 	#print("launching convoy")
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
 	Global.world.add_world_object(convoy)
-	convoy.init(vehicles,self,destination)
+	convoy.init(v,self,destination)
+
+func generate_level() -> void:
+	pass

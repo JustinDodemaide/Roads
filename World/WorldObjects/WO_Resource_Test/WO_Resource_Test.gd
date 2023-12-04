@@ -23,9 +23,3 @@ func add_production(producer:Producer) -> void:
 
 func add_vehicles(new_vehicles:Array[Vehicle]) -> void:
 	vehicles.append_array(new_vehicles)
-
-func launch_convoy(vehicles:Array[Vehicle],destination:WorldObject)->void:
-	#print("launching convoy")
-	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
-	Global.world.add_world_object(convoy)
-	convoy.init(vehicles,self,destination)

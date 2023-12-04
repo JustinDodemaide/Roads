@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq2g7oxrc26m"]
+
+[ext_resource type="Script" path="res://Level/Level.gd" id="1_wni3i"]
+[ext_resource type="Texture2D" uid="uid://blhiy0e4cpggk" path="res://Level/test/oven1.png" id="2_mnh7u"]
+[ext_resource type="PackedScene" uid="uid://dyqdy73hvxk7t" path="res://Level/PlayerCharacter/PlayerCharacter.tscn" id="2_rj1kf"]
+[ext_resource type="PackedScene" uid="uid://dig0gdmpvw7n6" path="res://Level/LevelObjects/LO_Test/LO_Test.tscn" id="4_qrf8s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7rk8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_217au"]
+size = Vector2(357, 20)
+
+[node name="Level" type="Node"]
+script = ExtResource("1_wni3i")
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -36.0
+offset_right = 72.0
+offset_bottom = 36.0
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_mnh7u")
+
+[node name="Cursor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+shape = SubResource("RectangleShape2D_o7rk8")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_rj1kf")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(506, 311)
+shape = SubResource("RectangleShape2D_217au")
+
+[node name="LO_Test" parent="." instance=ExtResource("4_qrf8s")]
+position = Vector2(373, 224)
+
+[connection signal="pressed" from="UI/VBoxContainer/Button" to="." method="_on_button_pressed"]

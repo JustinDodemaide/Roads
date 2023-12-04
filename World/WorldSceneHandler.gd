@@ -1,10 +1,10 @@
 extends StateMachine
 
 func _on_world_ready():
-	state = load("res://WorldMap/WorldMap.tscn").instantiate()
+	state = load("res://Level/Level.tscn").instantiate()
 	state.state_machine = self
 	add_child(state)
-	state.enter()
+	state.enter({"WorldObject": Global.world.world_objects.front()})
 	emit_signal("transitioned", state.name)
 
 func transition_to(target_scene_path:String, msg:Dictionary = {}) -> void:

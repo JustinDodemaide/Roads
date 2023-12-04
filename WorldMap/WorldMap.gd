@@ -16,7 +16,7 @@ func exit()->void:
 
 func _process(delta):
 	$Cursor.position = Global.world.tilemap.get_global_mouse_position()
-	$UI/GeneralInfo/WorldPosition.text = "(" + str($Cursor.position.x) + ", " + str($Cursor.position.y) + ")"
+	$UI/GeneralInfo/WorldPosition.text = "(" + str(round($Cursor.position.x)) + ", " + str(round($Cursor.position.y)) + ")"
 
 func _input(event):
 	if event.is_action_pressed("LeftClick"):
@@ -27,6 +27,9 @@ func _input(event):
 			pass
 			# Need a way to not deselect when clicking UI
 			#deselect()
+	
+	if event.is_action_pressed("M"):
+		state_machine.transition_to("res://Level/Level.tscn")
 
 func select(map_object:WorldMapObject) -> void:
 	selected_object = map_object
