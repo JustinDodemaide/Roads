@@ -7,3 +7,7 @@ script = ExtResource("1_d01dm")
 
 [node name="Outline" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.411765, 0.411765, 0.411765, 0.517647)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

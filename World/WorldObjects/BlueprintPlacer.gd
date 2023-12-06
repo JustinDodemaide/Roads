@@ -36,5 +36,5 @@ func _input(event):
 		var blueprint = load("res://World/WorldObjects/LO_Blueprint.tscn").instantiate()
 		blueprint.init(object_scene)
 		blueprint.position = position
-		Global.level.add_child(blueprint)
+		Global.level.add_level_object(blueprint)
 		queue_free()

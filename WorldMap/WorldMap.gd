@@ -29,7 +29,7 @@ func _input(event):
 			#deselect()
 	
 	if event.is_action_pressed("M"):
-		state_machine.transition_to("res://Level/Level.tscn")
+		state_machine.transition_to("res://Level/Level.tscn",  {"WorldObject": Global.world.world_objects.front()})
 
 func select(map_object:WorldMapObject) -> void:
 	selected_object = map_object

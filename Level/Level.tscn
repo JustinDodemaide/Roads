@@ -31,10 +31,18 @@ grow_vertical = 2
 layout_mode = 2
 icon = ExtResource("2_mnh7u")
 
+[node name="Inventory" type="HBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Cursor" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
 shape = SubResource("RectangleShape2D_o7rk8")
+
+[node name="CursorLabel" type="Label" parent="Cursor"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_rj1kf")]
 
@@ -44,7 +52,9 @@ shape = SubResource("RectangleShape2D_o7rk8")
 position = Vector2(506, 311)
 shape = SubResource("RectangleShape2D_217au")
 
-[node name="LO_Test" parent="." instance=ExtResource("4_qrf8s")]
+[node name="LevelObjects" type="Node" parent="."]
+
+[node name="LO_Test" parent="LevelObjects" instance=ExtResource("4_qrf8s")]
 position = Vector2(373, 224)
 
 [connection signal="pressed" from="UI/VBoxContainer/Button" to="." method="_on_button_pressed"]

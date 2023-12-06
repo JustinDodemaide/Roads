@@ -10,6 +10,16 @@ func is_interaction_valid(interactor) -> bool:
 	return true
 
 func interact(interactor) -> void:
-	var world_object = Global.level.world_object
-	var v:Array[Vehicle]
-	world_object.launch_convoy(world_object.vehicles,Global.world.world_objects.back())
+	pass
+
+func _on_area_2d_area_entered(area):
+	if area.get_parent() is PlayerCharacter:
+		pass
+
+func components() -> Dictionary:
+	#{item: amount}
+	return {"Waffle": 1}
+
+func producers() -> Array[Producer]:
+	var rate = ItemRate.new("Waffle",1)
+	return [Producer.new([rate])]
