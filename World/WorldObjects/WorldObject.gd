@@ -6,10 +6,13 @@ var producers:Array[Producer]
 var storage:Dictionary
 var vehicles:Array[Vehicle]
 
-var level_id:int = 0
-# A level id of 0 means a level must be generated for this object
+var level_id:int = 0 # A level id of 0 means a level must be generated for this object
+var faction:String
 
 signal moved
+
+func _init(initial_faction:String) -> void:
+	faction = initial_faction
 
 func name() -> String:
 	return "Test"
@@ -45,10 +48,14 @@ func additional_updates() -> void:
 	pass
 
 func options()->Array[WorldObjectOption]:
-	return []
+	var o:Array[WorldObjectOption] = []
+	if Global.level.world_object != self and faction == "PLAYER":
+		o.append(WorldObjectOption.new("Go to location"))
+	return o
 
 func option_chosen(option:WorldObjectOption) -> void:
-	return
+	if option.option_name == "Go to location":
+		Global.scene_handler.transition_to("res://Level/Level.tscn",{"WorldObject":self})
 
 func add_production(producer:Producer) -> void:
 	producers.append(producer)
@@ -58,7 +65,7 @@ func add_vehicles(new_vehicles:Array[Vehicle]) -> void:
 
 func launch_convoy(v:Array[Vehicle],destination:WorldObject)->void:
 	#print("launching convoy")
-	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
+	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new(faction)
 	Global.world.add_world_object(convoy)
 	convoy.init(v,self,destination)
 

@@ -24,24 +24,11 @@ var world_objects:Array[WorldObject]
 
 func _ready():
 	Global.world = self
-	var test = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new()
-	var producer1 = Producer.new([ItemRate.new("Clay",1)],0)
-	
-	var rates:Array[ItemRate] = []
-	rates.append(ItemRate.new("Clay",-1))
-	rates.append(ItemRate.new("Brick",0.5))
-	var producer = Producer.new(rates,0)
-	#test.add_production(producer)
-	#test.add_production(producer1)
+	var test = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new("PLAYER")
 	world_objects.append(test)
-	
-	var second = WorldObject.new()
-	second.world_position = Vector2(315,72)
-	world_objects.append(second)
-	
-	var waffle = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new()
-	waffle.world_position = Vector2(172,162)
-	world_objects.append(waffle)
+	var test1 = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new("PLAYER")
+	test1.world_position = Vector2(264,134)
+	world_objects.append(test1)
 	
 	initialize_astar()
 	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)

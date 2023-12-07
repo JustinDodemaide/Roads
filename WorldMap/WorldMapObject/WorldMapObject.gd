@@ -41,3 +41,11 @@ func stats() -> String:
 		string += item + ": "
 		string += str(items[item]) + "\n"
 	return string
+
+func _process(delta):
+	if Global.player_location == world_object:
+		$PlayerIndicator.visible = true
+	else:
+		$PlayerIndicator.visible = false
+	$Label.text = ""
+	$Label.text += str(world_object.level_id) + "\n"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq2g7oxrc26m"]
+[gd_scene load_steps=5 format=3 uid="uid://bq2g7oxrc26m"]
 
 [ext_resource type="Script" path="res://Level/Level.gd" id="1_wni3i"]
 [ext_resource type="Texture2D" uid="uid://blhiy0e4cpggk" path="res://Level/test/oven1.png" id="2_mnh7u"]
@@ -6,16 +6,14 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o7rk8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_217au"]
-size = Vector2(357, 20)
-
 [node name="Level" type="Node"]
 script = ExtResource("1_wni3i")
 
-[node name="PlayerSpawn" type="Marker2D" parent="."]
-
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_rj1kf")]
+position = Vector2(313, 171)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -44,15 +42,6 @@ shape = SubResource("RectangleShape2D_o7rk8")
 [node name="CursorLabel" type="Label" parent="Cursor"]
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("2_rj1kf")]
-position = Vector2(313, 171)
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(506, 311)
-shape = SubResource("RectangleShape2D_217au")
 
 [node name="LevelObjects" type="Node" parent="."]
 

@@ -12,12 +12,6 @@ func update()->void:
 func additional_updates() -> void:
 	pass
 
-func options()->Array[WorldObjectOption]:
-	return []
-
-func option_chosen(option:WorldObjectOption) -> void:
-	return
-
 func add_production(producer:Producer) -> void:
 	producers.append(producer)
 

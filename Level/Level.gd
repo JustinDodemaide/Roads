@@ -18,13 +18,13 @@ func enter(_msg:Dictionary = {})->void:
 	if world_object.level_id == 0:
 		world_object.generate_level()
 	Global.level = self
+	Global.player_location = world_object
 	load_level(world_object.level_id)
 	$PlayerCharacter.held_item = ItemStack.new(load("res://Items/Waffle/Item_Waffle.gd").new())
 	# $PlayerCharacter.add_item(ItemStack.new(load("res://Items/Waffle/Item_Waffle.gd").new()))
 
 func exit()->void:
 	save()
-	pass
 
 func _process(_delta):
 	$Cursor.position = Global.world.tilemap.get_global_mouse_position()
@@ -48,7 +48,7 @@ func _input(event):
 					parent.interact($PlayerCharacter)
 					break
 	if event.is_action_pressed("M"):
-		state_machine.transition_to("res://WorldMap/WorldMap.tscn")
+		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")
 	if event.is_action_pressed("1"):
 		test()
 
@@ -96,6 +96,7 @@ func load_level(id:int) -> void:
 	#return
 	if id == 0:
 		generate_level()
+		return
 	
 	var file_path:String = "user://" + "Level" + str(world_object.level_id) + ".save"
 	if not FileAccess.file_exists(file_path):
@@ -113,7 +114,6 @@ func load_level(id:int) -> void:
 		var new_object = load(data["filepath"]).instantiate()
 		new_object._load(data)
 		get_node(data["parent"]).add_child(new_object)
-	print($LevelObjects.get_children())
 
 func generate_level() -> void:
-	pass
+	world_object.level_id = get_instance_id()

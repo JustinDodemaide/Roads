@@ -1,5 +1,10 @@
 extends LevelObject
 
+func _ready():
+	if id == 0:
+		id = get_instance_id()
+	$Label.text = str(id)
+
 func name() -> String:
 	return "Test"
 
