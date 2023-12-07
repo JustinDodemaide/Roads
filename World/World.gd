@@ -25,14 +25,14 @@ var world_objects:Array[WorldObject]
 func _ready():
 	Global.world = self
 	var test = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new()
-	var producer1 = Producer.new([ItemRate.new("Clay",1)])
+	var producer1 = Producer.new([ItemRate.new("Clay",1)],0)
 	
 	var rates:Array[ItemRate] = []
 	rates.append(ItemRate.new("Clay",-1))
 	rates.append(ItemRate.new("Brick",0.5))
-	var producer = Producer.new(rates)
-	test.add_production(producer)
-	test.add_production(producer1)
+	var producer = Producer.new(rates,0)
+	#test.add_production(producer)
+	#test.add_production(producer1)
 	world_objects.append(test)
 	
 	var second = WorldObject.new()

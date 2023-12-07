@@ -1,5 +1,10 @@
-extends Node
+extends Node2D
 class_name LevelObject
+
+var id:int
+
+func _ready():
+	id = get_instance_id()
 
 func _name() -> String:
 	return "Level Object"
@@ -24,3 +29,28 @@ func get_collision_shape() -> Shape2D:
 
 func producers() -> Array[Producer]:
 	return []
+
+func save() -> Dictionary:
+	var save:Dictionary = {
+		"filepath": get_scene_file_path(),
+		"parent": "LevelObjects",
+		"x": position.x,
+		"y": position.y,
+		"id": id,
+	}
+	save_additional_fields(save)
+	return save
+
+func save_additional_fields(save:Dictionary) -> void: # Modifies the dictionary reference
+	pass
+
+func _load(data:Dictionary) -> void:
+	position = Vector2(data["x"], data["y"])
+	id = data["id"]
+	additional_load_fields(data)
+
+func additional_load_fields(data:Dictionary) -> void:
+	pass
+
+func _to_string():
+	return "Level Object " + _name()

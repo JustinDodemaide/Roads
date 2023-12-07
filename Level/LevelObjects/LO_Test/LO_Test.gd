@@ -10,11 +10,7 @@ func is_interaction_valid(interactor) -> bool:
 	return true
 
 func interact(interactor) -> void:
-	pass
-
-func _on_area_2d_area_entered(area):
-	if area.get_parent() is PlayerCharacter:
-		pass
+	Global.level.remove_level_object(self)
 
 func components() -> Dictionary:
 	#{item: amount}
@@ -22,4 +18,4 @@ func components() -> Dictionary:
 
 func producers() -> Array[Producer]:
 	var rate = ItemRate.new("Waffle",1)
-	return [Producer.new([rate])]
+	return [Producer.new([rate], id)]

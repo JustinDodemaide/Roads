@@ -40,3 +40,10 @@ func create() -> void:
 	new.position = $Outline.global_position
 	Global.level.add_level_object(new)
 	queue_free()
+
+func save_additional_fields(save:Dictionary) -> void: # Modifies the dictionary reference
+	var scene = object_scene.instantiate()
+	save["object_scene"] = scene.get_scene_file_path()
+
+func additional_load_fields(data:Dictionary) -> void:
+	init(load(data["object_scene"]))
