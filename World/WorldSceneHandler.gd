@@ -3,7 +3,6 @@ extends StateMachine
 func _on_world_ready():
 	Global.scene_handler = self
 	state = load("res://Level/Level.tscn").instantiate()
-	state.state_machine = self
 	add_child(state)
 	state.enter({"WorldObject": Global.world.world_objects.front()})
 	emit_signal("transitioned", state.name)

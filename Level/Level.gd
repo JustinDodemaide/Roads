@@ -1,8 +1,7 @@
 extends Node
 
-var state_machine
-
 var world_object:WorldObject
+var tileset_prefab:int
 # Interactables
 # NPCs
 # Placing objects
@@ -86,6 +85,11 @@ func save():
 		return
 	if not save_file.is_open():
 		return
+	
+	var tilemap_data = $TileMap.save()
+	tilemap_data = JSON.stringify(tilemap_data)
+	save_file.store_line(tilemap_data)
+	
 	for i in $LevelObjects.get_children():
 		var data = i.save()
 		var json_string = JSON.stringify(data)
@@ -100,7 +104,6 @@ func load_level(id:int) -> void:
 	
 	var file_path:String = "user://" + "Level" + str(world_object.level_id) + ".save"
 	if not FileAccess.file_exists(file_path):
-		state_machine.transition_to("Main")
 		print("file doesnt exist")
 		return # Error! We don't have a save to load.
 
@@ -113,7 +116,13 @@ func load_level(id:int) -> void:
 		var data:Dictionary = JSON.parse_string(line)
 		var new_object = load(data["filepath"]).instantiate()
 		new_object._load(data)
-		get_node(data["parent"]).add_child(new_object)
+		if data["parent"] == "Level":
+			add_child(new_object)
+		else:
+			get_node(data["parent"]).add_child(new_object)
 
 func generate_level() -> void:
 	world_object.level_id = get_instance_id()
+	var tilemap = load("res://Level/TileMapScene/TileMap.tscn").instantiate()
+	tilemap._load({"prefab":1.0})
+	add_child(tilemap)
