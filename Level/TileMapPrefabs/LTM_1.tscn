@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvw2o61c0pftr"]
+
+[ext_resource type="TileSet" uid="uid://byoypirfqqb7b" path="res://Level/LevelTilesets/TileSet1.tres" id="1_h1oad"]
+[ext_resource type="Script" path="res://Level/TileMapPrefabs/Scripts/LTM_1.gd" id="2_wdvkw"]
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource("1_h1oad")
+format = 2
+layer_0/z_index = -1
+layer_0/tile_data = PackedInt32Array(327693, 65536, 0, 262158, 65536, 0, 327694, 65536, 0, 393230, 65536, 0, 458766, 65536, 0, 524301, 65536, 0, 524302, 65536, 0, 524303, 65536, 0)
+script = ExtResource("2_wdvkw")
+prefab_id = 1
+
+[node name="PlayerStart" type="Marker2D" parent="."]
+position = Vector2(368, 212)

@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvw2o61c0pftr"]
-
-[ext_resource type="Script" path="res://Level/TileMapScene/TileMapScene.gd" id="1_2xop6"]
-
-[node name="TileMap" type="TileMap"]
-format = 2
-layer_0/tile_data = PackedInt32Array(327691, 1, 0, 262156, 1, 0, 262157, 1, 0, 327694, 1, 0, 393230, 1, 0, 458765, 1, 0, 524300, 1, 0, 589835, 1, 0, 589836, 1, 0, 589837, 1, 0, 589838, 1, 0)
-script = ExtResource("1_2xop6")

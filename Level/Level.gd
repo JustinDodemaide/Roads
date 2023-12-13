@@ -19,7 +19,9 @@ func enter(_msg:Dictionary = {})->void:
 	Global.level = self
 	Global.player_location = world_object
 	load_level(world_object.level_id)
-	$PlayerCharacter.held_item = ItemStack.new(load("res://Items/Waffle/Item_Waffle.gd").new())
+	
+	add_child(load("res://Level/PlayerCharacter/PlayerCharacter.tscn").instantiate())
+	$PlayerCharacter.position = $TileMap.get_node("PlayerStart").position
 	# $PlayerCharacter.add_item(ItemStack.new(load("res://Items/Waffle/Item_Waffle.gd").new()))
 
 func exit()->void:
@@ -46,13 +48,13 @@ func _input(event):
 				if parent.is_interaction_valid($PlayerCharacter):
 					parent.interact($PlayerCharacter)
 					break
-	if event.is_action_pressed("M"):
-		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")
+	#if event.is_action_pressed("M"):
+	#	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")
 	if event.is_action_pressed("1"):
 		test()
 
 func test():
-	var v:Array[Vehicle]
+	var _v:Array[Vehicle]
 	world_object.launch_convoy(world_object.vehicles,Global.world.world_objects.back())
 
 func new_producer(producer:Producer):
@@ -71,10 +73,6 @@ func remove_level_object(object:LevelObject):
 	for i in to_be_erased:
 		world_object.producers.erase(i)
 	object.queue_free()
-
-func _on_button_pressed():
-	var placer = load("res://World/WorldObjects/BlueprintPlacer.tscn").instantiate()
-	placer.init(load("res://Level/LevelObjects/LO_Test/LO_Test.tscn"))
 
 func save():
 	# What needs to be saved:
@@ -123,6 +121,34 @@ func load_level(id:int) -> void:
 
 func generate_level() -> void:
 	world_object.level_id = get_instance_id()
-	var tilemap = load("res://Level/TileMapScene/TileMap.tscn").instantiate()
-	tilemap._load({"prefab":1.0})
+	var level_prefab:int
+	# DEBUG /*
+	level_prefab = 1
+	if world_object.name() == "Waffle":
+		level_prefab = 2
+	# */ DEBUG END
+	world_object.level_id = level_prefab
+	var tilemap = load("res://Level/TileMapPrefabs/LTM_" + str(level_prefab) + ".tscn").instantiate()
+	tilemap._load({})
 	add_child(tilemap)
+
+
+func _on_button_pressed():
+	var placer = load("res://World/WorldObjects/BlueprintPlacer.tscn").instantiate()
+	placer.init(load("res://Level/LevelObjects/LO_Test/LO_Test.tscn"))
+
+func _on_button_2_pressed():
+	var placer = load("res://World/WorldObjects/BlueprintPlacer.tscn").instantiate()
+	placer.init(load("res://Level/LevelObjects/LO_Terminal/LO_Terminal.tscn"))
+
+
+func _on_pickaxe_pressed():
+	var item = load("res://Items/Pickaxe/Item_Pickaxe.gd").new()
+	var pickaxe = ItemStack.new(item)
+	$PlayerCharacter.carry_item(pickaxe)
+
+func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
+	var dropped_item = load("res://Level/LevelObjects/LO_DroppedItem/LO_DroppedItem.tscn").instantiate()
+	dropped_item.init(item_stack)
+	dropped_item.position = pos
+	add_level_object(dropped_item)

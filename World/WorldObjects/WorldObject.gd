@@ -15,7 +15,7 @@ func _init(initial_faction:String) -> void:
 	faction = initial_faction
 
 func name() -> String:
-	return "Test"
+	return "World Object"
 
 func map_texture() -> Texture2D:
 	return load("res://World/WorldObjects/WO_Test/wo.png")
@@ -49,13 +49,16 @@ func additional_updates() -> void:
 
 func options()->Array[WorldObjectOption]:
 	var o:Array[WorldObjectOption] = []
-	if Global.level.world_object != self and faction == "PLAYER":
-		o.append(WorldObjectOption.new("Go to location"))
+	o.append(WorldObjectOption.new("Launch Convoy"))
+	
+	if Global.player_location != self and faction == "PLAYER":
+		o.append(WorldObjectOption.new("Go to Location"))
 	return o
 
 func option_chosen(option:WorldObjectOption) -> void:
-	if option.option_name == "Go to location":
-		Global.scene_handler.transition_to("res://Level/Level.tscn",{"WorldObject":self})
+	var s = self
+	if option.option_name == "Go to Location":
+		Global.scene_handler.transition_to("res://Level/Level.tscn",{"WorldObject":s})
 
 func add_production(producer:Producer) -> void:
 	producers.append(producer)

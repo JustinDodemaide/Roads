@@ -140,6 +140,7 @@ animations = [{
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_apmpf")
+speed = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

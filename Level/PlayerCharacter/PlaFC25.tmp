@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dyqdy73hvxk7t"]
+[gd_scene load_steps=22 format=3 uid="uid://dyqdy73hvxk7t"]
 
 [ext_resource type="Script" path="res://Level/PlayerCharacter/PlayerCharacter.gd" id="1_apmpf"]
 [ext_resource type="Texture2D" uid="uid://ie1yecsi2xke" path="res://Level/PlayerCharacter/player_idle.png" id="2_tigqr"]
@@ -136,8 +136,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d36jc"]
-
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_apmpf")
 
@@ -147,10 +145,7 @@ sprite_frames = SubResource("SpriteFrames_why5h")
 animation = &"move"
 autoplay = "idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-
-[node name="HeldItemLabel" type="Label" parent="."]
+[node name="Label" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -163,12 +158,5 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HeldItem" type="Sprite2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_d36jc")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true

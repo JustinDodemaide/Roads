@@ -1,31 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://b10g8de4fkbvg"]
+[gd_scene load_steps=3 format=3 uid="uid://b10g8de4fkbvg"]
 
-[ext_resource type="Script" path="res://Level/LevelObjects/LO_Test/LO_Test.gd" id="1_bt1lm"]
-[ext_resource type="Texture2D" uid="uid://blhiy0e4cpggk" path="res://Level/test/oven1.png" id="2_q7pb2"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xtwcq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_q7pb2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="Script" path="res://Level/LevelObjects/LO_DroppedItem/LO_DroppedItem.gd" id="1_7ui3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_noj8k"]
 size = Vector2(64, 64)
 
 [node name="LO_DroppedItem" type="Node2D"]
-script = ExtResource("1_bt1lm")
+script = ExtResource("1_7ui3j")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_xtwcq")
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_noj8k")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

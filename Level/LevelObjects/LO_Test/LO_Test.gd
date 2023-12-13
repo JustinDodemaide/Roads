@@ -5,8 +5,8 @@ func _ready():
 		id = get_instance_id()
 	$Label.text = str(id)
 
-func name() -> String:
-	return "Test"
+func _name() -> String:
+	return "Terminal"
 
 func icon() -> Texture2D:
 	return load("res://World/WorldObjects/Options/outline_dashboard_black_24dp.png")
@@ -15,7 +15,7 @@ func is_interaction_valid(interactor) -> bool:
 	return true
 
 func interact(interactor) -> void:
-	Global.level.remove_level_object(self)
+	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")
 
 func components() -> Dictionary:
 	#{item: amount}

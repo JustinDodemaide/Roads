@@ -1,15 +1,5 @@
 extends Node
 
-# Meteor strikes
-# 3D world?
-# Constructing new world objects
-# Constructing roads
-# Tileset
-# Regions/Biomes
-# Factions
-# AI
-# Convoy interceptions
-
 const FLOOR_LAYER:int = 0
 
 signal world_ready
@@ -26,7 +16,7 @@ func _ready():
 	Global.world = self
 	var test = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new("PLAYER")
 	world_objects.append(test)
-	var test1 = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new("PLAYER")
+	var test1 = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new("PLAYER")
 	test1.world_position = Vector2(264,134)
 	world_objects.append(test1)
 	
@@ -35,7 +25,6 @@ func _ready():
 	emit_signal("world_ready")
 
 func initialize_astar() -> void:
-	const FLOOR_LAYER:int = 0
 	astar.size = Vector2i(255,255)
 	astar.cell_size = Vector2(16, 16)
 	#astar.set_jumping_enabled(true)
@@ -71,3 +60,9 @@ func _input(event):
 func get_custom_data(data_name:String, tile:Vector2i):
 	var data = tilemap.get_cell_tile_data(FLOOR_LAYER,tile)
 	return data.get_custom_data(data_name)
+
+func save() -> void:
+	pass
+
+func _load() -> void:
+	pass

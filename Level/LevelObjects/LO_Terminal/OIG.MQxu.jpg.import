@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blhiy0e4cpggk"
-path="res://.godot/imported/oven1.png-8253b047d5a51f841fa52f8aee57aff6.ctex"
+uid="uid://paf3wux0b8a0"
+path="res://.godot/imported/OIG.MQxu.jpg-c5c89d63aebdc465e710a36c32cca268.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/test/oven1.png"
-dest_files=["res://.godot/imported/oven1.png-8253b047d5a51f841fa52f8aee57aff6.ctex"]
+source_file="res://Level/LevelObjects/LO_Terminal/OIG.MQxu.jpg"
+dest_files=["res://.godot/imported/OIG.MQxu.jpg-c5c89d63aebdc465e710a36c32cca268.ctex"]
 
 [params]
 

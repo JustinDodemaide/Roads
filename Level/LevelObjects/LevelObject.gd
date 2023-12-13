@@ -12,11 +12,11 @@ func _name() -> String:
 func icon() -> Texture2D:
 	return load("res://World/WorldObjects/Options/outline_dashboard_black_24dp.png")
 
-func is_interaction_valid(interactor) -> bool:
+func is_interaction_valid(_interactor) -> bool:
 	print(_name(), " clicked on")
 	return false
 
-func interact(interactor) -> void:
+func interact(_interactor) -> void:
 	print(_name(), " interacted with")
 	pass
 
@@ -31,17 +31,17 @@ func producers() -> Array[Producer]:
 	return []
 
 func save() -> Dictionary:
-	var save:Dictionary = {
+	var save_dict:Dictionary = {
 		"filepath": get_scene_file_path(),
 		"parent": "LevelObjects",
 		"x": position.x,
 		"y": position.y,
 		"id": id,
 	}
-	save_additional_fields(save)
-	return save
+	save_additional_fields(save_dict)
+	return save_dict
 
-func save_additional_fields(save:Dictionary) -> void: # Modifies the dictionary reference
+func save_additional_fields(save_dict:Dictionary) -> void: # Modifies the dictionary reference
 	pass
 
 func _load(data:Dictionary) -> void:
@@ -49,7 +49,7 @@ func _load(data:Dictionary) -> void:
 	id = data["id"]
 	additional_load_fields(data)
 
-func additional_load_fields(data:Dictionary) -> void:
+func additional_load_fields(_data:Dictionary) -> void:
 	pass
 
 func _to_string():

@@ -18,8 +18,14 @@ func _process(_delta):
 		$AnimatedSprite2D.modulate = Color(1,0,0,0.5) # Red
 	else:
 		$AnimatedSprite2D.modulate = Color(0,1,0,0.5) # Green
-	position = Global.world.tilemap.get_global_mouse_position()
+	position = snapped_position()
 	check_position()
+
+func snapped_position() -> Vector2:
+	var tilemap = Global.level.get_node("TileMap")
+	var local = tilemap.get_global_mouse_position()
+	var tile = tilemap.local_to_map(local)
+	return tilemap.map_to_local(tile)
 
 func check_position():
 	for area in $Area2D.get_overlapping_areas():
