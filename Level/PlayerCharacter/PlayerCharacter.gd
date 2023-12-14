@@ -10,6 +10,17 @@ func _ready():
 	for i in Global.level.get_node("UI/Inventory").get_children():
 		i.inventory_slot_selected.connect(inventory_slot_selected)
 
+func _input(event):
+	if event.is_action_pressed("LeftClick"):
+		#if position.distance_to($Cursor.position) > 250:
+		#	return
+		for i in $Cursor.get_overlapping_areas():
+			var parent = i.get_parent()
+			if parent is LevelObject:
+				if parent.is_interaction_valid(self):
+					parent.interact(self)
+					break
+
 func get_input():
 	velocity = Vector2()
 	if Input.is_action_pressed('D'):
@@ -38,9 +49,18 @@ func _process(_delta):
 		$HeldItemLabel.text = ""
 	else:
 		$HeldItemLabel.text = held_item.item.item_name()
+	update_cursor()
 
-func _input(_event):
-	pass
+func update_cursor() -> void:
+	$Cursor.position = Global.world.tilemap.get_global_mouse_position() - position
+	#position.distance_to($Cursor.position) < 250:
+	var areas = $Cursor.get_overlapping_areas()
+	if not areas.is_empty():
+		var parent = areas.front().get_parent()
+		if parent is LevelObject:
+			$Cursor/CursorLabel.text = parent._name()
+	else:
+		$Cursor/CursorLabel.text = ""
 
 func add_item(item_stack:ItemStack) -> void:
 	inventory.append(item_stack)

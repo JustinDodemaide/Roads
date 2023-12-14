@@ -28,28 +28,11 @@ func exit()->void:
 	save()
 
 func _process(_delta):
-	$Cursor.position = Global.world.tilemap.get_global_mouse_position()
-
-	var areas = $Cursor.get_overlapping_areas()
-	if not areas.is_empty() and $PlayerCharacter.position.distance_to($Cursor.position) < 250:
-		var parent = areas.front().get_parent()
-		if parent is LevelObject:
-			$Cursor/CursorLabel.text = parent._name()
-	else:
-		$Cursor/CursorLabel.text = ""
+	pass
 
 func _input(event):
-	if event.is_action_pressed("LeftClick"):
-		if $PlayerCharacter.position.distance_to($Cursor.position) > 250:
-			return
-		for i in $Cursor.get_overlapping_areas():
-			var parent = i.get_parent()
-			if parent is LevelObject:
-				if parent.is_interaction_valid($PlayerCharacter):
-					parent.interact($PlayerCharacter)
-					break
-	#if event.is_action_pressed("M"):
-	#	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")
+	if event.is_action_pressed("M"):
+		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")
 	if event.is_action_pressed("1"):
 		test()
 
@@ -140,7 +123,6 @@ func _on_button_pressed():
 func _on_button_2_pressed():
 	var placer = load("res://World/WorldObjects/BlueprintPlacer.tscn").instantiate()
 	placer.init(load("res://Level/LevelObjects/LO_Terminal/LO_Terminal.tscn"))
-
 
 func _on_pickaxe_pressed():
 	var item = load("res://Items/Pickaxe/Item_Pickaxe.gd").new()
