@@ -1,10 +1,14 @@
 extends Node
 
+# TODO: This can run on a seperate thread without causing problems
+
 var world_map
 var current_location
 var stops = []
 
 @onready var stop_label = Label.new()
+var complete_circuit_button = preload("res://WorldMap/Modules/ConvoyProgrammer/ConvoyProgrammerCompleteCircuit.tscn").instantiate()
+var confirm_convoy_button = preload("res://WorldMap/Modules/ConvoyProgrammer/ConvoyStopConfirm.tscn").instantiate()
 
 func execute(map):
 	world_map = map
@@ -29,6 +33,10 @@ func on_vehicles_chosen(vehicles:Array[Vehicle]) -> void:
 			worst_fuel_capacity = vehicle.max_fuel_capacity()
 	
 	world_map.ui.add_child(stop_label)
+	complete_circuit_button.pressed.connect(complete_circuit)
+	world_map.ui.add_child(complete_circuit_button)
+	confirm_convoy_button.pressed.connect(confirm_program)
+	world_map.ui.add_child(confirm_convoy_button)
 # 2. Allow player to start selecting places for the convoy to stop
 	determine_valid_followup_locations(current_location)
 
@@ -95,6 +103,13 @@ func stop_confirmed():
 	for stop in stops:
 		stop_label.text += stop.name() + "\n"
 	
+	if stops.back() == current_location:
+		confirm_convoy_button.disabled = false
+		complete_circuit_button.disabled = true
+	else:
+		confirm_convoy_button.disabled = true
+		complete_circuit_button.disabled = false
+		
 	determine_valid_followup_locations(obj)
 # 3. When location is confirmed, add it to 'stops', make item selection menu,
 #    update total and fuel consumption, get valid follow ups
@@ -104,3 +119,13 @@ func item_selected(location,item:ItemStack):
 
 func item_deselected(location,item:ItemStack):
 	pass
+
+func complete_circuit():
+	clicked_object = current_location
+	stop_confirmed()
+
+func confirm_program():
+	world_map.clear_ui()
+	for i in lines:
+		lines[i].queue_free()
+	queue_free()

@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ConvoyStopConfirm.gd" id="1_0ks1v"]
 
 [node name="ConfirmButton" type="Button"]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = -34.0
+offset_top = -15.0
+offset_right = 37.0
+offset_bottom = 16.0
 disabled = true
 text = "Confirm"
 script = ExtResource("1_0ks1v")
