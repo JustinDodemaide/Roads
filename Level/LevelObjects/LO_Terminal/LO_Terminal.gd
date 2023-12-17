@@ -1,11 +1,10 @@
-extends Node2D
+extends LevelObject
 
+func _name():
+	return "Terminal"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func is_interaction_valid(_interactor) -> bool:
+	return true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func interact(_interactor) -> void:
+	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "ConvoyProgrammer"})

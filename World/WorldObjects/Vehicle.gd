@@ -9,6 +9,13 @@ func cargo_capacity()->int:
 func personnel_capacity()->int:
 	return 0
 
+func fuel_consumption() -> int:
+	# Fuel consumed per tile moved
+	return 1
+
+func max_fuel_capacity() -> int:
+	return 100
+
 func overall_health()->int:
 	return 1
 	

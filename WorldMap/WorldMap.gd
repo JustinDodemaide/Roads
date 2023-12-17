@@ -1,5 +1,6 @@
 extends Node
 
+var ui
 signal map_object_clicked(object:WorldMapObject)
 
 func enter(_msg:Dictionary = {})->void:
@@ -8,6 +9,9 @@ func enter(_msg:Dictionary = {})->void:
 	Global.world.tilemap.visible = true
 	Global.world.new_object.connect(new_map_object)
 	Global.world.removed_object.connect(new_map_object)
+	ui = $UI
+	if _msg.has("module"):
+		load_module(_msg["module"])
 
 func exit()->void:
 	Global.world.tilemap.visible = false
@@ -25,6 +29,11 @@ func remove_world_object(object:WorldObject) -> void:
 				i.queue_free()
 				return
 
+func load_module(module_name:String) -> void:
+	var module = load("res://WorldMap/Modules/" + module_name + "/" + module_name + ".tscn").instantiate()
+	add_child(module)
+	module.execute(self)
+
 func _process(delta):
 	$Cursor.position = Global.world.tilemap.get_global_mouse_position()
 	$UI/GeneralInfo/WorldPosition.text = "(" + str(round($Cursor.position.x)) + ", " + str(round($Cursor.position.y)) + ")"
@@ -38,6 +47,9 @@ func _input(event):
 	
 	if event.is_action_pressed("M"):
 		Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": Global.player_location})
+
+func add_to_ui(element)->void:
+	$UI.add_child(element)
 
 func clear_ui() -> void:
 	for child in $UI.get_children():

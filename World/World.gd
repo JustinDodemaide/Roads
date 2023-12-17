@@ -16,9 +16,10 @@ func _ready():
 	Global.world = self
 	var test = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new("PLAYER")
 	world_objects.append(test)
-	var test1 = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new("PLAYER")
-	test1.world_position = Vector2(264,134)
-	world_objects.append(test1)
+	for i in 5:
+		var test1 = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new("PLAYER")
+		test1.world_position = Vector2(21,156) + Vector2(i*100,0)
+		world_objects.append(test1)
 	
 	initialize_astar()
 	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)
@@ -66,3 +67,8 @@ func save() -> void:
 
 func _load() -> void:
 	pass
+
+func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
+	var from_tile = $TileMap.local_to_map(from.world_position)
+	var to_tile = $TileMap.local_to_map(to.world_position)
+	return astar.get_point_path(from_tile,to_tile)

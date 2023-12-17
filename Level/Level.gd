@@ -22,7 +22,8 @@ func enter(_msg:Dictionary = {})->void:
 	
 	add_child(load("res://Level/PlayerCharacter/PlayerCharacter.tscn").instantiate())
 	$PlayerCharacter.position = $TileMap.get_node("PlayerStart").position
-	# $PlayerCharacter.add_item(ItemStack.new(load("res://Items/Waffle/Item_Waffle.gd").new()))
+	var pickaxe = load("res://Items/Pickaxe/Item_Pickaxe.gd").new()
+	make_dropped_item(ItemStack.new(pickaxe),$PlayerCharacter.position + Vector2(0,100))
 
 func exit()->void:
 	save()
