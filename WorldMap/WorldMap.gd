@@ -31,8 +31,8 @@ func remove_world_object(object:WorldObject) -> void:
 
 func load_module(module_name:String) -> void:
 	var module = load("res://WorldMap/Modules/" + module_name + "/" + module_name + ".tscn").instantiate()
+	module.world_map = self
 	add_child(module)
-	module.execute(self)
 
 func _process(delta):
 	$Cursor.position = Global.world.tilemap.get_global_mouse_position()

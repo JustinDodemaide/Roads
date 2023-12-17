@@ -18,7 +18,7 @@ offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "                       Vehicles"
+text = "Select Vehicles"
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
