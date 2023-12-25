@@ -11,11 +11,13 @@ func _name() -> String:
 
 func is_interaction_valid(_interactor) -> bool:
 	print(_name(), " clicked on")
+	if _interactor.can_carry_item(item_stack):
+		return true
 	return false
 
 func interact(_interactor) -> void:
-	print(_name(), " interacted with")
-	pass
+	_interactor.carry_item(item_stack)
+	queue_free()
 
 func save_additional_fields(save_dict:Dictionary) -> void: # Modifies the dictionary reference
 	# save item stack

@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq2g7oxrc26m"]
+[gd_scene load_steps=5 format=3 uid="uid://bq2g7oxrc26m"]
 
 [ext_resource type="Script" path="res://Level/Level.gd" id="1_wni3i"]
 [ext_resource type="PackedScene" uid="uid://coo2txtpgadic" path="res://Level/LevelUI/LevelInventoryButton.tscn" id="2_2xcea"]
 [ext_resource type="PackedScene" uid="uid://dxyvh04r827d2" path="res://Level/LevelObjects/LO_Terminal/LO_Terminal.tscn" id="3_hb11d"]
+[ext_resource type="PackedScene" uid="uid://66g0pb5qec0y" path="res://Level/LevelObjects/LO_IronOre/LO_IronOre.tscn" id="4_ec6ho"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_wni3i")
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Inventory" type="HBoxContainer" parent="UI"]
 anchors_preset = 7
@@ -45,3 +47,6 @@ number = 4
 
 [node name="LO_Terminal" parent="LevelObjects" instance=ExtResource("3_hb11d")]
 position = Vector2(444, 234)
+
+[node name="LO_IronOre" parent="LevelObjects" instance=ExtResource("4_ec6ho")]
+position = Vector2(375, 151)

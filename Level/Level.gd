@@ -2,15 +2,6 @@ extends Node
 
 var world_object:WorldObject
 var tileset_prefab:int
-# Interactables
-# NPCs
-# Placing objects
-# Placing tiles
-# Refactor for multiplayer:
-#	Each player needs a UI, PlayerCharacter, cursor
-#	Probably want to figure out how multiplayer works before you overthrow
-#	this entire project for it? Moron
-# Inventory
 
 func enter(_msg:Dictionary = {})->void:
 	world_object = _msg["WorldObject"]
