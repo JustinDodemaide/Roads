@@ -21,12 +21,14 @@ func _ready():
 		test1.world_position = Vector2(21,156) + Vector2(i*100,0)
 		world_objects.append(test1)
 	
+	var world_generator = WorldGenerator.new()
+	world_generator.execute(tilemap)
 	initialize_astar()
 	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)
 	emit_signal("world_ready")
 
 func initialize_astar() -> void:
-	astar.size = Vector2i(255,255)
+	astar.size = Vector2i(300,300)
 	astar.cell_size = Vector2(16, 16)
 	#astar.set_jumping_enabled(true)
 	astar.update()
