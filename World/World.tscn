@@ -1,24 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://btjh78darwmh4"]
+[gd_scene load_steps=7 format=3 uid="uid://btjh78darwmh4"]
 
 [ext_resource type="Script" path="res://World/World.gd" id="1_vshny"]
 [ext_resource type="Script" path="res://World/WorldSceneHandler.gd" id="2_ti2vb"]
 [ext_resource type="Texture2D" uid="uid://c8sqc2wxn1yrv" path="res://World/World_TileMap.png" id="3_uta0c"]
+[ext_resource type="Texture2D" uid="uid://ctu77s5un1tfs" path="res://icon.svg" id="4_gubhq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l3m1p"]
 texture = ExtResource("3_uta0c")
 0:0/0 = 0
+0:0/0/custom_data_2 = true
 1:0/0 = 0
-1:0/0/custom_data_1 = 1
 2:0/0 = 0
-2:0/0/custom_data_1 = 2
 3:0/0 = 0
 4:0/0 = 0
+4:0/0/custom_data_2 = true
+0:1/0 = 0
+0:1/0/custom_data_1 = 1
+0:1/0/custom_data_2 = true
+1:1/0 = 0
+1:1/0/custom_data_1 = 1
+2:1/0 = 0
+2:1/0/custom_data_1 = 1
+3:1/0 = 0
+3:1/0/custom_data_1 = 1
+4:1/0 = 0
+4:1/0/custom_data_1 = 1
+4:1/0/custom_data_2 = true
+4:2/0 = 0
+4:2/0/custom_data_1 = 2
+4:2/0/custom_data_2 = true
+3:2/0 = 0
+3:2/0/custom_data_1 = 2
+2:2/0 = 0
+2:2/0/custom_data_1 = 2
+1:2/0 = 0
+1:2/0/custom_data_1 = 2
+0:2/0 = 0
+0:2/0/custom_data_1 = 2
+0:2/0/custom_data_2 = true
 
 [sub_resource type="TileSet" id="TileSet_3nt1j"]
 custom_data_layer_0/name = "speed_modifier"
 custom_data_layer_0/type = 3
 custom_data_layer_1/name = "zone"
 custom_data_layer_1/type = 2
+custom_data_layer_2/name = "impass"
+custom_data_layer_2/type = 1
 sources/0 = SubResource("TileSetAtlasSource_l3m1p")
 
 [node name="World" type="Node"]
@@ -34,6 +61,18 @@ z_index = -1
 texture_filter = 1
 tile_set = SubResource("TileSet_3nt1j")
 format = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(3432, 3721)
+texture = ExtResource("4_gubhq")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 3000.0
+offset_top = 3500.0
+offset_right = 3008.0
+offset_bottom = 3508.0
+scale = Vector2(2, 2)
 
 [connection signal="world_ready" from="." to="SceneHandler" method="_on_world_ready"]
 [connection signal="timeout" from="WorldUpdate" to="." method="_on_world_update_timeout"]
