@@ -9,7 +9,6 @@
 script = ExtResource("1_wni3i")
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Inventory" type="HBoxContainer" parent="UI"]
 anchors_preset = 7

@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu8q3xpdq0fpm"]
+
+[ext_resource type="Script" path="res://MainMenu/MainMenu.gd" id="1_fwtnf"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_fwtnf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "New"
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Save 1"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 61.0
+offset_right = 72.0
+offset_bottom = 84.0
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_button_2_pressed"]

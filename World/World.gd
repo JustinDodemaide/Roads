@@ -12,6 +12,10 @@ var world_objects:Array[WorldObject]
 @onready var tilemap:TileMap = $TileMap
 @onready var world_update:Timer = $WorldUpdate
 
+
+# Make the WorldGen place actual objects
+# Save and load the world
+
 func _ready():
 	Global.world = self
 	var test = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new("PLAYER")
@@ -21,8 +25,13 @@ func _ready():
 		test1.world_position = Vector2(21,156) + Vector2(i*100,0)
 		world_objects.append(test1)
 	
-	var world_generator = WorldGenerator.new()
-	world_generator.execute(tilemap)
+	if StartGameParameters.save == 0:
+		StartGameParameters.save = StartGameParameters.num_saves + 1
+		new_world()
+	else:
+		_load()
+	
+	Global.world = self
 	initialize_astar()
 	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)
 	emit_signal("world_ready")
@@ -65,10 +74,61 @@ func get_custom_data(data_name:String, tile:Vector2i):
 	return data.get_custom_data(data_name)
 
 func save() -> void:
-	pass
+	# World objects
+	# Tilemap
+	# World time
+	# Player money
+	# AI
+	var file_path:String = "user://" + "Save" + str(StartGameParameters.save) + ".save"
+	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
+	if save_file == null:
+		return
+	if not save_file.is_open():
+		return
+	
+	# Tilemap
+	# Potential optimization: just save the tiles that have been modified by the
+	# player, then save the seed for the tilemap, and generate it from that seed
+	# every time the game is started
+	var tilemap_data:Dictionary = {"what":"TileMap"}
+	for cell in $TileMap.get_used_cells(0):
+		tilemap_data[var_to_str(cell)] = var_to_str(tilemap.get_cell_atlas_coords(0,cell))
+
+	save_file.store_line(JSON.stringify(tilemap_data))
+	save_file.close()
+	print("Save successful.")
 
 func _load() -> void:
-	pass
+	# World objects
+	# Tilemap
+	# World time
+	# Player money
+	# AI
+	
+	var file_path:String = "user://" + "Save" + str(StartGameParameters.save) + ".save"
+	if not FileAccess.file_exists(file_path):
+		print("file doesnt exist")
+		return # Error! We don't have a save to load.
+		
+	# Load the file line by line and process that dictionary to restore
+	# the object it represents.
+	var save_file = FileAccess.open(file_path, FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var line = save_file.get_line()
+		# Get the data from the JSON object
+		var data:Dictionary = JSON.parse_string(line)
+		if data["what"] == "WorldObject":
+			pass
+		if data["what"] == "TileMap":
+			data.erase("what")
+			for cell in data:
+				#cell = "Vector2i" + str_to_var(cell)
+				$TileMap.set_cell(0,str_to_var(cell),0,str_to_var(data[cell]))
+			continue
+
+func new_world() -> void:
+	var world_generator = WorldGenerator.new()
+	world_generator.execute(tilemap)
 
 func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 	var from_tile = $TileMap.local_to_map(from.world_position)
