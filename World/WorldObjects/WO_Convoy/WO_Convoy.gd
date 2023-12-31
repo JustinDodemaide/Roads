@@ -35,7 +35,7 @@ func options()->Array[WorldObjectOption]:
 			WorldObjectOption.new("Speed Boost"),
 	]
 
-func init(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:WorldObject):
+func init_convoy(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:WorldObject) -> void:
 	vehicles = _vehicles
 	origin = _origin
 	world_position = origin.world_position

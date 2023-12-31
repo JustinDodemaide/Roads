@@ -1,8 +1,8 @@
 class_name ItemRate
 
-var item:String
+var item:Item
 var slope:float
 
-func _init(_item:String, _slope:float):
+func _init(_item:Item, _slope:float):
 	item = _item
 	slope = _slope

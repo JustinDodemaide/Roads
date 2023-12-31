@@ -41,7 +41,7 @@ func save() -> Dictionary:
 	save_additional_fields(save_dict)
 	return save_dict
 
-func save_additional_fields(save_dict:Dictionary) -> void: # Modifies the dictionary reference
+func save_additional_fields(_save_dict:Dictionary) -> void: # Modifies the dictionary reference
 	pass
 
 func _load(data:Dictionary) -> void:

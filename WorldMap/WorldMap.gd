@@ -36,7 +36,7 @@ func load_module(module_name:String) -> void:
 	module.world_map = self
 	add_child(module)
 
-func _process(delta):
+func _process(_delta):
 	$Cursor.position = Global.world.tilemap.get_global_mouse_position()
 	$UI/GeneralInfo/WorldPosition.text = "(" + str(round($Cursor.position.x)) + ", " + str(round($Cursor.position.y)) + ")"
 

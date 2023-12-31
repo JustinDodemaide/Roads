@@ -110,3 +110,8 @@ func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 	dropped_item.init(item_stack)
 	dropped_item.position = pos
 	add_level_object(dropped_item)
+
+
+func _on_add_place_holder_collector_pressed():
+	var lo = load("res://Level/LevelObjects/LO_PlaceholderCollector/LO_PlaceholderCollector.tscn").instantiate()
+	add_level_object(lo)

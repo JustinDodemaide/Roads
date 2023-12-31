@@ -17,6 +17,9 @@ func map_object_clicked(map_object):
 	text += "resources: "
 	for i in object.resources:
 		text += i.item_name() + " "
+	text += "\nstorage: "
+	for i in object.storage:
+		text += i.item_name() + "(" + str(object.storage[i]) + "), "
 	$ObjectInfo/Label.text = text
 	$ObjectInfo.visible = true
 	$ObjectInfo.position = object.world_position

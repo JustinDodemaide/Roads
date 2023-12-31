@@ -2,7 +2,7 @@ extends Resource
 class_name WorldObject
 
 var world_position:Vector2
-var resources:Array
+var resources:Array[Item]
 var producers:Array[Producer]
 var storage:Dictionary
 var vehicles:Array[Vehicle]
@@ -72,7 +72,7 @@ func launch_convoy(v:Array[Vehicle],destination:WorldObject)->void:
 	#print("launching convoy")
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new(faction)
 	Global.world.add_world_object(convoy)
-	convoy.init(v,self,destination)
+	convoy.init_convoy(v,self,destination)
 
 func save() -> Dictionary:
 # world_position

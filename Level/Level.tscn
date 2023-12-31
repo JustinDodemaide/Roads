@@ -49,3 +49,10 @@ position = Vector2(444, 234)
 
 [node name="LO_IronOre" parent="LevelObjects" instance=ExtResource("4_ec6ho")]
 position = Vector2(375, 151)
+
+[node name="AddPlaceHolderCollector" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Add PlaceholderCollector"
+
+[connection signal="pressed" from="AddPlaceHolderCollector" to="." method="_on_add_place_holder_collector_pressed"]

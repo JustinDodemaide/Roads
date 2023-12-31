@@ -42,7 +42,7 @@ func stats() -> String:
 		string += str(items[item]) + "\n"
 	return string
 
-func _process(delta):
+func _process(_delta):
 	if Global.player_location == world_object:
 		$PlayerIndicator.visible = true
 	else:
