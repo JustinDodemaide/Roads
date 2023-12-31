@@ -1,20 +1,16 @@
-extends RefCounted
-class_name Vehicle
+extends Vehicle
 
 func name()->String:
-	return "Vehicle"
+	return "Toyota Tacoma"
 	
 func cargo_capacity()->int:
-	return 0
+	return 4
 
 func personnel_capacity()->int:
-	return 0
+	return 2
 
-# Vehicles always consume 1 fuel per tile
-# Therefore fuel capacity corresponds to the maximum distance the vehicle can
-# travel
 func max_fuel_capacity() -> int:
-	return 1
+	return 30
 
 func overall_health()->int:
 	return 1

@@ -115,3 +115,8 @@ func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 func _on_add_place_holder_collector_pressed():
 	var lo = load("res://Level/LevelObjects/LO_PlaceholderCollector/LO_PlaceholderCollector.tscn").instantiate()
 	add_level_object(lo)
+
+
+func _on_add_vehicle_pressed():
+	var vehicles:Array[Vehicle] = [load("res://Vehicles/Vehicle_ToyotaTacoma.gd").new()]
+	world_object.add_vehicles(vehicles)

@@ -1,5 +1,8 @@
 extends WorldObject
 
+var stops:Array[WorldObject]
+var stops_index:int = 0
+
 var origin:WorldObject = null
 var destination:WorldObject = null
 
@@ -42,7 +45,18 @@ func init_convoy(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:World
 	max_speed = get_top_speed()
 	timer = Global.world.create_timer()
 	timer.timeout.connect(_on_move_timer_timeout)
+	Global.world.add_world_object(self)
 	new_destination(_destination)
+
+func init_convoy_program(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[WorldObject]) -> void:
+	stops = program_stops
+	origin = _origin
+	world_position = origin.world_position
+	max_speed = get_top_speed()
+	timer = Global.world.create_timer()
+	timer.timeout.connect(_on_move_timer_timeout)
+	Global.world.add_world_object(self)
+	new_destination(stops.front())
 
 func new_destination(new_dest:WorldObject):
 	# print("new destination: ", new_dest.name)
@@ -81,10 +95,16 @@ func get_top_speed()->float:
 func _destination_reached()->void:
 	path.clear()
 	path_index = 0
-	timer.queue_free()
-	emit_signal("destination_reached")
-	destination.add_vehicles(vehicles)
-	Global.world.remove_world_object(self)
+	if stops.is_empty():
+		timer.queue_free()
+		emit_signal("destination_reached")
+		destination.add_vehicles(vehicles)
+		Global.world.remove_world_object(self)
+	else:
+		stops_index += 1
+		if stops_index == stops.size():
+			stops_index = 0
+		new_destination(stops[stops_index])
 
 func destination_moved()->void:
 	new_destination(destination)

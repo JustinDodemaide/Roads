@@ -7,7 +7,8 @@ signal transitioned(state_name)
 var world_map
 @onready var current_location = Global.level.world_object
 var vehicles
-var stops:Array = []
+var vehicle_stats:Dictionary
+var stops:Array[WorldObject] = []
 
 # UI element refs
 @onready var vehicle_chooser = $UI/ConvoyProgammerVehicleChooser
@@ -50,7 +51,11 @@ func _on_complete_circuit_pressed():
 	add_stop(current_location)
 	transition_to("FollowUpPicker",{"location":current_location})
 
+# init_convoy_program(_vehicles,_origin,program_stops)
 func _on_confirm_pressed():
+	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
+	
+	convoy.init_convoy_program(vehicles,current_location,stops)
 	queue_free()
 
 @onready var flag = $ConfirmFollowUp/Button

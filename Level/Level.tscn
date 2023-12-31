@@ -55,4 +55,11 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Add PlaceholderCollector"
 
+[node name="AddVehicle" type="Button" parent="."]
+offset_top = 38.0
+offset_right = 97.0
+offset_bottom = 69.0
+text = "Add Toyota Tacoma"
+
 [connection signal="pressed" from="AddPlaceHolderCollector" to="." method="_on_add_place_holder_collector_pressed"]
+[connection signal="pressed" from="AddVehicle" to="." method="_on_add_vehicle_pressed"]

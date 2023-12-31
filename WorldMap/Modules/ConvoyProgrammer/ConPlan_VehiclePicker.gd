@@ -11,5 +11,7 @@ func enter(_msg := {}) -> void:
 func exit() -> void:
 	state_machine.vehicle_chooser.queue_free()
 
-func vehicles_chosen(vehicles:Array[Vehicle]):
+func vehicles_chosen(vehicles:Array[Vehicle],stats:Dictionary):
+	state_machine.vehicles = vehicles
+	state_machine.vehicle_stats = stats
 	state_machine.transition_to("FollowUpPicker",{"location":state_machine.current_location})

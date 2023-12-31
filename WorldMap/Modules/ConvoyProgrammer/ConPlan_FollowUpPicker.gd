@@ -12,6 +12,7 @@ func enter(_msg := {}) -> void:
 func exit() -> void:
 	state_machine.world_map.map_object_clicked.disconnect(map_object_clicked)
 
+# Change it to: left click brings up stats, right click chooses location
 func map_object_clicked(map_object):
 	var object = map_object.world_object
 	if !valid_followups.has(object):
@@ -28,7 +29,9 @@ func determine_valid_followup_locations(from:WorldObject):
 		if i.faction != Global.player_faction_name:
 			continue
 		var path = Global.world.get_astar_path(from,i)
-
+		if path.size() >= state_machine.vehicle_stats["max_distance"]:
+			continue
+		
 		valid_followups[i] = {"path": path}
 		draw_path_line(i,path)
 
