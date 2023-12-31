@@ -144,7 +144,7 @@ func altitudes():
 		tilemap.set_cell(FLOOR_LAYER,cell,0,atlas)
 
 func set_world_objects():
-	const OBJECTS_PER_ZONE_MULTIPLIER:int = 100
+	const OBJECTS_PER_ZONE_MULTIPLIER:int = 75
 	const OBJECTS_PER_ZONE_RATIOS:Array[float] = [1,0.75,0.33]
 	var zone_tiles = get_tiles_by_zone()
 	for zone in NUMBER_OF_ZONES:
@@ -176,16 +176,16 @@ func place_object(pos:Vector2i,zone:int):
 	world_object.init("PLAYER",pos)
 	Global.world.add_world_object(world_object)
 	
-	var sprite = Sprite2D.new()
-	sprite.texture = load("res://dot.png")
-	sprite.position = pos * Vector2i(TILE_SIZE,TILE_SIZE) + Vector2i(TILE_SIZE/2,TILE_SIZE/2)
-	if zone == 0:
-		sprite.modulate = Color.HOT_PINK
-	if zone == 1:
-		sprite.modulate = Color.MEDIUM_PURPLE
-	if zone == 2:
-		sprite.modulate = Color.ROYAL_BLUE
-	Global.world.add_child(sprite)
+	#var sprite = Sprite2D.new()
+	#sprite.texture = load("res://dot.png")
+	#sprite.position = pos * Vector2i(TILE_SIZE,TILE_SIZE) + Vector2i(TILE_SIZE/2,TILE_SIZE/2)
+	#if zone == 0:
+		#sprite.modulate = Color.HOT_PINK
+	#if zone == 1:
+		#sprite.modulate = Color.MEDIUM_PURPLE
+	#if zone == 2:
+		#sprite.modulate = Color.ROYAL_BLUE
+	#Global.world.add_child(sprite)
 
 func reduce_available_positions(available_positions,center:Vector2i):
 	const MIN_DISTANCE:int = 3

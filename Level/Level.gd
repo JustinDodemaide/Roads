@@ -15,8 +15,8 @@ func enter(_msg:Dictionary = {})->void:
 	
 	add_child(load("res://Level/PlayerCharacter/PlayerCharacter.tscn").instantiate())
 	$PlayerCharacter.position = $TileMap.get_node("PlayerStart").position
-	var pickaxe = load("res://Items/Pickaxe/Item_Pickaxe.gd").new()
-	make_dropped_item(ItemStack.new(pickaxe),$PlayerCharacter.position + Vector2(0,100))
+	#var pickaxe = load("res://Items/Pickaxe/Item_Pickaxe.gd").new()
+	#make_dropped_item(ItemStack.new(pickaxe),$PlayerCharacter.position + Vector2(0,100))
 
 func exit()->void:
 	save()
@@ -72,11 +72,6 @@ func save():
 	save_file.close()
 
 func load_level(id:int) -> void:
-	#return
-	if id == 0:
-		generate_level()
-		return
-	
 	var file_path:String = "user://" + "Level" + str(world_object.level_id) + ".save"
 	if not FileAccess.file_exists(file_path):
 		print("file doesnt exist")
@@ -95,6 +90,7 @@ func load_level(id:int) -> void:
 			add_child(new_object)
 		else:
 			get_node(data["parent"]).add_child(new_object)
+	save_file.close()
 
 func generate_level() -> void:
 	world_object.level_id = get_instance_id()
@@ -108,20 +104,6 @@ func generate_level() -> void:
 	var tilemap = load("res://Level/TileMapPrefabs/LTM_" + str(level_prefab) + ".tscn").instantiate()
 	tilemap._load({})
 	add_child(tilemap)
-
-
-func _on_button_pressed():
-	var placer = load("res://World/WorldObjects/BlueprintPlacer.tscn").instantiate()
-	placer.init(load("res://Level/LevelObjects/LO_Test/LO_Test.tscn"))
-
-func _on_button_2_pressed():
-	var placer = load("res://World/WorldObjects/BlueprintPlacer.tscn").instantiate()
-	placer.init(load("res://Level/LevelObjects/LO_Terminal/LO_Terminal.tscn"))
-
-func _on_pickaxe_pressed():
-	var item = load("res://Items/Pickaxe/Item_Pickaxe.gd").new()
-	var pickaxe = ItemStack.new(item)
-	$PlayerCharacter.carry_item(pickaxe)
 
 func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 	var dropped_item = load("res://Level/LevelObjects/LO_DroppedItem/LO_DroppedItem.tscn").instantiate()

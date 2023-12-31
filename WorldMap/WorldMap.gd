@@ -3,6 +3,8 @@ extends Node
 var ui
 signal map_object_clicked(object:WorldMapObject)
 
+var packed_map_object:PackedScene = preload("res://WorldMap/WorldMapObject/WorldMapObject.tscn")
+
 func enter(_msg:Dictionary = {})->void:
 	for object in Global.world.world_objects:
 		new_map_object(object)
@@ -18,7 +20,6 @@ func exit()->void:
 	Global.world.tilemap.visible = false
 	
 func new_map_object(object:WorldObject) -> void:
-	var packed_map_object:PackedScene = preload("res://WorldMap/WorldMapObject/WorldMapObject.tscn")
 	var new_wmo = packed_map_object.instantiate()
 	new_wmo.init(object)
 	add_child(new_wmo)

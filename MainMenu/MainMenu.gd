@@ -10,6 +10,10 @@ func _ready():
 			num_saves += 1
 	StartGameParameters.num_saves = num_saves
 	$Label.text = "num_saves: " + str(num_saves)
+	if num_saves != 0:
+		$HBoxContainer/Button.disabled = true
+	else:
+		$HBoxContainer/Button2.disabled = true
 
 func _on_button_2_pressed():
 	StartGameParameters.save = 1
