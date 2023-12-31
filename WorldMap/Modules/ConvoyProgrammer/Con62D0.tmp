@@ -61,7 +61,6 @@ alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="CompleteCircuit" type="Button" parent="UI/HBoxContainer"]
-visible = false
 layout_mode = 2
 disabled = true
 text = "Complete Circuit"

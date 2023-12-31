@@ -34,22 +34,21 @@ func update():
 	# Update stats
 	var speed = 0
 	var cargo = 0
-	var lowest_distance = 100000
+	var consumption = 0
 	for button in selected_column.get_children():
 		var vehicle = button.vehicle
 		speed += vehicle.speed()
 		cargo += vehicle.cargo_capacity()
-		if vehicle.max_fuel_capacity() < lowest_distance:
-			lowest_distance = vehicle.max_fuel_capacity()
+		consumption += vehicle.fuel_consumption()
 	$VBoxContainer/HBoxContainer/Stats/Speed.text = "Speed: " + str(speed)
 	$VBoxContainer/HBoxContainer/Stats/Cargo.text = "Cargo: " + str(cargo)
-	$VBoxContainer/HBoxContainer/Stats/Distance.text = "Max Distance: " + str(lowest_distance)
+	$VBoxContainer/HBoxContainer/Stats/Consumption.text = "Total fuel consumption: " + str(consumption)
 
 func _on_confirm_button_pressed():
 	var vehicles:Array[Vehicle] = []
 	for button in selected_column.get_children():
 		vehicles.append(button.vehicle)
 	var stats = {}
-	stats["max_distance"] = int($VBoxContainer/HBoxContainer/Stats/Distance.text)
+	stats["total_fuel_consumption"] = int($VBoxContainer/HBoxContainer/Stats/Consumption.text)
 	emit_signal("vehicles_chosen",vehicles,stats)
 	queue_free()

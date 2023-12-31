@@ -19,21 +19,25 @@ func map_object_clicked(map_object):
 		return
 	lines[object].default_color.a = 1
 	lines[object].z_index = 1
-	state_machine.transition_to("ConfirmFollowUp",{"location":object})
+	
+	var con:Array[ItemStack] = [ItemStack.new(load("res://Items/Fuel/Item_Fuel.gd").new(),fuel_required[object])]
+	state_machine.transition_to("ConfirmFollowUp",{"location":object, "items_consumed":con})
 
+var fuel_required:Dictionary
 func determine_valid_followup_locations(from:WorldObject):
 	valid_followups.clear()
-	for i in Global.world.world_objects:
-		if i == from:
+	for location in Global.world.world_objects:
+		if location == from:
 			continue
-		if i.faction != Global.player_faction_name:
+		if location.faction != Global.player_faction_name:
 			continue
-		var path = Global.world.get_astar_path(from,i)
-		if path.size() >= state_machine.vehicle_stats["max_distance"]:
+		var path = Global.world.get_astar_path(from,location)
+		fuel_required[location] = path.size() * state_machine.vehicle_stats["total_fuel_consumption"]
+		if fuel_required[location] > fuel_available_by_stop(location):
 			continue
-		
-		valid_followups[i] = {"path": path}
-		draw_path_line(i,path)
+			
+		valid_followups[location] = {"path": path}
+		draw_path_line(location,path)
 
 func draw_path_line(location,path):
 	var line = Line2D.new()
@@ -51,3 +55,11 @@ func clear():
 	for i in lines:
 		lines[i].queue_free()
 	lines.clear()
+
+func fuel_available_by_stop(location) -> int:
+	var items_before_stop = state_machine.convoy_items_before_stop(location)
+	var available_fuel = 0
+	for i in items_before_stop:
+		if i.item_name().contains("Fuel"):
+			available_fuel += i.quantity
+	return available_fuel

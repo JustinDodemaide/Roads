@@ -1,3 +1,4 @@
+extends RefCounted
 class_name Item
 
 func item_name() -> String:

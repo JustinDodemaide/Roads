@@ -8,7 +8,9 @@ var world_map
 @onready var current_location = Global.level.world_object
 var vehicles
 var vehicle_stats:Dictionary
-var stops:Array[WorldObject] = []
+var initial_items:Array[ItemStack]
+
+var stops:Array[ConvoyStop] = []
 
 # UI element refs
 @onready var vehicle_chooser = $UI/ConvoyProgammerVehicleChooser
@@ -28,7 +30,7 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state.enter(msg)
 	emit_signal("transitioned", state.name)
 
-func add_stop(loc:WorldObject):
+func add_stop(loc:ConvoyStop):
 	stops.append(loc)
 	update_ui()
 
@@ -43,7 +45,7 @@ func update_ui():
 	var stop_list = $UI/Stops
 	stop_list.text = "Stops: "
 	for i in stops:
-		stop_list.text += i.name() + " "
+		stop_list.text += i.destination.name() + " "
 	
 	#make_flag()
 
@@ -77,3 +79,19 @@ func make_flag():
 		hbox.add_child(dup)
 		add_child(hbox)
 		flags[location] = hbox
+
+func convoy_items_before_stop(location:WorldObject) -> Array[ItemStack]:
+	var cumulative_items:Array[ItemStack]
+	cumulative_items.append_array(initial_items)
+	for stop in stops:
+		if stop.destination == location:
+			break
+		cumulative_items = remove(stop.items_consumed,cumulative_items)
+		cumulative_items = remove(stop.items_to_deposit,cumulative_items)
+		cumulative_items.append_array(stop.items_to_collect)
+	return cumulative_items
+
+# Removes all items from set2 from set1
+func remove(items:Array[ItemStack],from:Array[ItemStack]) -> Array[ItemStack]:
+	
+	return []

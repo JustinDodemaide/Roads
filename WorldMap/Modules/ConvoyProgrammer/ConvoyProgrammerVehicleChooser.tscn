@@ -74,7 +74,7 @@ layout_mode = 2
 [node name="Cargo" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
 layout_mode = 2
 
-[node name="Distance" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
+[node name="Consumption" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
 layout_mode = 2
 
 [node name="ConfirmButton" type="Button" parent="VBoxContainer"]

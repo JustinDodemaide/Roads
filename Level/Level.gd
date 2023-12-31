@@ -118,5 +118,7 @@ func _on_add_place_holder_collector_pressed():
 
 
 func _on_add_vehicle_pressed():
-	var vehicles:Array[Vehicle] = [load("res://Vehicles/Vehicle_ToyotaTacoma.gd").new()]
+	var tacoma = load("res://Vehicles/Vehicle_ToyotaTacoma.gd").new()
+	tacoma.add_item_stack(ItemStack.new(load("res://Items/Fuel/Item_Fuel.gd").new(),30))
+	var vehicles:Array[Vehicle] = [tacoma]
 	world_object.add_vehicles(vehicles)

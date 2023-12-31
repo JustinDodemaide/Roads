@@ -9,8 +9,8 @@ func cargo_capacity()->int:
 func personnel_capacity()->int:
 	return 2
 
-func max_fuel_capacity() -> int:
-	return 30
+func fuel_consumption() -> int:
+	return 1
 
 func overall_health()->int:
 	return 1

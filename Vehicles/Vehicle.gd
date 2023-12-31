@@ -1,19 +1,29 @@
 extends RefCounted
 class_name Vehicle
 
+var storage:Array[ItemStack]
+
 func name()->String:
 	return "Vehicle"
-	
+
+# How many ItemStacks the Vehicle can carry
 func cargo_capacity()->int:
 	return 0
+
+func stack_can_be_added(stack:ItemStack) -> bool:
+	return stack.can_be_added_to(storage,cargo_capacity())
+
+func add_item_stack(stack:ItemStack) -> void:
+	storage.append(stack)
+
+func add_item_stack_array(stack_array:Array[ItemStack]) -> void:
+	storage.append_array(stack_array)
 
 func personnel_capacity()->int:
 	return 0
 
-# Vehicles always consume 1 fuel per tile
-# Therefore fuel capacity corresponds to the maximum distance the vehicle can
-# travel
-func max_fuel_capacity() -> int:
+# Quantity of fuel items used per 1 tile of travel
+func fuel_consumption() -> int:
 	return 1
 
 func overall_health()->int:

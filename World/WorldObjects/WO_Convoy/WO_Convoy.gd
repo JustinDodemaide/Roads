@@ -1,10 +1,10 @@
 extends WorldObject
 
-var stops:Array[WorldObject]
+var stops:Array[ConvoyStop]
 var stops_index:int = 0
 
 var origin:WorldObject = null
-var destination:WorldObject = null
+var destination:ConvoyStop = null
 
 #var moving:bool = false
 var timer:Timer
@@ -46,9 +46,9 @@ func init_convoy(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:World
 	timer = Global.world.create_timer()
 	timer.timeout.connect(_on_move_timer_timeout)
 	Global.world.add_world_object(self)
-	new_destination(_destination)
+	new_destination(ConvoyStop.new(_destination))
 
-func init_convoy_program(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[WorldObject]) -> void:
+func init_convoy_program(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[ConvoyStop]) -> void:
 	stops = program_stops
 	origin = _origin
 	world_position = origin.world_position
@@ -58,7 +58,7 @@ func init_convoy_program(_vehicles:Array[Vehicle],_origin:WorldObject,program_st
 	Global.world.add_world_object(self)
 	new_destination(stops.front())
 
-func new_destination(new_dest:WorldObject):
+func new_destination(new_dest:ConvoyStop):
 	# print("new destination: ", new_dest.name)
 	timer.stop()
 	destination = new_dest
@@ -116,6 +116,6 @@ func map_sprite()->Texture2D:
 func option_chosen(option:WorldObjectOption)->void:
 	print(option.option_name)
 	if option.option_name == "Return To Origin":
-		new_destination(origin)
+		new_destination(ConvoyStop.new(origin))
 	if option.option_name == "Speed Boost":
 		pass
