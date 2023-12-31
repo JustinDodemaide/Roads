@@ -143,9 +143,9 @@ func altitudes():
 		var atlas = Vector2i(atlas_x_value,zone)
 		tilemap.set_cell(FLOOR_LAYER,cell,0,atlas)
 
+const OBJECTS_PER_ZONE_MULTIPLIER:int = 75
+const OBJECTS_PER_ZONE_RATIOS:Array[float] = [1,0.75,0.33]
 func set_world_objects():
-	const OBJECTS_PER_ZONE_MULTIPLIER:int = 75
-	const OBJECTS_PER_ZONE_RATIOS:Array[float] = [1,0.75,0.33]
 	var zone_tiles = get_tiles_by_zone()
 	for zone in NUMBER_OF_ZONES:
 		var available_positions = zone_tiles[zone]
@@ -170,10 +170,32 @@ func get_tiles_by_zone():
 		zones[zone].append(tile)
 	return zones
 
+# func _init(_item_path:String,percent:int,objects_per_zone):
+var ZONE_RESOURCES = [
+	# Zone 0
+	[WO_ResourceParams.new("res://Items/Placeholder0/Item_Placeholder0.gd",100,OBJECTS_PER_ZONE_MULTIPLIER * OBJECTS_PER_ZONE_RATIOS[0]),
+	
+	],
+	
+	# Zone 1
+	[WO_ResourceParams.new("res://Items/Placeholder1/Item_Placeholder1.gd",100,OBJECTS_PER_ZONE_MULTIPLIER * OBJECTS_PER_ZONE_RATIOS[1]),
+	
+	],
+	
+	# Zone 2
+	[WO_ResourceParams.new("res://Items/Placeholder2/Item_Placeholder2.gd",100,OBJECTS_PER_ZONE_MULTIPLIER * OBJECTS_PER_ZONE_RATIOS[2]),
+	
+	],
+]
 func place_object(pos:Vector2i,zone:int):
 	pos = pos * Vector2i(TILE_SIZE,TILE_SIZE)
 	var world_object = WorldObject.new()
 	world_object.init("PLAYER",pos)
+	for resource in ZONE_RESOURCES[zone]:
+		if resource.current == resource.max:
+			continue
+		world_object.resources.append(load(resource.item_path).new())
+		resource.current += 1
 	Global.world.add_world_object(world_object)
 	
 	#var sprite = Sprite2D.new()

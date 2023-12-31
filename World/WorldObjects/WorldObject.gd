@@ -2,6 +2,7 @@ extends Resource
 class_name WorldObject
 
 var world_position:Vector2
+var resources:Array
 var producers:Array[Producer]
 var storage:Dictionary
 var vehicles:Array[Vehicle]

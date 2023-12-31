@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs3h4fqujf2ch"]
+
+[ext_resource type="Script" path="res://WorldMap/Modules/MapViewer/MapViewer.gd" id="1_1ww8x"]
+
+[node name="MapViewer" type="Node"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+script = ExtResource("1_1ww8x")
+
+[node name="ObjectInfo" type="VBoxContainer" parent="."]
+z_index = 1
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="ObjectInfo"]
+layout_mode = 2

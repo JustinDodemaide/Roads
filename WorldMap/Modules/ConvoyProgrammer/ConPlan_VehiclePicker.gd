@@ -12,5 +12,4 @@ func exit() -> void:
 	state_machine.vehicle_chooser.queue_free()
 
 func vehicles_chosen(vehicles:Array[Vehicle]):
-	pass
 	state_machine.transition_to("FollowUpPicker",{"location":state_machine.current_location})

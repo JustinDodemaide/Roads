@@ -53,8 +53,6 @@ func _on_complete_circuit_pressed():
 func _on_confirm_pressed():
 	queue_free()
 
-
-
 @onready var flag = $ConfirmFollowUp/Button
 var flags:Dictionary
 func make_flag():

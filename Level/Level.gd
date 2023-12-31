@@ -26,7 +26,7 @@ func _process(_delta):
 
 func _input(event):
 	if event.is_action_pressed("M"):
-		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")
+		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
 	if event.is_action_pressed("1"):
 		test()
 
