@@ -10,6 +10,7 @@ func enter(_msg:Dictionary = {})->void:
 	Global.world.new_object.connect(new_map_object)
 	Global.world.removed_object.connect(new_map_object)
 	ui = $UI
+	$Camera2D.move_camera_to(Global.player_location.world_position)
 	if _msg.has("module"):
 		load_module(_msg["module"])
 

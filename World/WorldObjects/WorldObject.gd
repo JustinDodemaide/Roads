@@ -11,8 +11,9 @@ var faction:String
 
 signal moved
 
-func _init(initial_faction:String) -> void:
+func init(initial_faction:String,position:Vector2) -> void:
 	faction = initial_faction
+	world_position = position
 
 func name() -> String:
 	return "World Object"
@@ -72,5 +73,27 @@ func launch_convoy(v:Array[Vehicle],destination:WorldObject)->void:
 	Global.world.add_world_object(convoy)
 	convoy.init(v,self,destination)
 
-func generate_level() -> void:
-	pass
+func save() -> Dictionary:
+# world_position
+# producers
+# storage
+# vehicles
+# level_id
+# faction
+	var data = {"what": "WorldObject",
+				"world_position": var_to_str(world_position),
+				"level_id":level_id,
+				"faction":faction,
+	}
+	
+	#var producer_saves = []
+	#for i in producers:
+		#producer_saves.append(i.save())
+	#data["producers"] = producer_saves
+	
+	return data
+
+func _load(data:Dictionary) -> void:
+	world_position = str_to_var(data["world_position"])
+	level_id = data["level_id"]
+	faction = data["faction"]

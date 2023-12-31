@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch74f37s1hwdr"]
+
+[ext_resource type="Script" path="res://FPSCounter.gd" id="1_tjmh6"]
+
+[node name="FPSCounter" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_tjmh6")

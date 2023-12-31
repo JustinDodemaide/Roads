@@ -1,12 +1,14 @@
 extends Node
 
+# Level
+
 var world_object:WorldObject
 var tileset_prefab:int
 
 func enter(_msg:Dictionary = {})->void:
 	world_object = _msg["WorldObject"]
 	if world_object.level_id == 0:
-		world_object.generate_level()
+		generate_level()
 	Global.level = self
 	Global.player_location = world_object
 	load_level(world_object.level_id)

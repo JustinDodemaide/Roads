@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://btjh78darwmh4"]
+[gd_scene load_steps=7 format=3 uid="uid://btjh78darwmh4"]
 
 [ext_resource type="Script" path="res://World/World.gd" id="1_vshny"]
 [ext_resource type="Script" path="res://World/WorldSceneHandler.gd" id="2_ti2vb"]
 [ext_resource type="Texture2D" uid="uid://c8sqc2wxn1yrv" path="res://World/World_TileMap.png" id="3_uta0c"]
+[ext_resource type="PackedScene" uid="uid://ch74f37s1hwdr" path="res://FPSCounter.tscn" id="4_hspch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l3m1p"]
 texture = ExtResource("3_uta0c")
@@ -61,11 +62,15 @@ texture_filter = 1
 tile_set = SubResource("TileSet_3nt1j")
 format = 2
 
-[node name="Save" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Save" type="Button" parent="CanvasLayer"]
+offset_right = 94.0
+offset_bottom = 31.0
 text = "Save Game"
+
+[node name="FPSCounter" parent="CanvasLayer" instance=ExtResource("4_hspch")]
 
 [connection signal="world_ready" from="." to="SceneHandler" method="_on_world_ready"]
 [connection signal="timeout" from="WorldUpdate" to="." method="_on_world_update_timeout"]
-[connection signal="pressed" from="Save" to="." method="save"]
+[connection signal="pressed" from="CanvasLayer/Save" to="." method="save"]

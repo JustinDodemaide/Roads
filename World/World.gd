@@ -18,12 +18,11 @@ var world_objects:Array[WorldObject]
 
 func _ready():
 	Global.world = self
-	var test = load("res://World/WorldObjects/WO_Test/WO_Test.gd").new("PLAYER")
-	world_objects.append(test)
-	for i in 5:
-		var test1 = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new("PLAYER")
-		test1.world_position = Vector2(21,156) + Vector2(i*100,0)
-		world_objects.append(test1)
+	#world_objects.append(test)
+	#for i in 5:
+		#var test1 = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new("PLAYER")
+		#test1.world_position = Vector2(21,156) + Vector2(i*100,0)
+		#world_objects.append(test1)
 	
 	if StartGameParameters.save == 0:
 		StartGameParameters.save = StartGameParameters.num_saves + 1
@@ -78,6 +77,7 @@ func save() -> void:
 	# Tilemap
 	# World time
 	# Player money
+	# Player location
 	# AI
 	var file_path:String = "user://" + "Save" + str(StartGameParameters.save) + ".save"
 	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
@@ -93,8 +93,13 @@ func save() -> void:
 	var tilemap_data:Dictionary = {"what":"TileMap"}
 	for cell in $TileMap.get_used_cells(0):
 		tilemap_data[var_to_str(cell)] = var_to_str(tilemap.get_cell_atlas_coords(0,cell))
-
 	save_file.store_line(JSON.stringify(tilemap_data))
+	
+	# World objects
+	for object in world_objects:
+		var object_data = object.save()
+		save_file.store_line(JSON.stringify(object_data))
+	
 	save_file.close()
 	print("Save successful.")
 
@@ -118,7 +123,9 @@ func _load() -> void:
 		# Get the data from the JSON object
 		var data:Dictionary = JSON.parse_string(line)
 		if data["what"] == "WorldObject":
-			pass
+			var object = WorldObject.new()
+			object._load(data)
+			world_objects.append(object)
 		if data["what"] == "TileMap":
 			data.erase("what")
 			for cell in data:

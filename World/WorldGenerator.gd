@@ -171,6 +171,11 @@ func get_tiles_by_zone():
 	return zones
 
 func place_object(pos:Vector2i,zone:int):
+	pos = pos * Vector2i(TILE_SIZE,TILE_SIZE)
+	var world_object = WorldObject.new()
+	world_object.init("PLAYER",pos)
+	Global.world.add_world_object(world_object)
+	
 	var sprite = Sprite2D.new()
 	sprite.texture = load("res://dot.png")
 	sprite.position = pos * Vector2i(TILE_SIZE,TILE_SIZE) + Vector2i(TILE_SIZE/2,TILE_SIZE/2)
