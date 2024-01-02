@@ -9,3 +9,6 @@ func world_texture() -> Texture2D:
 
 func menu_icon() -> Texture2D:
 	return load("res://Items/DefaultItemIcon.png")
+
+func stack_max() -> int:
+	return 64

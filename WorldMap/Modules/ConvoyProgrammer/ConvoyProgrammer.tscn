@@ -61,7 +61,6 @@ alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="CompleteCircuit" type="Button" parent="UI/HBoxContainer"]
-visible = false
 layout_mode = 2
 disabled = true
 text = "Complete Circuit"
@@ -95,6 +94,16 @@ offset_right = 20.0
 offset_bottom = 46.0
 grow_horizontal = 2
 text = "Stops:"
+
+[node name="UpfrontFuel" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = 52.0
+offset_right = 67.5
+offset_bottom = 75.0
+grow_horizontal = 2
 
 [connection signal="pressed" from="ConfirmFollowUp/ConfirmButton" to="ConfirmFollowUp" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/CompleteCircuit" to="." method="_on_complete_circuit_pressed"]

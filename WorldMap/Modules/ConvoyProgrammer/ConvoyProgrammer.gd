@@ -1,6 +1,5 @@
 extends Node
 
-# Emitted when transitioning to a new state.
 signal transitioned(state_name)
 @onready var state = $VehiclePicker
 
@@ -8,9 +7,11 @@ var world_map
 @onready var current_location = Global.level.world_object
 var vehicles
 var vehicle_stats:Dictionary
+var total_fuel_consumption:int = 0
 var initial_items:Array[ItemStack]
 
 var stops:Array[ConvoyStop] = []
+var upfront_cost:int
 
 # UI element refs
 @onready var vehicle_chooser = $UI/ConvoyProgammerVehicleChooser
@@ -30,8 +31,9 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state.enter(msg)
 	emit_signal("transitioned", state.name)
 
-func add_stop(loc:ConvoyStop):
+func add_stop(loc:ConvoyStop,cost:int):
 	stops.append(loc)
+	upfront_cost += cost
 	update_ui()
 
 func update_ui():
@@ -46,11 +48,12 @@ func update_ui():
 	stop_list.text = "Stops: "
 	for i in stops:
 		stop_list.text += i.destination.name() + " "
-	
+	$UI/UpfrontFuel.text = "Upfront fuel cost: " + str(upfront_cost)
 	#make_flag()
 
 func _on_complete_circuit_pressed():
-	add_stop(current_location)
+	var path = Global.world.get_astar_path(stops.back().destination,current_location)
+	add_stop(ConvoyStop.new(current_location),path.size()*total_fuel_consumption)
 	transition_to("FollowUpPicker",{"location":current_location})
 
 # init_convoy_program(_vehicles,_origin,program_stops)
@@ -93,5 +96,5 @@ func convoy_items_before_stop(location:WorldObject) -> Array[ItemStack]:
 
 # Removes all items from set2 from set1
 func remove(items:Array[ItemStack],from:Array[ItemStack]) -> Array[ItemStack]:
-	
+	#TODO
 	return []

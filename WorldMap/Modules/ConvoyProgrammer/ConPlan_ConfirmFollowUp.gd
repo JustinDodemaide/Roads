@@ -3,11 +3,12 @@ extends Node
 var state_machine = null
 
 var location:WorldObject
-var consumed_items:Array[ItemStack]
+var fuel_cost:int
 
 func enter(_msg := {}) -> void:
 	location = _msg["location"]
-	consumed_items = _msg["items_consumed"]
+	
+	fuel_cost = _msg["fuel_cost"]
 	$ConfirmButton.position = location.world_position
 	
 	# The input from clicking the map is going through and clicking the
@@ -28,8 +29,8 @@ func _on_confirm_button_pressed():
 	# Make item menu
 	# Update confirm and complete circuit buttons
 	var stop = ConvoyStop.new(location)
-	stop.items_consumed = consumed_items
-	state_machine.add_stop(stop)
+	# stop.items_consumed = consumed_items
+	state_machine.add_stop(stop,fuel_cost)
 	state_machine.transition_to("FollowUpPicker",{"location": location})
 
 #func different_object_clicked(map_object:WorldMapObject):
