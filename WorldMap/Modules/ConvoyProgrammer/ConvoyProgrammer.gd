@@ -20,9 +20,8 @@ var upfront_cost:int
 
 func _ready() -> void:
 	for child in get_children():
-		if child.name == "UI":
-			continue
-		child.state_machine = self
+		if child.has_method("enter"):
+			child.state_machine = self
 	state.enter()
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:

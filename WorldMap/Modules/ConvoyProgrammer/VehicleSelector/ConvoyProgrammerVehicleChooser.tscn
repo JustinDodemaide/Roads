@@ -1,23 +1,24 @@
 [gd_scene load_steps=2 format=3 uid="uid://de3gs1lr34p1p"]
 
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ConvoyProgrammerVehicleChooser.gd" id="1_pm7vo"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.gd" id="1_pm7vo"]
 
-[node name="ConvoyProgammerVehicleChooser" type="Control"]
+[node name="VehicleSelector" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 8.0
-offset_bottom = 8.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
 script = ExtResource("1_pm7vo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+color = Color(0, 0, 0, 0.403922)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 323.0
+offset_bottom = 217.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Select Vehicles"
 vertical_alignment = 1
 
@@ -27,6 +28,7 @@ alignment = 1
 
 [node name="A" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/A"]
 layout_mode = 2
@@ -34,17 +36,17 @@ text = "Available"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/A"]
-custom_minimum_size = Vector2(0, 128)
+custom_minimum_size = Vector2(256, 128)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
 [node name="AvailableColumn" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/A/ScrollContainer"]
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="S" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/S"]
 layout_mode = 2
@@ -52,16 +54,16 @@ text = "Selected"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/S"]
-custom_minimum_size = Vector2(0, 128)
+custom_minimum_size = Vector2(256, 128)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
 [node name="SelectedColumn" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/S/ScrollContainer"]
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="Stats" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
@@ -79,6 +81,8 @@ layout_mode = 2
 
 [node name="ConfirmButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 disabled = true
 text = "Confirm"
 

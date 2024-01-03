@@ -7,8 +7,8 @@ var fuel_cost:int
 
 func enter(_msg := {}) -> void:
 	location = _msg["location"]
-	
 	fuel_cost = _msg["fuel_cost"]
+	state_machine.world_map.map_object_clicked.connect(map_object_clicked)
 	$ConfirmButton.position = location.world_position
 	
 	# The input from clicking the map is going through and clicking the
@@ -24,6 +24,15 @@ func exit() -> void:
 	$ConfirmButton.visible = false
 	
 	#state_machine.world_map.map_object_clicked.disconnect(different_object_clicked)
+
+func map_object_clicked(map_object):
+	# HACK
+	if map_object.world_object == location:
+		return
+	state_machine.world_map.map_object_clicked.disconnect(map_object_clicked)
+	if state_machine.get_node("FollowUpPicker").lines.has(location):
+		state_machine.get_node("FollowUpPicker").lines[location].default_color.a = 0.35
+	state_machine.get_node("FollowUpPicker").map_object_clicked(map_object)
 
 func _on_confirm_button_pressed():
 	# Make item menu

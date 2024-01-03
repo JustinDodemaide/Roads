@@ -10,7 +10,6 @@ var lines:Dictionary
 # travel (like changing destination)
 
 
-
 func enter(_msg := {}) -> void:
 	clear()
 	determine_valid_followup_locations(_msg["location"])

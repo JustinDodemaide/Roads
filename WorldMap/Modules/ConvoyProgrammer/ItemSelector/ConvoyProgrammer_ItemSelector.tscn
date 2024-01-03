@@ -1,0 +1,133 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdo8y48gvdo05"]
+
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ItemSelector/ConvoyProgrammer_ItemSelector.gd" id="1_82mck"]
+
+[node name="ConvoyProgrammer_ItemSelector" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.254902)
+script = ExtResource("1_82mck")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.266667)
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Select Items"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Deposit" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Items to deposit"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Available" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer/Available"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Available Items"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer/Available"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="PUTBUTTONHERE" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer/Available/ScrollContainer"]
+layout_mode = 2
+
+[node name="Selected" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer/Selected"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Selected Items"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer/Selected"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="PUTBUTTONHERE" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Deposit/HBoxContainer/Selected/ScrollContainer"]
+layout_mode = 2
+
+[node name="Collect" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Items to collect"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Available" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer/Available"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Available Items"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer/Available"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="PUTBUTTONHERE" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer/Available/ScrollContainer"]
+layout_mode = 2
+
+[node name="Selected" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer/Selected"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Selected Items"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer/Selected"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="PUTBUTTONHERE" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/Collect/HBoxContainer/Selected/ScrollContainer"]
+layout_mode = 2

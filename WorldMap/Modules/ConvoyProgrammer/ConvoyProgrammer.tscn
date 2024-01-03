@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ConPlan_VehiclePicker.gd" id="2_sjd2x"]
 [ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ConPlan_FollowUpPicker.gd" id="3_mpxns"]
 [ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ConPlan_ConfirmFollowUp.gd" id="4_ev4yr"]
-[ext_resource type="PackedScene" uid="uid://de3gs1lr34p1p" path="res://WorldMap/Modules/ConvoyProgrammer/ConvoyProgrammerVehicleChooser.tscn" id="5_55omj"]
+[ext_resource type="PackedScene" uid="uid://de3gs1lr34p1p" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.tscn" id="5_55omj"]
 [ext_resource type="Texture2D" uid="uid://dfdhsje56v12q" path="res://WorldMap/Modules/ConvoyProgrammer/flag.png" id="5_l2tsa"]
 
 [node name="ConvoyProgrammer" type="Node"]

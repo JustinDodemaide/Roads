@@ -8,12 +8,11 @@ func init(location):
 	available_column = $VBoxContainer/HBoxContainer/A/ScrollContainer/AvailableColumn
 	selected_column = $VBoxContainer/HBoxContainer/S/ScrollContainer/SelectedColumn
 	for vehicle in location.vehicles:
-	#for i in 5:
-	#	var vehicle = Vehicle.new()
-		var button = load("res://WorldMap/Modules/ConvoyProgrammer/VehicleChooserButton.tscn").instantiate()
+		var button = load("res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/VehicleChooserButton.tscn").instantiate()
 		button.init(vehicle)
 		button.pressed.connect(button_pressed)
 		available_column.add_child(button)
+	update()
 
 func button_pressed(button):
 	if button.available:
@@ -43,6 +42,8 @@ func update():
 	$VBoxContainer/HBoxContainer/Stats/Speed.text = "Speed: " + str(speed)
 	$VBoxContainer/HBoxContainer/Stats/Cargo.text = "Cargo: " + str(cargo)
 	$VBoxContainer/HBoxContainer/Stats/Consumption.text = "Total fuel consumption: " + str(consumption)
+
+	$ColorRect.custom_minimum_size = $VBoxContainer.size
 
 func _on_confirm_button_pressed():
 	var vehicles:Array[Vehicle] = []
