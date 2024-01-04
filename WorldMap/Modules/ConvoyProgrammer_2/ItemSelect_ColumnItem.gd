@@ -26,4 +26,3 @@ func _on_text_edit_text_changed():
 		amount = 0
 		text_edit.text = str(amount)
 	selected_amount = amount
-	print(selected_amount)

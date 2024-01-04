@@ -19,6 +19,7 @@ func execute(tilemap_to_be_altered:TileMap):
 	zone_rings()
 	await altitudes()
 	set_world_objects()
+	set_faction_starting_objects()
 
 func zone_rings():
 	const ZONE_RADIUS_MULTIPLIER:int = 14
@@ -184,30 +185,19 @@ var ZONE_RESOURCES = [
 	
 	# Zone 2
 	[WO_ResourceParams.new("res://Items/Placeholder2/Item_Placeholder2.gd",100,OBJECTS_PER_ZONE_MULTIPLIER * OBJECTS_PER_ZONE_RATIOS[2]),
-	
+
 	],
 ]
 func place_object(pos:Vector2i,zone:int):
 	pos = pos * Vector2i(TILE_SIZE,TILE_SIZE)
 	var world_object = WorldObject.new()
-	world_object.init("PLAYER",pos)
+	world_object.init("",pos)
 	for resource in ZONE_RESOURCES[zone]:
 		if resource.current == resource.max:
 			continue
 		world_object.resources.append(load(resource.item_path).new())
 		resource.current += 1
 	Global.world.add_world_object(world_object)
-	
-	#var sprite = Sprite2D.new()
-	#sprite.texture = load("res://dot.png")
-	#sprite.position = pos * Vector2i(TILE_SIZE,TILE_SIZE) + Vector2i(TILE_SIZE/2,TILE_SIZE/2)
-	#if zone == 0:
-		#sprite.modulate = Color.HOT_PINK
-	#if zone == 1:
-		#sprite.modulate = Color.MEDIUM_PURPLE
-	#if zone == 2:
-		#sprite.modulate = Color.ROYAL_BLUE
-	#Global.world.add_child(sprite)
 
 func reduce_available_positions(available_positions,center:Vector2i):
 	const MIN_DISTANCE:int = 3
@@ -217,3 +207,21 @@ func reduce_available_positions(available_positions,center:Vector2i):
 			var y = round(radius * sin(theta))
 			var pos_to_remove = Vector2i(x,y) + center
 			available_positions.erase(pos_to_remove)
+
+func set_faction_starting_objects() -> void:
+	var factions = ["1","2","3","PLAYER"]
+	var ideal_positions = [Vector2(4000,3400),Vector2(3400,4000),Vector2(4000,4600),Vector2(4600,4000)]
+	for i in factions.size():
+		var ideal_position = ideal_positions.pick_random()
+		ideal_positions.erase(ideal_position)
+		# Get object closest to ideal location
+		var closest_distance:int = 100000
+		var closest_object = null
+		for object in Global.world.world_objects:
+			var distance = ideal_position.distance_to(object.world_position)
+			if distance < closest_distance:
+				closest_distance = distance
+				closest_object = object
+		closest_object.faction = factions[i]
+		if factions[i] == "PLAYER":
+			Global.player_location = closest_object

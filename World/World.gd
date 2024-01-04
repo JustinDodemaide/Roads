@@ -43,6 +43,8 @@ func initialize_astar() -> void:
 	for coord in $TileMap.get_used_cells(FLOOR_LAYER):
 		var cell_data = $TileMap.get_cell_tile_data(FLOOR_LAYER, coord)
 		var speed_modifier = cell_data.get_custom_data("speed_modifier")
+		if cell_data.get_custom_data("impass"):
+			astar.set_point_solid(coord)
 		# if the tile is an impass, astar.set_point_solid(coord)
 		astar.set_point_weight_scale(coord, speed_modifier)
 

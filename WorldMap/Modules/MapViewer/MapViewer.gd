@@ -13,6 +13,7 @@ func _ready():
 func map_object_clicked(map_object):
 	var object = map_object.world_object
 	var text = "name: " + object.name() + "\n"
+	text += "faction: " + object.faction + "\n"
 	text += "position: " + str(object.world_position) + "\n"
 	text += "resources: "
 	for i in object.resources:
