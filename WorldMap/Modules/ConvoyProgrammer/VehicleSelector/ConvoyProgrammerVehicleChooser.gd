@@ -31,12 +31,13 @@ func update():
 	else:
 		$VBoxContainer/ConfirmButton.disabled = false
 	# Update stats
-	var speed = 0
+	var speed = 100000 # Convoy only moves as fast as its slowest vehicle
 	var cargo = 0
 	var consumption = 0
 	for button in selected_column.get_children():
 		var vehicle = button.vehicle
-		speed += vehicle.speed()
+		if vehicle.speed() < speed:
+			speed = vehicle.speed()
 		cargo += vehicle.cargo_capacity()
 		consumption += vehicle.fuel_consumption()
 	$VBoxContainer/HBoxContainer/Stats/Speed.text = "Speed: " + str(speed)

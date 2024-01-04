@@ -1,23 +1,29 @@
 extends RefCounted
 class_name Vehicle
 
-var storage:Array[ItemStack]
+var storage:Dictionary
 
 func name()->String:
 	return "Vehicle"
+
+func ui_texture() -> Texture2D:
+	return load("res://World/WorldObjects/WO_Convoy/truck.png")
 
 # How many ItemStacks the Vehicle can carry
 func cargo_capacity()->int:
 	return 0
 
 func stack_can_be_added(stack:ItemStack) -> bool:
-	return stack.can_be_added_to(storage,cargo_capacity())
+	return true
 
 func add_item_stack(stack:ItemStack) -> void:
-	storage.append(stack)
+	if storage.has(stack.item):
+		storage[stack.item] += stack.quantity
+	else:
+		storage[stack.item] = stack.quantity
 
-func add_item_stack_array(stack_array:Array[ItemStack]) -> void:
-	storage.append_array(stack_array)
+#func add_item_stack_array(stack_array:Array[ItemStack]) -> void:
+#	storage.append_array(stack_array)
 
 func personnel_capacity()->int:
 	return 0

@@ -1,0 +1,301 @@
+[gd_scene load_steps=9 format=3 uid="uid://c152jlr7o8vwd"]
+
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ConvoyProgrammer_2.gd" id="1_6ef0r"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ChooseVehicles.gd" id="2_bjbbo"]
+[ext_resource type="PackedScene" uid="uid://de3gs1lr34p1p" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.tscn" id="3_xx4wx"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ChooseDestination.gd" id="4_lenic"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ChooseItems.gd" id="5_3tao2"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ItemSelect_ColumnItem.gd" id="6_235ll"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/Confirm.gd" id="7_rm7w3"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ColumnItem.gd" id="8_ghri8"]
+
+[node name="ConvoyProgrammer_2" type="Node"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
+script = ExtResource("1_6ef0r")
+
+[node name="ChooseVehicles" type="Node" parent="."]
+script = ExtResource("2_bjbbo")
+
+[node name="UIElements" type="CanvasLayer" parent="ChooseVehicles"]
+visible = false
+
+[node name="VehicleSelector" parent="ChooseVehicles/UIElements" instance=ExtResource("3_xx4wx")]
+offset_left = 254.0
+offset_top = 205.0
+offset_right = 254.0
+offset_bottom = 205.0
+
+[node name="ChooseDestination" type="Node" parent="."]
+script = ExtResource("4_lenic")
+
+[node name="UIElements" type="CanvasLayer" parent="ChooseDestination"]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChooseDestination/UIElements"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.5
+offset_top = -104.0
+offset_right = 35.5
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Upfront" type="Label" parent="ChooseDestination/UIElements/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ConfirmButton" type="Button" parent="ChooseDestination/UIElements/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = "Confirm"
+
+[node name="ChooseItems" type="Node" parent="."]
+script = ExtResource("5_3tao2")
+
+[node name="ColumnItem" type="PanelContainer" parent="ChooseItems"]
+visible = false
+offset_left = 16.0
+offset_top = 70.0
+offset_right = 42.0
+offset_bottom = 109.0
+script = ExtResource("6_235ll")
+
+[node name="MarginContainer" type="MarginContainer" parent="ChooseItems/ColumnItem"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChooseItems/ColumnItem/MarginContainer"]
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="ChooseItems/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="ChooseItems/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Total" type="Label" parent="ChooseItems/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="ChooseItems/ColumnItem/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="UIElements" type="CanvasLayer" parent="ChooseItems"]
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="ChooseItems/UIElements"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.0
+offset_top = -188.5
+offset_right = 274.0
+offset_bottom = 188.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ChooseItems/UIElements/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Select Items"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Deposit" type="VBoxContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Deposit"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Deposit"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Deposit"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Deposit/ScrollContainer"]
+layout_mode = 2
+
+[node name="Collect" type="VBoxContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Collect"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Collect"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Collect"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Collect/ScrollContainer"]
+layout_mode = 2
+
+[node name="Confirm" type="Button" parent="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Confirm"
+
+[node name="ReviewAndConfirm" type="Node" parent="."]
+script = ExtResource("7_rm7w3")
+
+[node name="ColumnItem" type="PanelContainer" parent="ReviewAndConfirm"]
+visible = false
+offset_left = 16.0
+offset_top = 70.0
+offset_right = 42.0
+offset_bottom = 109.0
+script = ExtResource("8_ghri8")
+
+[node name="MarginContainer" type="MarginContainer" parent="ReviewAndConfirm/ColumnItem"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReviewAndConfirm/ColumnItem/MarginContainer"]
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="ReviewAndConfirm/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="ReviewAndConfirm/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Amount" type="Label" parent="ReviewAndConfirm/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="UIElements" type="CanvasLayer" parent="ReviewAndConfirm"]
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="ReviewAndConfirm/UIElements"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ReviewAndConfirm/UIElements/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Review"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Vehicles" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Vehicles"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VehicleList" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles/ScrollContainer"]
+layout_mode = 2
+
+[node name="Deposit" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Deposit"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Deposit"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Deposit"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Deposit/ScrollContainer"]
+layout_mode = 2
+
+[node name="Collect" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Collect"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Collect"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Collect"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Collect/ScrollContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="UpfrontCost" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Fuel cost per trip:"
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Launch convoy:"
+
+[node name="OptionButton" type="OptionButton" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Only once"
+popup/item_0/id = 0
+popup/item_1/text = "Whenever possible"
+popup/item_1/id = 1
+
+[node name="Confirm" type="Button" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Launch Convoy"
+
+[connection signal="pressed" from="ChooseDestination/UIElements/VBoxContainer/ConfirmButton" to="ChooseDestination" method="_on_confirm_button_pressed"]
+[connection signal="text_changed" from="ChooseItems/ColumnItem/MarginContainer/HBoxContainer/TextEdit" to="ChooseItems/ColumnItem" method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="ChooseItems/UIElements/PanelContainer/MarginContainer/VBoxContainer/Confirm" to="ChooseItems" method="_on_confirm_pressed"]
+[connection signal="pressed" from="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/Confirm" to="ReviewAndConfirm" method="_on_confirm_pressed"]

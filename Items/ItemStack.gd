@@ -10,7 +10,3 @@ func _init(_item:Item, _quantity:int = 1):
 
 func item_name() -> String:
 	return item.item_name()
-
-func can_be_added_to(array:Array[ItemStack], max_size:int) -> bool:
-	# TODO
-	return true

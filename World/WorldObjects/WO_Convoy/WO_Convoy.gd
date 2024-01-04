@@ -38,7 +38,7 @@ func options()->Array[WorldObjectOption]:
 			WorldObjectOption.new("Speed Boost"),
 	]
 
-func init_convoy(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:WorldObject) -> void:
+func init_convoy_oneshot(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:ConvoyStop) -> void:
 	vehicles = _vehicles
 	origin = _origin
 	world_position = origin.world_position
@@ -46,9 +46,9 @@ func init_convoy(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:World
 	timer = Global.world.create_timer()
 	timer.timeout.connect(_on_move_timer_timeout)
 	Global.world.add_world_object(self)
-	new_destination(ConvoyStop.new(_destination))
+	new_destination(_destination)
 
-func init_convoy_program(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[ConvoyStop]) -> void:
+func init_convoy_circuit(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[ConvoyStop]) -> void:
 	stops = program_stops
 	origin = _origin
 	world_position = origin.world_position
@@ -65,7 +65,7 @@ func new_destination(new_dest:ConvoyStop):
 	if destination.has_signal("moved_to"):
 		destination.moved_to.connect(destination_moved)
 	var tile_pos = Global.world.tilemap.local_to_map(world_position)
-	var dest_tile_pos = Global.world.tilemap.local_to_map(destination.world_position)
+	var dest_tile_pos = Global.world.tilemap.local_to_map(destination.destination.world_position)
 	path = Global.world.astar.get_id_path(tile_pos, dest_tile_pos)
 	# print("path: ", path)
 	path_index = 0
@@ -110,7 +110,7 @@ func destination_moved()->void:
 	new_destination(destination)
 
 func map_sprite()->Texture2D:
-	# place each of the vehicles in formation. how? idk
+	# place each of the vehicles in formation
 	return load("res://World/WorldObjects/WO_Convoy/truck.png")
 
 func option_chosen(option:WorldObjectOption)->void:

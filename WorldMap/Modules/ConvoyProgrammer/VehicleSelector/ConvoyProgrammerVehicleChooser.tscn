@@ -72,6 +72,7 @@ text = "Stats:"
 
 [node name="Speed" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
 layout_mode = 2
+tooltip_text = "Convoy only moves as fast as its slowest vehicle."
 
 [node name="Cargo" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
 layout_mode = 2
