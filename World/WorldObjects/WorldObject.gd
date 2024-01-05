@@ -85,8 +85,13 @@ func save() -> Dictionary:
 				"world_position": var_to_str(world_position),
 				"level_id":level_id,
 				"faction":faction,
+				"resources":[],
+				"player_location":false
 	}
-	
+	for i in resources:
+		data["resources"].append(i.save())
+	if Global.player_location == self:
+		data["player_location"] = true
 	#var producer_saves = []
 	#for i in producers:
 		#producer_saves.append(i.save())
@@ -98,3 +103,7 @@ func _load(data:Dictionary) -> void:
 	world_position = str_to_var(data["world_position"])
 	level_id = data["level_id"]
 	faction = data["faction"]
+	for i in data["resources"]:
+		resources.append(load(i["path"]).new())
+	if data["player_location"]:
+		Global.player_location = self

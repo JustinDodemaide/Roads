@@ -13,7 +13,7 @@ func ui_texture() -> Texture2D:
 func cargo_capacity()->int:
 	return 0
 
-func stack_can_be_added(stack:ItemStack) -> bool:
+func stack_can_be_added(_stack:ItemStack) -> bool:
 	return true
 
 func add_item_stack(stack:ItemStack) -> void:

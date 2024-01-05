@@ -11,7 +11,7 @@ func enter(_msg:Dictionary = {})->void:
 		generate_level()
 	Global.level = self
 	Global.player_location = world_object
-	load_level(world_object.level_id)
+	load_level()
 	
 	add_child(load("res://Level/PlayerCharacter/PlayerCharacter.tscn").instantiate())
 	$PlayerCharacter.position = $TileMap.get_node("PlayerStart").position
@@ -31,7 +31,7 @@ func _input(event):
 		test()
 
 func test():
-	var _v:Array[Vehicle]
+	#var _v:Array[Vehicle]
 	world_object.launch_convoy(world_object.vehicles,Global.world.world_objects.back())
 
 func new_producer(producer:Producer):
@@ -71,7 +71,7 @@ func save():
 		save_file.store_line(json_string)
 	save_file.close()
 
-func load_level(id:int) -> void:
+func load_level() -> void:
 	var file_path:String = "user://" + "Level" + str(world_object.level_id) + ".save"
 	if not FileAccess.file_exists(file_path):
 		print("file doesnt exist")

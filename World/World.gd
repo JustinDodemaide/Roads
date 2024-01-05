@@ -134,6 +134,7 @@ func _load() -> void:
 				#cell = "Vector2i" + str_to_var(cell)
 				$TileMap.set_cell(0,str_to_var(cell),0,str_to_var(data[cell]))
 			continue
+	save_file.close()
 
 func new_world() -> void:
 	var world_generator = WorldGenerator.new()

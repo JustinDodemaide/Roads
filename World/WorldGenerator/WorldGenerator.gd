@@ -19,6 +19,7 @@ func execute(tilemap_to_be_altered:TileMap):
 	zone_rings()
 	await altitudes()
 	set_world_objects()
+	distribute_resources()
 	set_faction_starting_objects()
 
 func zone_rings():
@@ -146,7 +147,10 @@ func altitudes():
 
 const OBJECTS_PER_ZONE_MULTIPLIER:int = 75
 const OBJECTS_PER_ZONE_RATIOS:Array[float] = [1,0.75,0.33]
+var zone_objects = []
 func set_world_objects():
+	for i in NUMBER_OF_ZONES:
+		zone_objects.append([])
 	var zone_tiles = get_tiles_by_zone()
 	for zone in NUMBER_OF_ZONES:
 		var available_positions = zone_tiles[zone]
@@ -171,33 +175,12 @@ func get_tiles_by_zone():
 		zones[zone].append(tile)
 	return zones
 
-# func _init(_item_path:String,percent:int,objects_per_zone):
-var ZONE_RESOURCES = [
-	# Zone 0
-	[WO_ResourceParams.new("res://Items/Placeholder0/Item_Placeholder0.gd",100,OBJECTS_PER_ZONE_MULTIPLIER * OBJECTS_PER_ZONE_RATIOS[0]),
-	
-	],
-	
-	# Zone 1
-	[WO_ResourceParams.new("res://Items/Placeholder1/Item_Placeholder1.gd",100,OBJECTS_PER_ZONE_MULTIPLIER * OBJECTS_PER_ZONE_RATIOS[1]),
-	
-	],
-	
-	# Zone 2
-	[WO_ResourceParams.new("res://Items/Placeholder2/Item_Placeholder2.gd",100,OBJECTS_PER_ZONE_MULTIPLIER * OBJECTS_PER_ZONE_RATIOS[2]),
-
-	],
-]
 func place_object(pos:Vector2i,zone:int):
 	pos = pos * Vector2i(TILE_SIZE,TILE_SIZE)
 	var world_object = WorldObject.new()
 	world_object.init("",pos)
-	for resource in ZONE_RESOURCES[zone]:
-		if resource.current == resource.max:
-			continue
-		world_object.resources.append(load(resource.item_path).new())
-		resource.current += 1
 	Global.world.add_world_object(world_object)
+	zone_objects[zone].append(world_object)
 
 func reduce_available_positions(available_positions,center:Vector2i):
 	const MIN_DISTANCE:int = 3
@@ -207,6 +190,31 @@ func reduce_available_positions(available_positions,center:Vector2i):
 			var y = round(radius * sin(theta))
 			var pos_to_remove = Vector2i(x,y) + center
 			available_positions.erase(pos_to_remove)
+
+var ZONE_RESOURCES = [
+	# Zone 0
+	[
+	WG_RP.new("res://Items/Iron_Ore/Item_Iron_Ore.gd",90),
+	WG_RP.new("res://Items/Placeholder0/Item_Placeholder0.gd",50),
+	],
+	
+	# Zone 1
+	[
+	WG_RP.new("res://Items/Placeholder1/Item_Placeholder1.gd",100),
+	],
+	
+	# Zone 2
+	[
+	WG_RP.new("res://Items/Placeholder2/Item_Placeholder2.gd",100),
+	],
+]
+func distribute_resources():
+	for zone in NUMBER_OF_ZONES:
+		for object in zone_objects[zone]:
+			for resource in ZONE_RESOURCES[zone]:
+				var dice_roll = randi_range(0,100)
+				if dice_roll < resource.percent_chance:
+					object.resources.append(load(resource.item_path).new())
 
 func set_faction_starting_objects() -> void:
 	var factions = ["1","2","3","PLAYER"]

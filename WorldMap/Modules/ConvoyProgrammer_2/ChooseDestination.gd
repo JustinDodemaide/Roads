@@ -30,13 +30,15 @@ func determine_valid_followup_locations(from:WorldObject):
 		fuel_costs[location] = path.size() * state_machine.total_fuel_consumption
 		valid_followups[location] = {"path": path}
 		draw_path_line(location,path)
+	if valid_followups.is_empty():
+		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
 
 # Change it to: left click brings up stats, right click chooses location
 func map_object_clicked(map_object):
-	$UIElements/VBoxContainer/ConfirmButton.disabled = false
 	var object = map_object.world_object
-	if !valid_followups.has(object):
+	if not valid_followups.has(object):
 		return
+	$UIElements/VBoxContainer/ConfirmButton.disabled = false
 	lines[object].default_color.a = 1
 	lines[object].z_index = 1
 	$UIElements/VBoxContainer/Upfront.text = "Upfront fuel cost: " + str(fuel_costs[object])
