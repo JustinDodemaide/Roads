@@ -17,13 +17,6 @@ var world_objects:Array[WorldObject]
 # Save and load the world
 
 func _ready():
-	Global.world = self
-	#world_objects.append(test)
-	#for i in 5:
-		#var test1 = load("res://World/WorldObjects/WO_Resource_Test/WO_Resource_Test.gd").new("PLAYER")
-		#test1.world_position = Vector2(21,156) + Vector2(i*100,0)
-		#world_objects.append(test1)
-	
 	if StartGameParameters.save == 0:
 		StartGameParameters.save = StartGameParameters.num_saves + 1
 		new_world()
@@ -144,3 +137,4 @@ func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 	var from_tile = $TileMap.local_to_map(from.world_position)
 	var to_tile = $TileMap.local_to_map(to.world_position)
 	return astar.get_point_path(from_tile,to_tile)
+
