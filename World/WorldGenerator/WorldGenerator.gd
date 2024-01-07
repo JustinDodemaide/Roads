@@ -236,5 +236,5 @@ func set_faction_starting_objects() -> void:
 
 func initialize_player_start() -> void:
 	var loc = Global.player_location
-	var starting_items = {load("res://Items/Tier0Harvest/Item_Tier0Harvest.gd").new(): 100}
+	var starting_items = {load("res://Items/Tier0Harvest/Item_Tier0Harvest.gd").new().item_name(): 100}
 	loc.storage = starting_items

@@ -112,7 +112,7 @@ func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 	add_level_object(dropped_item)
 
 func _on_add_place_holder_collector_pressed():
-	var lo = load("res://Level/LevelObjects/LO_PlaceholderCollector/LO_PlaceholderCollector.tscn").instantiate()
+	var lo = load("res://Level/LevelObjects/LO_Tier0Harvester/LO_Tier0Harvester.tscn").instantiate()
 	add_level_object(lo)
 
 func _on_add_vehicle_pressed():

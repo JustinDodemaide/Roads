@@ -32,18 +32,18 @@ func info() -> PackedStringArray:
 func update()->void:
 	for producer in producers:
 		for rate in producer.item_rates:
+			var item_name = rate.item.item_name()
 			if rate.slope < 0:
 				# If producer needs an item to make something, and that item
 				# isn't available, skip that producer.
-				if not storage.has(rate.item):
+				if not storage.has(item_name):
 					break
 				var required_amount = rate.slope * Global.WORLD_UPDATE_TIME
-				if storage[rate.item] < required_amount:
+				if storage[item_name] < required_amount:
 					break
-
-			if not storage.has(rate.item):
-				storage[rate.item] = 0
-			storage[rate.item] += rate.slope * Global.WORLD_UPDATE_TIME
+			if not storage.has(item_name):
+				storage[item_name] = 0
+			storage[item_name] += rate.slope * Global.WORLD_UPDATE_TIME
 	additional_updates()
 
 func additional_updates() -> void:
