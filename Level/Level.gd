@@ -27,6 +27,10 @@ func _process(_delta):
 func _input(event):
 	if event.is_action_pressed("M"):
 		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
+	if event.is_action_pressed("B"):
+		var menu = load("res://Level/BuildingMenu/BuildingMenu.tscn").instantiate()
+		menu.building_selected.connect(add_level_object)
+		$UI.add_child(menu)
 	if event.is_action_pressed("1"):
 		test()
 
@@ -110,13 +114,3 @@ func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 	dropped_item.init(item_stack)
 	dropped_item.position = pos
 	add_level_object(dropped_item)
-
-func _on_add_place_holder_collector_pressed():
-	var lo = load("res://Level/LevelObjects/LO_Tier0Harvester/LO_Tier0Harvester.tscn").instantiate()
-	add_level_object(lo)
-
-func _on_add_vehicle_pressed():
-	var tacoma = load("res://Vehicles/Vehicle_ToyotaTacoma.gd").new()
-	tacoma.add_item_stack(ItemStack.new(load("res://Items/Fuel/Item_Fuel.gd").new(),30))
-	var vehicles:Array[Vehicle] = [tacoma]
-	world_object.add_vehicles(vehicles)
