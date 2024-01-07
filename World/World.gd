@@ -12,18 +12,14 @@ var world_objects:Array[WorldObject]
 @onready var tilemap:TileMap = $TileMap
 @onready var world_update:Timer = $WorldUpdate
 
-
-# Make the WorldGen place actual objects
-# Save and load the world
-
 func _ready():
+	Global.world = self
 	if StartGameParameters.save == 0:
 		StartGameParameters.save = StartGameParameters.num_saves + 1
 		new_world()
 	else:
 		_load()
 	
-	Global.world = self
 	initialize_astar()
 	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)
 	emit_signal("world_ready")

@@ -21,6 +21,7 @@ func execute(tilemap_to_be_altered:TileMap):
 	set_world_objects()
 	distribute_resources()
 	set_faction_starting_objects()
+	initialize_player_start()
 
 func zone_rings():
 	const ZONE_RADIUS_MULTIPLIER:int = 14
@@ -194,18 +195,17 @@ func reduce_available_positions(available_positions,center:Vector2i):
 var ZONE_RESOURCES = [
 	# Zone 0
 	[
-	WG_RP.new("res://Items/Iron_Ore/Item_Iron_Ore.gd",90),
-	WG_RP.new("res://Items/Placeholder0/Item_Placeholder0.gd",50),
+	WG_RP.new("res://Items/Tier0Harvest/Item_Tier0Harvest.gd",90),
 	],
 	
 	# Zone 1
 	[
-	WG_RP.new("res://Items/Placeholder1/Item_Placeholder1.gd",100),
+	WG_RP.new("res://Items/Tier1Harvest/Item_Tier1Harvest.gd",90),
 	],
 	
 	# Zone 2
 	[
-	WG_RP.new("res://Items/Placeholder2/Item_Placeholder2.gd",100),
+	WG_RP.new("res://Items/Tier2Harvest/Item_Tier2Harvest.gd",90),
 	],
 ]
 func distribute_resources():
@@ -233,3 +233,8 @@ func set_faction_starting_objects() -> void:
 		closest_object.faction = factions[i]
 		if factions[i] == "PLAYER":
 			Global.player_location = closest_object
+
+func initialize_player_start() -> void:
+	var loc = Global.player_location
+	var starting_items = {load("res://Items/Tier0Harvest/Item_Tier0Harvest.gd").new(): 100}
+	loc.storage = starting_items
