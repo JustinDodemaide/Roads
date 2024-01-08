@@ -17,6 +17,7 @@ func _ready():
 	if StartGameParameters.save == 0:
 		StartGameParameters.save = StartGameParameters.num_saves + 1
 		new_world()
+		add_default_research_projects()
 	else:
 		_load()
 	
@@ -129,8 +130,15 @@ func new_world() -> void:
 	var world_generator = WorldGenerator.new()
 	world_generator.execute(tilemap)
 
+func add_default_research_projects():
+	var file_path:String = "user://" + str(StartGameParameters.save) + "ResearchedFacilities.save"
+	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
+	# Make sure to store the SCRIPT path, NOT the scene path
+	save_file.store_line(JSON.stringify({"path": "res://Level/LevelObjects/LO_Tier0Harvester/LO_Tier0Harvester.gd"}))
+	
+	save_file.close()
+
 func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 	var from_tile = $TileMap.local_to_map(from.world_position)
 	var to_tile = $TileMap.local_to_map(to.world_position)
 	return astar.get_point_path(from_tile,to_tile)
-

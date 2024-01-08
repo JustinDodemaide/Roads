@@ -11,3 +11,6 @@ var player_faction_name:String = "PLAYER"
 func random_color()->Color:
 	randomize()
 	return Color(randf_range(0,1),randf_range(0,1),randf_range(0,1))
+
+func research_complete(category:String,path:String):
+	pass

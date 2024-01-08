@@ -14,9 +14,7 @@ func enter(_msg:Dictionary = {})->void:
 	load_level()
 	
 	add_child(load("res://Level/PlayerCharacter/PlayerCharacter.tscn").instantiate())
-	$PlayerCharacter.position = $TileMap.get_node("PlayerStart").position
-	#var pickaxe = load("res://Items/Pickaxe/Item_Pickaxe.gd").new()
-	#make_dropped_item(ItemStack.new(pickaxe),$PlayerCharacter.position + Vector2(0,100))
+	#$PlayerCharacter.position = $TileMap.get_node("PlayerStart").position
 
 func exit()->void:
 	save()
@@ -29,6 +27,7 @@ func _input(event):
 		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
 	if event.is_action_pressed("B"):
 		var menu = load("res://Level/BuildingMenu/BuildingMenu.tscn").instantiate()
+		menu.init("Facilities")
 		menu.building_selected.connect(add_level_object)
 		$UI.add_child(menu)
 	if event.is_action_pressed("1"):
@@ -56,18 +55,21 @@ func remove_level_object(object:LevelObject):
 	object.queue_free()
 
 func save():
+	# Problem: this isnt overwriting the save file, its appending to it
+	
+	for i in $LevelObjects.get_children():
+		print(i.name)
 	# What needs to be saved:
 	# 	All LevelObjects
-	var file_path:String = "user://" + "Level" + str(world_object.level_id) + ".save"
+	var file_path:String = "user://" + str(StartGameParameters.save) + "Level" + str(world_object.level_id) + ".save"
 	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
 	if save_file == null:
 		return
 	if not save_file.is_open():
 		return
-	
-	var tilemap_data = $TileMap.save()
-	tilemap_data = JSON.stringify(tilemap_data)
-	save_file.store_line(tilemap_data)
+	# var tilemap_data = $TileMap.save()
+	# tilemap_data = JSON.stringify(tilemap_data)
+	# save_file.store_line(tilemap_data)
 	
 	for i in $LevelObjects.get_children():
 		var data = i.save()
@@ -76,7 +78,7 @@ func save():
 	save_file.close()
 
 func load_level() -> void:
-	var file_path:String = "user://" + "Level" + str(world_object.level_id) + ".save"
+	var file_path:String = "user://" + str(StartGameParameters.save) + "Level" + str(world_object.level_id) + ".save"
 	if not FileAccess.file_exists(file_path):
 		print("file doesnt exist")
 		return # Error! We don't have a save to load.
@@ -99,18 +101,22 @@ func load_level() -> void:
 func generate_level() -> void:
 	world_object.level_id = get_instance_id()
 	var level_prefab:int
-	# DEBUG /*
-	level_prefab = 1
-	if world_object.name() == "Waffle":
-		level_prefab = 2
-	# */ DEBUG END
+
 	world_object.level_id = level_prefab
-	var tilemap = load("res://Level/TileMapPrefabs/LTM_" + str(level_prefab) + ".tscn").instantiate()
-	tilemap._load({})
-	add_child(tilemap)
+	# var tilemap = load("res://Level/TileMapPrefabs/LTM_" + str(level_prefab) + ".tscn").instantiate()
+	# tilemap._load({})
+	# add_child(tilemap)
 
 func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 	var dropped_item = load("res://Level/LevelObjects/LO_DroppedItem/LO_DroppedItem.tscn").instantiate()
 	dropped_item.init(item_stack)
 	dropped_item.position = pos
 	add_level_object(dropped_item)
+
+
+func _on_button_pressed():
+	var file_path:String = "user://test.save"
+	var save_file = FileAccess.open(file_path, FileAccess.READ_WRITE)
+	var json_string = JSON.stringify("line")
+	save_file.seek_end()
+	save_file.store_line(json_string)

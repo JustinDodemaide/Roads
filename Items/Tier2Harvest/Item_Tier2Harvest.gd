@@ -1,4 +1,4 @@
 extends Item
 
 func item_name() -> String:
-	return "Placeholder2"
+	return "Tier2Harvest"
