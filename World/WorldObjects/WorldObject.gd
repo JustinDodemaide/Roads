@@ -86,16 +86,16 @@ func save() -> Dictionary:
 				"level_id":level_id,
 				"faction":faction,
 				"resources":[],
+				"producers":[],
+				"storage":storage,
 				"player_location":false
 	}
 	for i in resources:
 		data["resources"].append(i.save())
+	for i in producers:
+		data["producers"].append(i.save())
 	if Global.player_location == self:
 		data["player_location"] = true
-	#var producer_saves = []
-	#for i in producers:
-		#producer_saves.append(i.save())
-	#data["producers"] = producer_saves
 	
 	return data
 
@@ -105,5 +105,8 @@ func _load(data:Dictionary) -> void:
 	faction = data["faction"]
 	for i in data["resources"]:
 		resources.append(load(i["path"]).new())
+	for i in data["producers"]:
+		producers.append(Producer.new([],0,i))
 	if data["player_location"]:
 		Global.player_location = self
+	storage = data["storage"]
