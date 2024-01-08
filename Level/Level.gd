@@ -30,12 +30,6 @@ func _input(event):
 		menu.init("Facilities")
 		menu.building_selected.connect(add_level_object)
 		$UI.add_child(menu)
-	if event.is_action_pressed("1"):
-		test()
-
-func test():
-	#var _v:Array[Vehicle]
-	world_object.launch_convoy(world_object.vehicles,Global.world.world_objects.back())
 
 func new_producer(producer:Producer):
 	world_object.producers.append(producer)
@@ -55,8 +49,6 @@ func remove_level_object(object:LevelObject):
 	object.queue_free()
 
 func save():
-	# Problem: this isnt overwriting the save file, its appending to it
-	
 	for i in $LevelObjects.get_children():
 		print(i.name)
 	# What needs to be saved:

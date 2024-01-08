@@ -7,8 +7,7 @@ var inventory:Array[ItemStack] = [null,null,null,null,null]
 var held_item:ItemStack
 
 func _ready():
-	for i in Global.level.get_node("UI/Inventory").get_children():
-		i.inventory_slot_selected.connect(inventory_slot_selected)
+	pass
 
 func _input(event):
 	if event.is_action_pressed("LeftClick"):

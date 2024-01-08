@@ -1,43 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq2g7oxrc26m"]
+[gd_scene load_steps=2 format=3 uid="uid://bq2g7oxrc26m"]
 
 [ext_resource type="Script" path="res://Level/Level.gd" id="1_wni3i"]
-[ext_resource type="PackedScene" uid="uid://coo2txtpgadic" path="res://Level/LevelUI/LevelInventoryButton.tscn" id="2_2xcea"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_wni3i")
 
 [node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Inventory" type="HBoxContainer" parent="UI"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -154.0
-offset_top = -70.0
-offset_right = 154.0
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="LevelInventoryButton0" parent="UI/Inventory" instance=ExtResource("2_2xcea")]
-layout_mode = 2
-
-[node name="LevelInventoryButton1" parent="UI/Inventory" instance=ExtResource("2_2xcea")]
-layout_mode = 2
-number = 1
-
-[node name="LevelInventoryButton2" parent="UI/Inventory" instance=ExtResource("2_2xcea")]
-layout_mode = 2
-number = 2
-
-[node name="LevelInventoryButton3" parent="UI/Inventory" instance=ExtResource("2_2xcea")]
-layout_mode = 2
-number = 3
-
-[node name="LevelInventoryButton4" parent="UI/Inventory" instance=ExtResource("2_2xcea")]
-layout_mode = 2
-number = 4
 
 [node name="LevelObjects" type="Node" parent="."]
