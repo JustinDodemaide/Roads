@@ -5,7 +5,11 @@ extends Control
 var option_scene_paths:PackedStringArray = []
 signal building_selected(building:LevelObject)
 
-func init(category:String) -> void:
+func _on_facilities_pressed():
+	init_options("Facilities")
+	$Categories.queue_free()
+
+func init_options(category:String) -> void:
 	var file_path:String = "user://" + str(StartGameParameters.save) + "Researched" + category + ".save"
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	while file.get_position() < file.get_length():
@@ -13,10 +17,12 @@ func init(category:String) -> void:
 		var data:Dictionary = JSON.parse_string(line)
 		var script_path = data["path"]
 		var script = load(data["path"]).new()
+		new_option(script)
 		var scene_path = script_path.replace(".gd",".tscn")
 		# HACK? Not sure how inefficient this is compared to storing both
 		# paths seperately
 		option_scene_paths.append(scene_path)
+	$OptionButton.visible = true
 
 func new_option(script):
 	$OptionButton.add_item(script._name())

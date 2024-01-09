@@ -27,7 +27,6 @@ func _input(event):
 		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
 	if event.is_action_pressed("B"):
 		var menu = load("res://Level/BuildingMenu/BuildingMenu.tscn").instantiate()
-		menu.init("Facilities")
 		menu.building_selected.connect(add_level_object)
 		$UI.add_child(menu)
 
@@ -49,8 +48,6 @@ func remove_level_object(object:LevelObject):
 	object.queue_free()
 
 func save():
-	for i in $LevelObjects.get_children():
-		print(i.name)
 	# What needs to be saved:
 	# 	All LevelObjects
 	var file_path:String = "user://" + str(StartGameParameters.save) + "Level" + str(world_object.level_id) + ".save"
