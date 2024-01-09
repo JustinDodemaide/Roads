@@ -17,21 +17,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rn446")
 
-[node name="Categories" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Facilities" type="Button" parent="Categories"]
-layout_mode = 2
-text = "Facilities"
-
 [node name="OptionButton" type="OptionButton" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 45.0
 offset_bottom = 20.0
 allow_reselect = true
 
-[connection signal="pressed" from="Categories/Facilities" to="." method="_on_facilities_pressed"]
 [connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

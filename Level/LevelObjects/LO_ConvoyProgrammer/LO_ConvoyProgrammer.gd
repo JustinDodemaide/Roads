@@ -1,7 +1,7 @@
 extends LevelObject
 
 func _name():
-	return "Terminal"
+	return "Convoy Programmer"
 
 func is_interaction_valid(_interactor) -> bool:
 	return true

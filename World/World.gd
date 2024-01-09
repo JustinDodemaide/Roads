@@ -134,8 +134,14 @@ func add_default_research_projects():
 	var file_path:String = "user://" + str(StartGameParameters.save) + "ResearchedFacilities.save"
 	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
 	# Make sure to store the SCRIPT path, NOT the scene path
-	save_file.store_line(JSON.stringify({"path": "res://Level/LevelObjects/LO_Tier0Harvester/LO_Tier0Harvester.gd"}))
+	save_file.store_line("res://Level/LevelObjects/LO_Tier0Harvester/LO_Tier0Harvester.gd")
+	save_file.store_line("res://Level/LevelObjects/LO_VehicleBuilder/LO_VehicleBuilder.gd")
+	save_file.store_line("res://Level/LevelObjects/LO_ConvoyProgrammer/LO_ConvoyProgrammer.gd")
+	save_file.close()
 	
+	file_path = "user://" + str(StartGameParameters.save) + "ResearchedVehicles.save"
+	save_file = FileAccess.open(file_path, FileAccess.WRITE)
+	save_file.store_line("res://Vehicles/Vehicle_AllRounder.gd")
 	save_file.close()
 
 func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:

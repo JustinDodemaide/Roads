@@ -102,7 +102,6 @@ func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 	dropped_item.position = pos
 	add_level_object(dropped_item)
 
-
 func _on_button_pressed():
 	var file_path:String = "user://test.save"
 	var save_file = FileAccess.open(file_path, FileAccess.READ_WRITE)

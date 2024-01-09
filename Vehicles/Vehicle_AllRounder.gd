@@ -1,7 +1,7 @@
 extends Vehicle
 
-func name()->String:
-	return "Toyota Tacoma"
+func _name()->String:
+	return "All Rounder"
 	
 func cargo_capacity()->int:
 	return 4
