@@ -8,7 +8,7 @@ func init(location):
 	available_column = $VBoxContainer/HBoxContainer/A/ScrollContainer/AvailableColumn
 	selected_column = $VBoxContainer/HBoxContainer/S/ScrollContainer/SelectedColumn
 	for vehicle in location.vehicles:
-		var button = load("res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/VehicleChooserButton.tscn").instantiate()
+		var button = load("res://WorldMap/Modules/ConvoyProgrammer_2/VehicleSelector/VehicleChooserButton.tscn").instantiate()
 		button.init(vehicle)
 		button.pressed.connect(button_pressed)
 		available_column.add_child(button)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmdughlph7u3"]
 
 [ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/VehicleChooserButton.gd" id="1_wpf6o"]
-[ext_resource type="Texture2D" uid="uid://dhymqqihg10iu" path="res://WorldMap/Modules/ConvoyProgrammer/login_FILL0_wght400_GRAD0_opsz24.png" id="2_d85u4"]
+[ext_resource type="Texture2D" uid="uid://dhymqqihg10iu" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/login_FILL0_wght400_GRAD0_opsz24.png" id="2_d85u4"]
 [ext_resource type="Texture2D" uid="uid://bws6jlbq2cw2h" path="res://World/WorldObjects/WO_Convoy/truck.png" id="2_vrlk2"]
 
 [node name="VehicleChooserButton" type="ColorRect"]

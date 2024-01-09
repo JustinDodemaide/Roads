@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhymqqihg10iu"
-path="res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-a35b6d980f6672062c6559fe2d5b5f1d.ctex"
+path="res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-dbd3f674b7e72d40a3d7a6a63ef3b899.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://WorldMap/Modules/ConvoyProgrammer/login_FILL0_wght400_GRAD0_opsz24.png"
-dest_files=["res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-a35b6d980f6672062c6559fe2d5b5f1d.ctex"]
+source_file="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/login_FILL0_wght400_GRAD0_opsz24.png"
+dest_files=["res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-dbd3f674b7e72d40a3d7a6a63ef3b899.ctex"]
 
 [params]
 

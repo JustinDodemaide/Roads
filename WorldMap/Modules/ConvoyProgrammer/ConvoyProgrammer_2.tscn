@@ -1,15 +1,15 @@
 [gd_scene load_steps=9 format=3 uid="uid://c152jlr7o8vwd"]
 
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ConvoyProgrammer_2.gd" id="1_6ef0r"]
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ChooseVehicles.gd" id="2_bjbbo"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ConvoyProgrammer_2.gd" id="1_6ef0r"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ChooseVehicles.gd" id="2_bjbbo"]
 [ext_resource type="PackedScene" uid="uid://de3gs1lr34p1p" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.tscn" id="3_xx4wx"]
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ChooseDestination.gd" id="4_lenic"]
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ChooseItems.gd" id="5_3tao2"]
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ItemSelect_ColumnItem.gd" id="6_235ll"]
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/Confirm.gd" id="7_rm7w3"]
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer_2/ColumnItem.gd" id="8_ghri8"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ChooseDestination.gd" id="4_lenic"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ChooseItems.gd" id="5_3tao2"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ItemSelect_ColumnItem.gd" id="6_235ll"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/Confirm.gd" id="7_rm7w3"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ColumnItem.gd" id="8_ghri8"]
 
-[node name="ConvoyProgrammer_2" type="Node"]
+[node name="ConvoyProgrammer" type="Node"]
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 0
