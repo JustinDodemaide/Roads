@@ -19,6 +19,7 @@ func enter(_msg:Dictionary = {})->void:
 
 func exit()->void:
 	Global.world.tilemap.visible = false
+	$Module.queue_free()
 	
 func new_map_object(object:WorldObject) -> void:
 	var new_wmo = packed_map_object.instantiate()
@@ -34,6 +35,7 @@ func remove_world_object(object:WorldObject) -> void:
 
 func load_module(module_name:String) -> void:
 	var module = load("res://WorldMap/Modules/" + module_name + "/" + module_name + ".tscn").instantiate()
+	module.name = "Module"
 	module.world_map = self
 	add_child(module)
 

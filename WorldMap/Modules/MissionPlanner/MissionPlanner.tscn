@@ -1,0 +1,171 @@
+[gd_scene load_steps=7 format=3 uid="uid://1eucjjegm47b"]
+
+[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/MissionPlanner.gd" id="1_ixscy"]
+[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ChooseVehicles.gd" id="2_uiifl"]
+[ext_resource type="PackedScene" uid="uid://de3gs1lr34p1p" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.tscn" id="3_5pl8h"]
+[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ChooseDestination.gd" id="3_83t6j"]
+[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ReviewAndConfirm.gd" id="4_d37sd"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ColumnItem.gd" id="5_glc3i"]
+
+[node name="MissionPlanner" type="Node"]
+script = ExtResource("1_ixscy")
+
+[node name="ChooseVehicles" type="Node" parent="."]
+script = ExtResource("2_uiifl")
+
+[node name="UIElements" type="CanvasLayer" parent="ChooseVehicles"]
+visible = false
+
+[node name="VehicleSelector" parent="ChooseVehicles/UIElements" instance=ExtResource("3_5pl8h")]
+offset_left = 254.0
+offset_top = 205.0
+offset_right = 254.0
+offset_bottom = 205.0
+
+[node name="ChooseDestination" type="Node" parent="."]
+script = ExtResource("3_83t6j")
+
+[node name="UIElements" type="CanvasLayer" parent="ChooseDestination"]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChooseDestination/UIElements"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.5
+offset_top = -104.0
+offset_right = 35.5
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Upfront" type="Label" parent="ChooseDestination/UIElements/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ConfirmButton" type="Button" parent="ChooseDestination/UIElements/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = "Confirm"
+
+[node name="ReviewAndConfirm" type="Node" parent="."]
+script = ExtResource("4_d37sd")
+
+[node name="ColumnItem" type="PanelContainer" parent="ReviewAndConfirm"]
+visible = false
+offset_left = 16.0
+offset_top = 70.0
+offset_right = 42.0
+offset_bottom = 109.0
+script = ExtResource("5_glc3i")
+
+[node name="MarginContainer" type="MarginContainer" parent="ReviewAndConfirm/ColumnItem"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReviewAndConfirm/ColumnItem/MarginContainer"]
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="ReviewAndConfirm/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="ReviewAndConfirm/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Amount" type="Label" parent="ReviewAndConfirm/ColumnItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="UIElements" type="CanvasLayer" parent="ReviewAndConfirm"]
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="ReviewAndConfirm/UIElements"]
+anchors_preset = -1
+anchor_left = 0.064
+anchor_top = 0.209
+anchor_right = 0.936
+anchor_bottom = 0.791
+offset_left = 0.271996
+offset_top = 0.0679932
+offset_right = -0.272095
+offset_bottom = -0.0679932
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ReviewAndConfirm/UIElements/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Review"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Vehicles" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Vehicles"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VehicleList" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles/ScrollContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Units" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Units"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Units"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Units"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Units/ScrollContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="UpfrontCost" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Fuel cost per trip:"
+
+[node name="Confirm" type="Button" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Launch Convoy"
+
+[connection signal="pressed" from="ChooseDestination/UIElements/VBoxContainer/ConfirmButton" to="ChooseDestination" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/Confirm" to="ReviewAndConfirm" method="_on_confirm_pressed"]

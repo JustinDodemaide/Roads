@@ -29,6 +29,8 @@ func _input(event):
 		var menu = load("res://Level/BuildingMenu/BuildingMenu.tscn").instantiate()
 		menu.building_selected.connect(add_level_object)
 		$UI.add_child(menu)
+	if event.is_action_pressed("1"):
+		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MissionPlanner"})
 
 func new_producer(producer:Producer):
 	world_object.producers.append(producer)
