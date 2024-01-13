@@ -8,7 +8,7 @@ var storage:Dictionary
 var vehicles:Array[Vehicle]
 
 var level_id:int = 0 # A level id of 0 means a level must be generated for this object
-var faction:String
+var faction:String = "Unclaimed"
 
 signal moved
 

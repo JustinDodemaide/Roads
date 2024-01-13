@@ -65,7 +65,7 @@ func new_destination(new_dest:ConvoyStop):
 	if destination.has_signal("moved_to"):
 		destination.moved_to.connect(destination_moved)
 	var tile_pos = Global.world.tilemap.local_to_map(world_position)
-	var dest_tile_pos = Global.world.tilemap.local_to_map(destination.destination.world_position)
+	var dest_tile_pos = Global.world.tilemap.local_to_map(destination.location.world_position)
 	path = Global.world.astar.get_id_path(tile_pos, dest_tile_pos)
 	# print("path: ", path)
 	path_index = 0
@@ -80,7 +80,10 @@ func _on_move_timer_timeout():
 	path_index += 1
 	var speed = max_speed
 	if path_index < path.size():
-		speed += Global.world.get_custom_data("speed_modifier", path[path_index])
+		var speed_modifier = Global.world.get_custom_data("speed_modifier", path[path_index])
+		if speed_modifier == null:
+			speed_modifier = 0
+		speed += speed_modifier
 	timer.start(speed)
 	
 func get_top_speed()->float:
@@ -95,10 +98,12 @@ func get_top_speed()->float:
 func _destination_reached()->void:
 	path.clear()
 	path_index = 0
+	if destination.location.faction == "Unclaimed":
+		Global.world.claim_world_object(destination.location,faction)
 	if stops.is_empty():
 		timer.queue_free()
 		emit_signal("destination_reached")
-		destination.add_vehicles(vehicles)
+		destination.location.add_vehicles(vehicles)
 		Global.world.remove_world_object(self)
 	else:
 		stops_index += 1

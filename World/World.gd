@@ -62,6 +62,8 @@ func _input(event):
 
 func get_custom_data(data_name:String, tile:Vector2i):
 	var data = tilemap.get_cell_tile_data(FLOOR_LAYER,tile)
+	if data == null:
+		return null
 	return data.get_custom_data(data_name)
 
 func save() -> void:
@@ -148,3 +150,6 @@ func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 	var from_tile = $TileMap.local_to_map(from.world_position)
 	var to_tile = $TileMap.local_to_map(to.world_position)
 	return astar.get_point_path(from_tile,to_tile)
+
+func claim_world_object(object:WorldObject,who:String) -> void:
+	object.faction = who

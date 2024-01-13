@@ -10,7 +10,7 @@ var vehicles
 var total_fuel_consumption = 0
 var destination
 var upfront_cost
-var units = []
+var units:Array[Character]
 
 func _ready() -> void:
 	for child in get_children():
