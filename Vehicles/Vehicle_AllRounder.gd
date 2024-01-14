@@ -2,7 +2,10 @@ extends Vehicle
 
 func _name()->String:
 	return "All Rounder"
-	
+
+func path() -> String:
+	return "res://Vehicles/Vehicle_AllRounder.gd"
+
 func cargo_capacity()->int:
 	return 4
 

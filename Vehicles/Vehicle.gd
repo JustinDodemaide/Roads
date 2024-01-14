@@ -2,9 +2,13 @@ extends RefCounted
 class_name Vehicle
 
 var storage:Dictionary
+var characters:Array[Character]
 
-func name()->String:
+func name() -> String:
 	return "Vehicle"
+
+func path() -> String:
+	return ""
 
 func ui_texture() -> Texture2D:
 	return load("res://World/WorldObjects/WO_Convoy/truck.png")
@@ -57,3 +61,19 @@ func get_stats()->Dictionary:
 							"handling":handling()
 							}
 	return stats
+
+func save() -> Dictionary:
+	var data = {"path":path(),
+				"storage":storage,
+				"characters":[]
+	}
+	for i in characters:
+		data["characters"].append(i.save())
+	return data
+
+func _load(data:Dictionary) -> void:
+	storage = data["storage"]
+	for i in data["characters"]:
+		var character = Character.new()
+		character._load(i)
+		characters.append(character)

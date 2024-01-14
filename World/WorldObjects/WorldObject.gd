@@ -88,12 +88,15 @@ func save() -> Dictionary:
 				"resources":[],
 				"producers":[],
 				"storage":storage,
+				"vehicles":[],
 				"player_location":false
 	}
 	for i in resources:
 		data["resources"].append(i.save())
 	for i in producers:
 		data["producers"].append(i.save())
+	for i in vehicles:
+		data["vehicles"].append(i.save())
 	if Global.player_location == self:
 		data["player_location"] = true
 	
@@ -103,10 +106,15 @@ func _load(data:Dictionary) -> void:
 	world_position = str_to_var(data["world_position"])
 	level_id = data["level_id"]
 	faction = data["faction"]
-	for i in data["resources"]:
-		resources.append(load(i["path"]).new())
-	for i in data["producers"]:
-		producers.append(Producer.new([],0,i))
+	for save_data in data["resources"]:
+		resources.append(load(save_data["path"]).new())
+	for save_data in data["producers"]:
+		producers.append(Producer.new([],0,save_data))
+	for save_data in data["vehicles"]:
+		var vehicle = load(save_data["path"]).new()
+		vehicle._load(save_data)
+		vehicles.append(vehicle)
+		
+	storage = data["storage"]
 	if data["player_location"]:
 		Global.player_location = self
-	storage = data["storage"]
