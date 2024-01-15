@@ -18,6 +18,7 @@ func enter(_msg:Dictionary = {})->void:
 
 func exit()->void:
 	save()
+	Global.save_game()
 
 func _process(_delta):
 	pass
@@ -91,9 +92,6 @@ func load_level() -> void:
 
 func generate_level() -> void:
 	world_object.level_id = get_instance_id()
-	var level_prefab:int
-
-	world_object.level_id = level_prefab
 	# var tilemap = load("res://Level/TileMapPrefabs/LTM_" + str(level_prefab) + ".tscn").instantiate()
 	# tilemap._load({})
 	# add_child(tilemap)

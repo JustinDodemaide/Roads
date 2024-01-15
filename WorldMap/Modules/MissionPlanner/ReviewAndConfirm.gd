@@ -35,6 +35,7 @@ func exit() -> void:
 
 func _on_confirm_pressed():
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
+	convoy.faction = Global.player_faction_name
 	var vehicles = state_machine.vehicles
 	var origin = state_machine.current_location
 	var dest_stop = ConvoyStop.new(state_machine.destination,{},{})

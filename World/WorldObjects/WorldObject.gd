@@ -8,12 +8,11 @@ var storage:Dictionary
 var vehicles:Array[Vehicle]
 
 var level_id:int = 0 # A level id of 0 means a level must be generated for this object
-var faction:String = "Unclaimed"
+var faction:String = Global.UNCLAIMED_FACTION
 
 signal moved
 
-func init(initial_faction:String,position:Vector2) -> void:
-	faction = initial_faction
+func init(position:Vector2) -> void:
 	world_position = position
 
 func name() -> String:

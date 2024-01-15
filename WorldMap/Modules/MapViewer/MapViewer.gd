@@ -14,6 +14,10 @@ func _ready():
 #var vehicles:Array[Vehicle]
 func map_object_clicked(map_object):
 	selected_object = map_object.world_object
+	if selected_object.faction == Global.player_faction_name:
+		$UI/Travel.disabled = false
+	else:
+		$UI/Travel.disabled = true
 	update()
 
 func update():
@@ -31,3 +35,6 @@ func update():
 	$ObjectInfo/Label.text = text
 	$ObjectInfo.visible = true
 	$ObjectInfo.position = selected_object.world_position
+
+func _on_travel_pressed():
+	Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": selected_object})

@@ -179,7 +179,7 @@ func get_tiles_by_zone():
 func place_object(pos:Vector2i,zone:int):
 	pos = pos * Vector2i(TILE_SIZE,TILE_SIZE)
 	var world_object = WorldObject.new()
-	world_object.init("",pos)
+	world_object.init(pos)
 	Global.world.add_world_object(world_object)
 	zone_objects[zone].append(world_object)
 
@@ -208,6 +208,7 @@ var ZONE_RESOURCES = [
 	WG_RP.new("res://Items/Tier2Harvest/Item_Tier2Harvest.gd",90),
 	],
 ]
+
 func distribute_resources():
 	for zone in NUMBER_OF_ZONES:
 		for object in zone_objects[zone]:

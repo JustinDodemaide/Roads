@@ -98,7 +98,7 @@ func get_top_speed()->float:
 func _destination_reached()->void:
 	path.clear()
 	path_index = 0
-	if destination.location.faction == "Unclaimed":
+	if destination.location.faction == Global.UNCLAIMED_FACTION:
 		Global.world.claim_world_object(destination.location,faction)
 	if stops.is_empty():
 		timer.queue_free()
