@@ -43,6 +43,8 @@ func init_convoy(_vehicles:Array[Vehicle],_stops:Array[ConvoyStop],_circuit:bool
 	vehicles = _vehicles
 	stops = _stops
 	origin = _stops.front().location
+	for i in vehicles:
+		origin.location
 	world_position = origin.world_position
 	circuit = _circuit
 	max_speed = get_top_speed()
