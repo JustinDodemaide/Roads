@@ -70,7 +70,6 @@ func new_destination(new_dest:ConvoyStop):
 	var tile_pos = Global.world.tilemap.local_to_map(world_position)
 	var dest_tile_pos = Global.world.tilemap.local_to_map(destination.location.world_position)
 	path = Global.world.astar.get_id_path(tile_pos, dest_tile_pos)
-	# print("path: ", path)
 	path_index = 0
 	timer.start(max_speed)
 
@@ -187,3 +186,42 @@ func option_chosen(option:WorldObjectOption)->void:
 		new_destination(ConvoyStop.new(origin))
 	if option.option_name == "Speed Boost":
 		pass
+
+func save() -> Dictionary:
+# world_position
+# producers
+# storage
+# vehicles
+# faction
+	var data = {"what": "Convoy",
+				"world_position": var_to_str(world_position),
+				"faction":faction,
+				"storage":storage,
+				"vehicles":[],
+				"path":path,
+				"path_index":path_index,
+				"stops":[],
+				"stops_index":stops_index
+	}
+	for i in vehicles:
+		data["vehicles"].append(i.save())
+	for i in path:
+		data["stops"].append(var_to_str(i))
+	for i in stops:
+		data["stops"].append(i.save())
+	return data
+
+func _load(data:Dictionary) -> void:
+	world_position = str_to_var(data["world_position"])
+	faction = data["faction"]
+	for save_data in data["vehicles"]:
+		var vehicle = load(save_data["path"]).new()
+		vehicle._load(save_data)
+		vehicles.append(vehicle)
+	for stop in data["stops"]:
+		stops.append(ConvoyStop.new(stop["location"],stop["deposit"],stop["collect"]))
+	stops_index = data["stops_index"]
+	for point in data["path"]:
+		path.append(str_to_var(point))
+	path_index = data["path_index"]
+	storage = data["storage"]

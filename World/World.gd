@@ -120,6 +120,10 @@ func _load() -> void:
 			var object = WorldObject.new()
 			object._load(data)
 			world_objects.append(object)
+		if data["what"] == "Convoy":
+			var object = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
+			object._load(data)
+			world_objects.append(object)
 		if data["what"] == "TileMap":
 			data.erase("what")
 			for cell in data:

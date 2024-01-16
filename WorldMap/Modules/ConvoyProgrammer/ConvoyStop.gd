@@ -9,3 +9,10 @@ func _init(_location:WorldObject,deposit:Dictionary = {},collect:Dictionary = {}
 	location = _location
 	items_to_deposit = deposit
 	items_to_collect = collect
+
+func save() -> Dictionary:
+	return {
+		"location":location,
+		"deposit":items_to_deposit,
+		"collect":items_to_collect
+	}
