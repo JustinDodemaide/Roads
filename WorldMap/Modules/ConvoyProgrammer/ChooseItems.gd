@@ -10,7 +10,13 @@ var state_machine = null
 func enter(_msg := {}) -> void:
 	var column_item = $ColumnItem
 	
-	var destination_storage = state_machine.current_location.storage
+	var origin_storage = state_machine.current_location.storage
+	for item in origin_storage:
+		var new_item = column_item.duplicate()
+		new_item.init(item,origin_storage[item])
+		deposit.add_child(new_item)
+		new_item.visible = true
+	var destination_storage = state_machine.destination.storage
 	for item in destination_storage:
 		var new_item = column_item.duplicate()
 		new_item.init(item,destination_storage[item])
@@ -38,27 +44,24 @@ func exit() -> void:
 	$UIElements.visible = false
 
 func _on_confirm_pressed():
-	var to_collect = state_machine.items_to_collect
+	var refs = state_machine.items_to_collect_refs
+	var strings = state_machine.items_to_collect_strings
 	for column_item in collect.get_children():
 		var item = column_item.item
 		var amount = column_item.selected_amount
 		if amount == 0:
 			continue
-		if to_collect.has(item):
-			to_collect[item] += amount
-		else:
-			to_collect[item] = amount
+		refs[item] = amount
+		strings[column_item.item_string] = amount
 
-	var to_deposit = state_machine.items_to_deposit
+	refs = state_machine.items_to_deposit_refs
+	strings = state_machine.items_to_deposit_strings
 	for column_item in deposit.get_children():
 		var item = column_item.item
 		var amount = column_item.selected_amount
 		if amount == 0:
 			continue
-		if to_collect.has(item):
-			to_deposit[item] += amount
-		else:
-			to_deposit[item] = amount
-
+		refs[item] = amount
+		strings[column_item.item_string] = amount
+		
 	state_machine.transition_to("ReviewAndConfirm")
-

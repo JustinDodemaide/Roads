@@ -25,6 +25,7 @@ size = Vector2(64, 64)
 size = Vector2(61, 61)
 
 [node name="LO_ConvoyProgrammer" type="Node2D"]
+position = Vector2(0, -100)
 script = ExtResource("1_1ew3a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

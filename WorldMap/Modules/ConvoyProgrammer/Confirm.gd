@@ -29,14 +29,14 @@ func enter(_msg := {}) -> void:
 		vehicle_list.add_child(new_item)
 		new_item.visible = true
 	$UIElements.visible = true
-	for key in state_machine.items_to_deposit:
+	for key in state_machine.items_to_deposit_refs:
 		var new_item = column_item.duplicate()
-		new_item.init(key.menu_icon(),key.item_name(),state_machine.items_to_deposit[key])
+		new_item.init(key.menu_icon(),key.item_name(),state_machine.items_to_deposit_refs[key])
 		deposit_list.add_child(new_item)
 		new_item.visible = true
-	for key in state_machine.items_to_collect:
+	for key in state_machine.items_to_collect_refs:
 		var new_item = column_item.duplicate()
-		new_item.init(key.menu_icon(),key.item_name(),state_machine.items_to_collect[key])
+		new_item.init(key.menu_icon(),key.item_name(),state_machine.items_to_collect_refs[key])
 		collect_list.add_child(new_item)
 		new_item.visible = true
 	upfront_cost.text = "Upfront cost: " + str(state_machine.upfront_cost) + " fuel"
@@ -47,14 +47,19 @@ func exit() -> void:
 func _on_confirm_pressed():
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
 	var vehicles = state_machine.vehicles
-	var origin = state_machine.current_location
-	var dest_stop = ConvoyStop.new(state_machine.destination,state_machine.items_to_deposit,state_machine.items_to_collect)
+	var origin_stop = ConvoyStop.new(state_machine.current_location,state_machine.items_to_collect_strings,state_machine.items_to_deposit_strings)
+	var dest_stop = ConvoyStop.new(state_machine.destination,state_machine.items_to_deposit_strings,state_machine.items_to_collect_strings)
+	var stops:Array[ConvoyStop] = [origin_stop,dest_stop]
+	# Collect initial items
+	var items = state_machine.items_to_deposit_strings
+	for i in items:
+		state_machine.current_location.storage[i] -= items[i]
+		convoy.storage[i] = items[i]
+
 	if options_button.selected == ONCE:
-		convoy.init_convoy_oneshot(vehicles,origin,dest_stop)
-#func init_convoy_oneshot(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:ConvoyStop) -> void:
+		convoy.init_convoy(vehicles,stops)
 	else:
-		var origin_stop = ConvoyStop.new(origin,state_machine.items_to_collect,state_machine.items_to_deposit)
-		var stops:Array[ConvoyStop] = [origin_stop,dest_stop]
-		convoy.init_convoy_circuit(vehicles,origin,stops)
+		convoy.init_convoy(vehicles,stops,true)
+	
+# init_convoy(_vehicles:Array[Vehicle],_stops:Array[ConvoyStop],_circuit:bool = false)
 	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
-#func init_convoy_cicruit(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[ConvoyStop]) -> void:

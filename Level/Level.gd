@@ -9,6 +9,7 @@ func enter(_msg:Dictionary = {})->void:
 	world_object = _msg["WorldObject"]
 	if world_object.level_id == 0:
 		generate_level()
+		save()
 	Global.level = self
 	Global.player_location = world_object
 	load_level()

@@ -1,7 +1,8 @@
 extends WorldObject
 
+var circuit:bool = false
 var stops:Array[ConvoyStop]
-var stops_index:int = 0
+var stops_index:int = 1
 
 var origin:WorldObject = null
 var destination:ConvoyStop = null
@@ -38,25 +39,27 @@ func options()->Array[WorldObjectOption]:
 			WorldObjectOption.new("Speed Boost"),
 	]
 
-func init_convoy_oneshot(_vehicles:Array[Vehicle],_origin:WorldObject,_destination:ConvoyStop) -> void:
+func init_convoy(_vehicles:Array[Vehicle],_stops:Array[ConvoyStop],_circuit:bool = false) -> void:
 	vehicles = _vehicles
-	origin = _origin
+	stops = _stops
+	origin = _stops.front().location
 	world_position = origin.world_position
+	circuit = _circuit
 	max_speed = get_top_speed()
 	timer = Global.world.create_timer()
 	timer.timeout.connect(_on_move_timer_timeout)
 	Global.world.add_world_object(self)
-	new_destination(_destination)
+	new_destination(stops[stops_index])
 
-func init_convoy_circuit(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[ConvoyStop]) -> void:
-	stops = program_stops
-	origin = _origin
-	world_position = origin.world_position
-	max_speed = get_top_speed()
-	timer = Global.world.create_timer()
-	timer.timeout.connect(_on_move_timer_timeout)
-	Global.world.add_world_object(self)
-	new_destination(stops.front())
+#func init_convoy_circuit(_vehicles:Array[Vehicle],_origin:WorldObject,program_stops:Array[ConvoyStop]) -> void:
+	#stops = program_stops
+	#origin = _origin
+	#world_position = origin.world_position
+	#max_speed = get_top_speed()
+	#timer = Global.world.create_timer()
+	#timer.timeout.connect(_on_move_timer_timeout)
+	#Global.world.add_world_object(self)
+	#new_destination(stops.front())
 
 func new_destination(new_dest:ConvoyStop):
 	# print("new destination: ", new_dest.name)
@@ -85,7 +88,83 @@ func _on_move_timer_timeout():
 			speed_modifier = 0
 		speed += speed_modifier
 	timer.start(speed)
+
+func _destination_reached() -> void:
+	if destination.location.faction == Global.UNCLAIMED_FACTION:
+		Global.world.claim_world_object(destination.location,faction)
+	transfer_items()
 	
+	stops_index += 1
+	if stops_index == stops.size():
+		stops_index = 0
+	if stops_index == 0 and not circuit:
+		end_convoy()
+		return
+	new_destination(stops[stops_index])
+
+func transfer_items() -> void:
+	pass
+	# Deposit first
+	var stop = stops[stops_index]
+	var stop_storage = stop.location.storage
+	for item in stop.items_to_deposit:
+		if not storage.has(item):
+			# Halt
+			return
+		var amount = stop.items_to_deposit[item]
+		if storage[item] < amount:
+			# Problem, bc the convoy should have the items by this point
+			return
+		storage[item] -= amount
+		if stop_storage.has(item):
+			stop_storage[item] += amount
+		else:
+			stop_storage[item] = amount
+	
+	# Collect next
+	for item in stop.items_to_collect:
+		if not stop_storage.has(item):
+			# Halt
+			return
+		var amount = stop.items_to_collect[item]
+		if stop_storage[item] < amount:
+			# Halt
+			return
+		stop_storage[item] -= amount
+		if storage.has(item):
+			storage[item] += amount
+		else:
+			storage[item] = amount
+
+func end_convoy() -> void:
+	stops[stops_index].location.add_vehicles(vehicles)
+	Global.world.remove_world_object(self)
+
+#func _destination_reached()->void:
+	#path.clear()
+	#path_index = 0
+	#if destination.location.faction == Global.UNCLAIMED_FACTION:
+		#Global.world.claim_world_object(destination.location,faction)
+	#if stops.is_empty():
+		#timer.queue_free()
+		#emit_signal("destination_reached")
+		#destination.location.add_vehicles(vehicles)
+		#Global.world.remove_world_object(self)
+	#else:
+		#var stop = stops[stops_index]
+		#for i in stop.items_to_deposit:
+			#if stop.location.storage.has(i):
+				#stop.location.storage[i] += storage[i]
+			#else:
+				#stop.location.storage[i] = storage[i]
+			#storage.erase(i)
+		#for i in stop.items_to_collect:
+			#pass
+		#stops_index += 1
+		#if stops_index == stops.size():
+			#stops_index = 0
+		#new_destination(stops[stops_index])
+
 func get_top_speed()->float:
 	# The convoy only moves as fast as its slowest vehicle
 	#var lowest_speed = vehicles.front().speed()
@@ -94,22 +173,6 @@ func get_top_speed()->float:
 		if i.speed() < lowest_speed:
 			lowest_speed = i.speed()
 	return lowest_speed
-
-func _destination_reached()->void:
-	path.clear()
-	path_index = 0
-	if destination.location.faction == Global.UNCLAIMED_FACTION:
-		Global.world.claim_world_object(destination.location,faction)
-	if stops.is_empty():
-		timer.queue_free()
-		emit_signal("destination_reached")
-		destination.location.add_vehicles(vehicles)
-		Global.world.remove_world_object(self)
-	else:
-		stops_index += 1
-		if stops_index == stops.size():
-			stops_index = 0
-		new_destination(stops[stops_index])
 
 func destination_moved()->void:
 	new_destination(destination)

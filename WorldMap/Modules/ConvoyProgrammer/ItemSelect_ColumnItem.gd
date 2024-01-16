@@ -2,12 +2,14 @@ extends PanelContainer
 
 @onready var text_edit = $MarginContainer/HBoxContainer/TextEdit
 
-var item
+var item:Item
+var item_string:String
 var total
 var selected_amount = 0
 
-func init(_item:Item,amount):
-	item = _item
+func init(_item:String,amount):
+	item_string = _item
+	item = load("res://Items/" + _item + "/Item_" + _item + ".gd").new()
 	$MarginContainer/HBoxContainer/Image.texture = item.menu_icon()
 	$MarginContainer/HBoxContainer/Name.text = item.item_name()
 	total = amount

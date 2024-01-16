@@ -14,7 +14,7 @@ func _ready():
 #var vehicles:Array[Vehicle]
 func map_object_clicked(map_object):
 	selected_object = map_object.world_object
-	if selected_object.faction == Global.player_faction_name:
+	if selected_object != Global.player_location and selected_object.faction == Global.player_faction_name:
 		$UI/Travel.disabled = false
 	else:
 		$UI/Travel.disabled = true
