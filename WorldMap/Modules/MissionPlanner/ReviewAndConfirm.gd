@@ -37,9 +37,12 @@ func _on_confirm_pressed():
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
 	convoy.faction = Global.player_faction_name
 	var vehicles = state_machine.vehicles
-	var origin_stop = ConvoyStop.new(state_machine.current_location,{},{})
-	var dest_stop = ConvoyStop.new(state_machine.destination,{},{})
-	var stops:Array[ConvoyStop] = [origin_stop,dest_stop]
-	convoy.init_convoy(vehicles,stops)
-#func init_convoy(_vehicles:Array[Vehicle],_stops:Array[ConvoyStop],_circuit:bool = false) -> void:
+	var actions:Array[ConvoyAction] = [
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(state_machine.destination),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/LaunchMission.gd").new(state_machine.destination),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(state_machine.current_location),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/End.gd").new()
+	]
+	convoy.init_convoy(state_machine.vehicles,state_machine.current_location,actions)
+# func init_convoy(_vehicles:Array[Vehicle],_origin:WorldObject,_actions:Array) -> void:
 	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
