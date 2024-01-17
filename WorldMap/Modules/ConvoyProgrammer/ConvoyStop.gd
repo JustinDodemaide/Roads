@@ -1,6 +1,8 @@
 extends RefCounted
 class_name ConvoyStop
 
+# Deprecated in favor of ConvoyActions
+
 var location:WorldObject
 var items_to_deposit:Dictionary
 var items_to_collect:Dictionary

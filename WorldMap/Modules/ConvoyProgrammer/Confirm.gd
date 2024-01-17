@@ -15,12 +15,6 @@ const WHENEVER:int = 1
 @onready var upfront_cost = $UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/UpfrontCost
 @onready var options_button = $UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/OptionButton
 
-#var vehicles
-#var total_fuel_consumption = 0
-#var upfront_cost
-#var items_to_deposit:Dictionary
-#var items_to_collect:Dictionary
-#func init(image,_name,amount = 0):
 func enter(_msg := {}) -> void:
 	var column_item = $ColumnItem
 	for i in state_machine.vehicles:
@@ -44,22 +38,34 @@ func enter(_msg := {}) -> void:
 func exit() -> void:
 	pass
 
+#var vehicles
+#var total_fuel_consumption = 0
+#var total_storage_capacity:int
+#var destination
+#var upfront_cost
+#var items_to_deposit_refs:Dictionary
+#var items_to_deposit_strings:Dictionary
+#var items_to_collect_refs:Dictionary
+#var items_to_collect_strings:Dictionary
 func _on_confirm_pressed():
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
 	var vehicles = state_machine.vehicles
-	var origin_stop = ConvoyStop.new(state_machine.current_location,state_machine.items_to_collect_strings,state_machine.items_to_deposit_strings)
-	var dest_stop = ConvoyStop.new(state_machine.destination,state_machine.items_to_deposit_strings,state_machine.items_to_collect_strings)
-	var stops:Array[ConvoyStop] = [origin_stop,dest_stop]
+	var deposit = state_machine.items_to_deposit_strings
+	var collect = state_machine.items_to_collect_strings
+
 	# Collect initial items
 	var items = state_machine.items_to_deposit_strings
 	for i in items:
 		state_machine.current_location.storage[i] -= items[i]
 		convoy.storage[i] = items[i]
 
+	var actions:Array[ConvoyAction] = [
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(state_machine.destination),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TransferItems.gd").new(deposit,collect),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(state_machine.current_location),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TransferItems.gd").new(collect,deposit),
+	]
 	if options_button.selected == ONCE:
-		convoy.init_convoy(vehicles,stops)
-	else:
-		convoy.init_convoy(vehicles,stops,true)
-	
-# init_convoy(_vehicles:Array[Vehicle],_stops:Array[ConvoyStop],_circuit:bool = false)
+		actions.append(load("res://World/WorldObjects/WO_Convoy/ConvoyActions/End.gd").new())
+	convoy.init_convoy(vehicles,state_machine.current_location,actions)
 	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
