@@ -32,6 +32,9 @@ func update():
 	text += "\nstorage: "
 	for i in selected_object.storage:
 		text += i + " (" + str(selected_object.storage[i]) + "), "
+	text += "\nvehicles: "
+	for i in selected_object.vehicles:
+		text += i.name() + ", "
 	$ObjectInfo/Label.text = text
 	$ObjectInfo.visible = true
 	$ObjectInfo.position = selected_object.world_position

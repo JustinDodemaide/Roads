@@ -13,6 +13,10 @@ var path:PackedVector2Array = []
 var path_index:int = 0
 var max_speed:float = 0.0
 
+var halted:bool = false
+var halted_reason:int
+enum HALT_REASONS{AWAITING_COLLECTION}
+
 signal moved_to(tile_coord:Vector2)
 signal destination_reached
 
@@ -43,8 +47,8 @@ func init_convoy(_vehicles:Array[Vehicle],_stops:Array[ConvoyStop],_circuit:bool
 	vehicles = _vehicles
 	stops = _stops
 	origin = _stops.front().location
-	for i in vehicles:
-		origin.location
+	for vehicle in vehicles:
+		origin.vehicles.erase(vehicle)
 	world_position = origin.world_position
 	circuit = _circuit
 	max_speed = get_top_speed()
@@ -69,9 +73,7 @@ func new_destination(new_dest:ConvoyStop):
 	destination = new_dest
 	if destination.has_signal("moved_to"):
 		destination.moved_to.connect(destination_moved)
-	var tile_pos = Global.world.tilemap.local_to_map(world_position)
-	var dest_tile_pos = Global.world.tilemap.local_to_map(destination.location.world_position)
-	path = Global.world.astar.get_id_path(tile_pos, dest_tile_pos)
+	path = Global.world.get_astar_path(self, destination.location)
 	path_index = 0
 	timer.start(max_speed)
 
@@ -79,7 +81,7 @@ func _on_move_timer_timeout():
 	if path_index == path.size():
 		_destination_reached()
 		return
-	world_position = Global.world.tilemap.map_to_local(path[path_index])
+	world_position = path[path_index]
 	emit_signal("moved")
 	path_index += 1
 	var speed = max_speed
@@ -93,8 +95,10 @@ func _on_move_timer_timeout():
 func _destination_reached() -> void:
 	if destination.location.faction == Global.UNCLAIMED_FACTION:
 		Global.world.claim_world_object(destination.location,faction)
-	transfer_items()
-	
+	var items_transfered = transfer_items()
+	if not items_transfered:
+		halt(HALT_REASONS.AWAITING_COLLECTION)
+		return
 	stops_index += 1
 	if stops_index == stops.size():
 		stops_index = 0
@@ -103,19 +107,18 @@ func _destination_reached() -> void:
 		return
 	new_destination(stops[stops_index])
 
-func transfer_items() -> void:
-	pass
+func transfer_items() -> bool:
 	# Deposit first
 	var stop = stops[stops_index]
 	var stop_storage = stop.location.storage
 	for item in stop.items_to_deposit:
 		if not storage.has(item):
-			# Halt
-			return
+			# Problem, bc the convoy should have the items by this point
+			return false
 		var amount = stop.items_to_deposit[item]
 		if storage[item] < amount:
 			# Problem, bc the convoy should have the items by this point
-			return
+			return false
 		storage[item] -= amount
 		if stop_storage.has(item):
 			stop_storage[item] += amount
@@ -126,16 +129,51 @@ func transfer_items() -> void:
 	for item in stop.items_to_collect:
 		if not stop_storage.has(item):
 			# Halt
-			return
+			return false
 		var amount = stop.items_to_collect[item]
 		if stop_storage[item] < amount:
 			# Halt
-			return
+			return false
 		stop_storage[item] -= amount
 		if storage.has(item):
 			storage[item] += amount
 		else:
 			storage[item] = amount
+	return true
+
+func halt(reason:int) -> void:
+	halted_reason = reason
+	Global.world.world_update.timeout.connect(update_halt_status)
+
+func update_halt_status() -> void:
+	var unhalt:bool = false
+	match halted_reason:
+		HALT_REASONS.AWAITING_COLLECTION:
+			var stop_storage = stops[stops_index].location.storage
+			var items_to_collect = stops[stops_index].items_to_collect
+			var needed_items = {}
+			for item in items_to_collect:
+				var needed_amount = items_to_collect[item] - storage[item]
+				if needed_amount < 0:
+					continue
+				needed_items[item] = needed_amount
+			for item in stop_storage:
+				if stop_storage[item] >= needed_items[item]:
+					stop_storage[item] -= needed_items[item]
+					storage[item] += needed_items[item]
+					needed_items.erase(item)
+			if needed_items.is_empty():
+				unhalt = true
+	if unhalt:
+		Global.world.world_update.timeout.disconnect(update_halt_status)
+		halted = false
+		stops_index += 1
+		if stops_index == stops.size():
+			stops_index = 0
+		if stops_index == 0 and not circuit:
+			end_convoy()
+			return
+		new_destination(stops[stops_index])
 
 func end_convoy() -> void:
 	stops[stops_index].location.add_vehicles(vehicles)
@@ -208,7 +246,7 @@ func save() -> Dictionary:
 	for i in vehicles:
 		data["vehicles"].append(i.save())
 	for i in path:
-		data["stops"].append(var_to_str(i))
+		data["path"].append(var_to_str(i))
 	for i in stops:
 		data["stops"].append(i.save())
 	return data
@@ -221,7 +259,20 @@ func _load(data:Dictionary) -> void:
 		vehicle._load(save_data)
 		vehicles.append(vehicle)
 	for stop in data["stops"]:
-		stops.append(ConvoyStop.new(stop["location"],stop["deposit"],stop["collect"]))
+		# Using the position as the unique identifier to get the WO for a stop
+		# Works if the stop location is a WorldObject bc they'll all be loaded
+		# in at this point. Does not work if the stop location is a Convoy that hasn't been loaded
+		# yet
+		var stop_position = str_to_var(stop)
+		var location:WorldObject = null
+		for loc in Global.world.world_objects:
+			if loc.world_position == stop_position:
+				location = loc
+				break
+		if location == null:
+			# Problem
+			return
+		stops.append(ConvoyStop.new(location,stop["deposit"],stop["collect"]))
 	stops_index = data["stops_index"]
 	for point in data["path"]:
 		path.append(str_to_var(point))

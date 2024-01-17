@@ -12,7 +12,7 @@ func _init(_location:WorldObject,deposit:Dictionary = {},collect:Dictionary = {}
 
 func save() -> Dictionary:
 	return {
-		"location":location,
+		"location":var_to_str(location.world_position),
 		"deposit":items_to_deposit,
 		"collect":items_to_collect
 	}
