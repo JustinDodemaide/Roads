@@ -1,10 +1,11 @@
 extends ConvoyAction
+# TransferItems
 
 var convoy
 var items_to_deposit:Dictionary
 var items_to_collect:Dictionary
 
-func _init(deposit:Dictionary,collect:Dictionary):
+func _init(deposit:Dictionary = {},collect:Dictionary = {}):
 	items_to_deposit = deposit
 	items_to_collect = collect
 
@@ -63,3 +64,11 @@ func update_halt() -> void:
 	if needed_items.is_empty():
 		Global.world.world_update.timeout.disconnect(update_halt)
 		emit_signal("complete")
+
+func save() -> Dictionary:
+	return {"path":"res://World/WorldObjects/WO_Convoy/ConvoyActions/TransferItems.gd",
+		"deposit":items_to_deposit,"collect":items_to_collect}
+
+func _load(_data) -> void:
+	items_to_deposit = _data["deposit"]
+	items_to_collect = _data["collect"]

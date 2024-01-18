@@ -47,16 +47,45 @@ func save() -> Dictionary:
 				"faction":faction,
 				"storage":storage,
 				"vehicles":[],
+				"current_location":null,
+				# For saving and loading specific world objects:
+				# could take advantage of the fact they're all stored in an
+				# array? Just save the index of the WO, and use the index
+				# to retrieve it when loading
+				"actions":[],
+				"action_index":action_index,
 	}
 	for i in vehicles:
 		data["vehicles"].append(i.save())
+	if current_location != null:
+		data["current_location"] = var_to_str(current_location.world_position)
+	for i in actions:
+		data["actions"].append(i.save())
+		# Problem: each action has their own init parameters, so calling '.new()'
+		# on the path isnt going to work 
 	return data
 
 func _load(data:Dictionary) -> void:
 	world_position = str_to_var(data["world_position"])
 	faction = data["faction"]
+	storage = data["storage"]
 	for save_data in data["vehicles"]:
 		var vehicle = load(save_data["path"]).new()
 		vehicle._load(save_data)
 		vehicles.append(vehicle)
-	storage = data["storage"]
+	if data["current_location"] != null:
+		var pos = str_to_var(data["current_location"])
+		# Yeah this sucks
+		# HACK
+		for i in Global.world.world_objects:
+			if i.world_position == pos:
+				current_location = pos
+				break
+		
+	for save_data in data["actions"]:
+		var action = load(save_data["path"]).new()
+		action._load(save_data)
+		actions.append(action)
+	num_actions = actions.size()
+	action_index = data["action_index"] - 1
+	get_next_action()

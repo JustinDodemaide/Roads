@@ -3,7 +3,7 @@ extends ConvoyAction
 var location:WorldObject
 var button
 
-func _init(_location) -> void:
+func _init(_location = null) -> void:
 	location = _location
 
 func execute(convoy:WorldObject) -> void:
@@ -27,3 +27,19 @@ func launched() -> void:
 
 func mission_over() -> void:
 	emit_signal("complete")
+
+
+func save() -> Dictionary:
+	return {
+		"path": "res://World/WorldObjects/WO_Convoy/ConvoyActions/LaunchMission.gd",
+		"location":var_to_str(location.world_position)
+	}
+
+func _load(_data) -> void:
+	var pos = str_to_var(_data["location"])
+	# HACK
+	for i in Global.world.world_objects:
+		if i.world_position == pos:
+			location = i
+			return
+	pass
