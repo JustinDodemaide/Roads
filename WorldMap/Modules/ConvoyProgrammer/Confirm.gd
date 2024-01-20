@@ -65,6 +65,7 @@ func _on_confirm_pressed():
 		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TransferItems.gd").new(deposit,collect),
 		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(state_machine.current_location),
 		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TransferItems.gd").new(collect,deposit),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/ConsumeItem.gd").new({"Fuel":state_machine.unfront_cost}),
 	]
 	if options_button.selected == ONCE:
 		actions.append(load("res://World/WorldObjects/WO_Convoy/ConvoyActions/End.gd").new())
