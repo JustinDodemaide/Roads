@@ -6,9 +6,10 @@ var resources:Array[Item]
 var producers:Array[Producer]
 var storage:Dictionary
 var vehicles:Array[Vehicle]
+var characters:Array[Character]
 
 var level_id:int = 0 # A level id of 0 means a level must be generated for this object
-var faction:String = Global.UNCLAIMED_FACTION
+var faction:Faction = load("res://World/Factions/Faction_Default.gd").new()
 
 signal moved
 
@@ -49,12 +50,7 @@ func additional_updates() -> void:
 	pass
 
 func options()->Array[WorldObjectOption]:
-	var o:Array[WorldObjectOption] = []
-	o.append(WorldObjectOption.new("Launch Convoy"))
-	
-	if Global.player_location != self and faction == "PLAYER":
-		o.append(WorldObjectOption.new("Go to Location"))
-	return o
+	return []
 
 func option_chosen(option:WorldObjectOption) -> void:
 	var s = self
@@ -83,7 +79,7 @@ func save() -> Dictionary:
 	var data = {"what": "WorldObject",
 				"world_position": var_to_str(world_position),
 				"level_id":level_id,
-				"faction":faction,
+				"faction":faction.faction_name,
 				"resources":[],
 				"producers":[],
 				"storage":storage,
@@ -104,7 +100,7 @@ func save() -> Dictionary:
 func _load(data:Dictionary) -> void:
 	world_position = str_to_var(data["world_position"])
 	level_id = data["level_id"]
-	faction = data["faction"]
+	faction = Global.world.factions[data["faction"]]
 	for save_data in data["resources"]:
 		resources.append(load(save_data["path"]).new())
 	for save_data in data["producers"]:

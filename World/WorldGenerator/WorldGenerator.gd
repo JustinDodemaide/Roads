@@ -20,8 +20,8 @@ func execute(tilemap_to_be_altered:TileMap):
 	await altitudes()
 	set_world_objects()
 	distribute_resources()
-	set_faction_starting_objects()
-	initialize_player_start()
+	get_faction_start_locations()
+	initialize_factions()
 
 func zone_rings():
 	const ZONE_RADIUS_MULTIPLIER:int = 14
@@ -31,7 +31,7 @@ func zone_rings():
 	# y = rsin(θ)
 	
 	# The center needs to be really far into quadrant 1 or else some tiles
-	# will be negative, which breaks the astar
+	# will be negative, which breaks the astargrid
 	const CENTER = Vector2i(250,250)
 	for layer in NUMBER_OF_ZONES:
 		for theta in 360:
@@ -49,6 +49,7 @@ func zone_rings():
 				# All cells at this point are placeholders - they'll be
 				# changed in altitudes()
 
+#region Tester
 #func noise_tester():
 	## This function allowed me to see the results of each type/frequency of noise
 	## without having to rerun the program each time. Leaving it here in case
@@ -84,6 +85,7 @@ func zone_rings():
 			#step *= 10
 			#
 		#await button.pressed
+#endregion
 
 func altitudes():
 	# Potential noises:
@@ -98,6 +100,7 @@ func altitudes():
 	
 	var cells = tilemap.get_used_cells(FLOOR_LAYER)
 	
+#region Automatic version
 	# Originally planned on getting altitude-tile threshold values automatically
 	# so I could change the noise type/frequency freely, but it wasn't giving the
 	# results I wanted (too much water, not enough mountains).
@@ -125,6 +128,7 @@ func altitudes():
 		#var zone = tilemap.get_cell_tile_data(FLOOR_LAYER,cell).get_custom_data("zone")
 		#var atlas = Vector2i(atlas_x_value,zone)
 		#tilemap.set_cell(FLOOR_LAYER,cell,0,atlas)
+#endregion
 		
 	# Hard coding the values gave better results. I'll revisit the automatic
 	# version if I need the flexibility.
@@ -217,10 +221,11 @@ func distribute_resources():
 				if dice_roll < resource.percent_chance:
 					object.resources.append(load(resource.item_path).new())
 
-func set_faction_starting_objects() -> void:
-	var factions = ["1","2","3","PLAYER"]
+var faction_start_locations:Array[WorldObject]
+func get_faction_start_locations() -> void:
+	const NUM_FACTIONS = 4
 	var ideal_positions = [Vector2(4000,3400),Vector2(3400,4000),Vector2(4000,4600),Vector2(4600,4000)]
-	for i in factions.size():
+	for i in NUM_FACTIONS:
 		var ideal_position = ideal_positions.pick_random()
 		ideal_positions.erase(ideal_position)
 		# Get object closest to ideal location
@@ -231,11 +236,31 @@ func set_faction_starting_objects() -> void:
 			if distance < closest_distance:
 				closest_distance = distance
 				closest_object = object
-		closest_object.faction = factions[i]
-		if factions[i] == "PLAYER":
-			Global.player_location = closest_object
+		faction_start_locations.append(closest_object)
 
-func initialize_player_start() -> void:
-	var loc = Global.player_location
+func initialize_factions() -> void:
+	initialize_player_start(faction_start_locations.pop_back())
+	var default = Faction.new()
+	Global.world.factions[default.faction_name] = default
+	var index:int = 0
+	for location in faction_start_locations:
+		var faction = Faction.new()
+		faction.faction_name = random_name()
+		Global.world.factions[faction.faction_name] = faction
+		location.faction = faction
+		index += 1
+
+func initialize_player_start(location:WorldObject) -> void:
+	Global.player_location = location
+	var faction = Faction.new()
+	location.faction = faction
+	faction.is_player = true
+	faction.faction_name = "Player"
+	Global.world.factions["Player"] = faction
 	var starting_items = {load("res://Items/Tier0Harvest/Item_Tier0Harvest.gd").new().item_name(): 100}
-	loc.storage = starting_items
+	location.storage = starting_items
+
+func random_name() -> String:
+	var pre = ["Gle", "Sbla", "Slub", "Wompa","Ubla","Glurp"]
+	var suf = ["bling","glomp","slomp","shboing","binkly","glab"]
+	return pre.pick_random() + suf.pick_random()

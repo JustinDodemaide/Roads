@@ -7,6 +7,7 @@ signal new_object(world_object)
 signal removed_object(world_object)
 
 var world_objects:Array[WorldObject]
+var factions:Dictionary
 
 @onready var astar = AStarGrid2D.new()
 @onready var tilemap:TileMap = $TileMap
@@ -89,6 +90,10 @@ func save() -> void:
 		tilemap_data[var_to_str(cell)] = var_to_str(tilemap.get_cell_atlas_coords(0,cell))
 	save_file.store_line(JSON.stringify(tilemap_data))
 	
+	# Factions
+	for i in factions:
+		save_file.store_line(JSON.stringify(factions[i].save()))
+	
 	# World objects
 	for object in world_objects:
 		var object_data = object.save()
@@ -116,6 +121,10 @@ func _load() -> void:
 		var line = save_file.get_line()
 		# Get the data from the JSON object
 		var data:Dictionary = JSON.parse_string(line)
+		if data["what"] == "Faction":
+			var faction = Faction.new()
+			faction._load(data)
+			factions[data["name"]] = faction
 		if data["what"] == "WorldObject":
 			var object = WorldObject.new()
 			object._load(data)
@@ -155,5 +164,5 @@ func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 	var to_tile = $TileMap.local_to_map(to.world_position)
 	return astar.get_point_path(from_tile,to_tile)
 
-func claim_world_object(object:WorldObject,who:String) -> void:
+func claim_world_object(object:WorldObject,who:Faction) -> void:
 	object.faction = who

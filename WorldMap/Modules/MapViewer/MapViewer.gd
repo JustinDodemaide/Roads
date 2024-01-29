@@ -14,7 +14,7 @@ func _ready():
 #var vehicles:Array[Vehicle]
 func map_object_clicked(map_object):
 	selected_object = map_object.world_object
-	if selected_object != Global.player_location and selected_object.faction == Global.player_faction_name:
+	if selected_object != Global.player_location and selected_object.faction.is_player:
 		$UI/Travel.disabled = false
 	else:
 		$UI/Travel.disabled = true
@@ -24,7 +24,7 @@ func update():
 	if selected_object == null:
 		return
 	var text = "name: " + selected_object.name() + "\n"
-	text += "faction: " + selected_object.faction + "\n"
+	text += "faction: " + selected_object.faction.faction_name + "\n"
 	text += "position: " + str(selected_object.world_position) + "\n"
 	text += "resources: "
 	for i in selected_object.resources:
