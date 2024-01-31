@@ -166,3 +166,9 @@ func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 
 func claim_world_object(object:WorldObject,who:Faction) -> void:
 	object.faction = who
+
+
+func _on_button_pressed():
+	for i in factions:
+		factions[i].make_plan()
+		break

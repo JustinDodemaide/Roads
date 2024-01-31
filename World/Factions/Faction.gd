@@ -10,11 +10,11 @@ var plan = []
 var ideal_defense_score:int
 var needed_items:Array[Item]
 func make_plan():
-	var target_info = get_priority_target()
-	var target = target_info["object"]
+	var target = get_priority_target()
+	place_marker(target.world_position)
 	if target == current_target and not plan.is_empty():
 		return
-	var required_score = target_info["score"]
+	var required_score = defense_score(target)
 	var best_offense = get_object_with_best_offense(target)
 	var actual_score = best_offense["score"] - ideal_defense_score
 	if actual_score >= required_score:
@@ -23,26 +23,28 @@ func make_plan():
 		increase_offense(best_offense["object"], best_offense["improvements"], target)
 
 # Returns dict with target and defense score
-func get_priority_target() -> Dictionary:
+func get_priority_target() -> WorldObject:
 	var highest_object:WorldObject = null
 	var highest_score:int = 0
 	# Each faction will eventually have their own list of WOs.
 	# For now, just use the first available location.
 	for potential_target in Global.world.world_objects:
-		if potential_target.faction == faction_name:
+		if potential_target.faction.equals(self):
 			continue
 			
 		var score:int
 		score += resource_score(potential_target)
-		score += defense_score(potential_target)
+		score += isolation_score(potential_target) # Will return a high value if its isolated from allies, making it a better target to attack
 		
 		if score > highest_score:
 			highest_object = potential_target
 			highest_score = score
-	return {"object":null, "score": 0}
+	return highest_object
 
 func resource_score(object:WorldObject) -> int:
 	# Resources needed compared to Resources available at location
+	if needed_items.size() == 0:
+		return 100
 	var total:int = 0
 	for resource in object.resources:
 		for item in needed_items:
@@ -60,16 +62,36 @@ func defense_score(object:WorldObject) -> int:
 	
 	return 0
 
+func isolation_score(object:WorldObject) -> int:
+	#	Higher value means more isolated
+	#	object is always going to be an enemy faction
+	# 	If its close to other enemy locations, its not good
+	# 	If its close to other friendly locations, it is good
+	const EFFECTIVE_RANGE:int = 100
+	var isolation:int = 0
+	for nearby_object in Global.world.world_objects:
+		var distance = object.world_position.distance_to(nearby_object.world_position)
+		if distance > EFFECTIVE_RANGE:
+			continue
+		if nearby_object.faction.equals(object.faction):
+			# The current object is near an ally
+			isolation -= 1
+		else:
+			# The current object is not near an ally
+			isolation += 1
+	return isolation
+
 # Returns dict with the object and its score
 func get_object_with_best_offense(target:WorldObject) -> Dictionary:
 	var best_object:WorldObject = null
-	var best_score:int = 0
+	var best_score:int = -1
 	for object in Global.world.world_objects:
-		if object.faction != faction_name:
+		if not object.faction.equals(self):
 			continue
-
+		
+		var improvements:Array = []
 		var score:int = 0
-		score += offense_score(object)
+		score += offense_score(object,improvements)
 		score += resource_requirement(object,target)
 		
 		if score > best_score:
@@ -79,13 +101,25 @@ func get_object_with_best_offense(target:WorldObject) -> Dictionary:
 		# Eventually, sort improvements by order of importance?
 	return {"object":best_object, "score":best_score, "improvements":[]}
 
-func offense_score(object:WorldObject) -> int:
+func offense_score(object:WorldObject,improvements:Array) -> int:
 	# Criteria:
 	# Total power score of characters
-	#
+	# Vehicle offense and defense score
 	var total:int = 0
+	
+	var total_character_score:int = 0
 	for character in object.characters:
-		total += character.potential()
+		total_character_score += character.potential()
+	if total_character_score < 10: # Arbitrary threshold
+		improvements.append("Units")
+	total += total_character_score
+	
+	var total_vehicle_score:int = 0
+	for vehicle in object.vehicles:
+		total_vehicle_score += vehicle.total_offense()
+	if total_vehicle_score < 10: # Arbitrary threshold
+		improvements.append("Vehicles")
+	
 	return total
 
 func resource_requirement(object:WorldObject,target:WorldObject) -> int:
@@ -93,6 +127,14 @@ func resource_requirement(object:WorldObject,target:WorldObject) -> int:
 
 func launch_mission(target:WorldObject) -> void:
 	pass
+
+func place_marker(where):
+	var sprite = Sprite2D.new()
+	sprite.texture = load("res://dot.png")
+	sprite.position = where
+	sprite.scale = Vector2(4,4)
+	sprite.z_index = 6
+	Global.world.add_child(sprite)
 
 # Using the improvements suggested by "get_object_with_best_offense",
 # create an action plan to increase the chance of winning a mission
