@@ -9,6 +9,9 @@ var action_index:int = -1
 
 var max_speed:float = 1.0
 
+func _init():
+	ai_info = null
+
 func name() -> String:
 	return "Convoy"
 	

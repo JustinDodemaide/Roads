@@ -10,6 +10,7 @@ var characters:Array[Character]
 
 var level_id:int = 0 # A level id of 0 means a level must be generated for this object
 var faction:Faction = load("res://World/Factions/Faction_Default.gd").new()
+var ai_info:AI_Info = AI_Info.new()
 
 signal moved
 
@@ -49,25 +50,19 @@ func update()->void:
 func additional_updates() -> void:
 	pass
 
-func options()->Array[WorldObjectOption]:
-	return []
-
-func option_chosen(option:WorldObjectOption) -> void:
-	var s = self
-	if option.option_name == "Go to Location":
-		Global.scene_handler.transition_to("res://Level/Level.tscn",{"WorldObject":s})
-
 func add_production(producer:Producer) -> void:
 	producers.append(producer)
 
 func add_vehicles(new_vehicles:Array[Vehicle]) -> void:
 	vehicles.append_array(new_vehicles)
+	ai_info.update()
 
 func launch_convoy(v:Array[Vehicle],destination:WorldObject)->void:
 	#print("launching convoy")
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new(faction)
 	Global.world.add_world_object(convoy)
 	convoy.init_convoy(v,self,destination)
+	ai_info.update()
 
 func save() -> Dictionary:
 # world_position
