@@ -96,7 +96,6 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Make decision"
 
-[connection signal="world_ready" from="." to="SceneHandler" method="_on_world_ready"]
 [connection signal="timeout" from="WorldUpdate" to="." method="_on_world_update_timeout"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="save"]
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

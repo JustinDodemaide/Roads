@@ -170,5 +170,5 @@ func claim_world_object(object:WorldObject,who:Faction) -> void:
 
 func _on_button_pressed():
 	for i in factions:
-		factions[i].make_plan()
+		factions[i].make_decision()
 		break
