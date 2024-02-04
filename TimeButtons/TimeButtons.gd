@@ -2,7 +2,11 @@ extends Control
 
 @onready var scale_label = $VBoxContainer/Scale
 
+
 func _on_pause_pressed():
+	pause()
+	
+func pause():
 	Engine.time_scale = 0
 	scale_label.text = "Paused"
 

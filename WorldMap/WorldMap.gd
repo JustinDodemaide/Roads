@@ -5,7 +5,7 @@ signal map_object_clicked(object:WorldMapObject)
 
 var packed_map_object:PackedScene = preload("res://WorldMap/WorldMapObject/WorldMapObject.tscn")
 
-func enter(_msg:Dictionary = {})->void:
+func enter(_msg:Dictionary)->void:
 	for object in Global.world.world_objects:
 		new_map_object(object)
 	Global.world.tilemap.visible = true

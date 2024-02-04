@@ -35,10 +35,10 @@ func exit() -> void:
 
 func _on_confirm_pressed():
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
-	convoy.faction = Global.player_faction_name
+	convoy.faction = Global.player_faction
 	var vehicles = state_machine.vehicles
 	var actions:Array[ConvoyAction] = [
-		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/ConsumeItem.gd").new({"Fuel":state_machine.unfront_cost}),
+		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/ConsumeItem.gd").new({"Fuel":state_machine.upfront_cost}),
 		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(state_machine.destination),
 		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/LaunchMission.gd").new(state_machine.destination),
 		load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(state_machine.current_location),

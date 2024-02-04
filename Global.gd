@@ -5,6 +5,7 @@ var level
 var scene_handler
 var player_location:WorldObject
 const WORLD_UPDATE_TIME:float = 1.0
+var time_controls
 
 var player_faction:Faction
 

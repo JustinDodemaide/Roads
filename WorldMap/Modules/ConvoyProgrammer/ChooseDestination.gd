@@ -24,7 +24,7 @@ func determine_valid_followup_locations(from:WorldObject):
 	for location in Global.world.world_objects:
 		if location == from:
 			continue
-		if location.faction != Global.player_faction_name:
+		if location.faction != Global.player_faction:
 			continue
 		var path = Global.world.get_astar_path(from,location)
 		fuel_costs[location] = path.size() * state_machine.total_fuel_consumption

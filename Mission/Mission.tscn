@@ -4,3 +4,52 @@
 
 [node name="Mission" type="Node"]
 script = ExtResource("1_bgrlc")
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+layer_0/tile_data = PackedInt32Array(852003, 0, 0, 917539, 0, 0, 983075, 0, 0, 1048610, 0, 0, 1048611, 0, 0, 1048612, 0, 0, 917538, 0, 0)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "In mission"
+
+[node name="Win" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = 22.5
+offset_right = 19.0
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Win"
+
+[node name="Lose" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = 60.5
+offset_right = 22.0
+offset_bottom = 91.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lose"
+
+[connection signal="pressed" from="Win" to="." method="attacker_victory"]
+[connection signal="pressed" from="Lose" to="." method="attacker_defeat"]

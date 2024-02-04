@@ -81,15 +81,15 @@ func get_better_vehicles(location:WorldObject) -> void:
 	# Either get more or improve current ones
 	pass
 
-func equals(other:Faction) -> bool:
-	# Returns true if this and other are the same faction
-	return faction_name == other.faction_name
-
 func save() -> Dictionary:
 	return {"what":"Faction",
 			"name":faction_name,
-			"profile":personality_profile
+			"profile":personality_profile,
+			"player":is_player,
 	}
 
 func _load(data:Dictionary) -> void:
 	faction_name = data["name"]
+	is_player = data["player"]
+	if is_player:
+		Global.player_faction = self

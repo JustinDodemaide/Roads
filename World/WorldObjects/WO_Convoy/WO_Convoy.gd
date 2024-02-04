@@ -44,10 +44,17 @@ func action_complete() -> void:
 	actions[action_index].complete.disconnect(action_complete)
 	get_next_action()
 
+func return_to_origin() -> void:
+	actions.clear()
+	action_index = -1
+	actions.append(load("res://World/WorldObjects/WO_Convoy/ConvoyActions/TravelTo.gd").new(origin))
+	actions.append(load("res://World/WorldObjects/WO_Convoy/ConvoyActions/End.gd").new())
+	get_next_action()
+
 func save() -> Dictionary:
 	var data = {"what": "Convoy",
 				"world_position": var_to_str(world_position),
-				"faction":faction,
+				"faction":faction.faction_name,
 				"storage":storage,
 				"vehicles":[],
 				"current_location":null,
@@ -70,7 +77,7 @@ func save() -> Dictionary:
 
 func _load(data:Dictionary) -> void:
 	world_position = str_to_var(data["world_position"])
-	faction = data["faction"]
+	faction = Global.world.factions[data["faction"]]
 	storage = data["storage"]
 	for save_data in data["vehicles"]:
 		var vehicle = load(save_data["path"]).new()

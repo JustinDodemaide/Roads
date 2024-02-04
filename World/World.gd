@@ -15,6 +15,7 @@ var factions:Dictionary
 
 func _ready():
 	Global.world = self
+	Global.time_controls = $CanvasLayer/TimeButtons
 	if StartGameParameters.save == 0:
 		StartGameParameters.save = StartGameParameters.num_saves + 1
 		new_world()
@@ -167,8 +168,10 @@ func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 func claim_world_object(object:WorldObject,who:Faction) -> void:
 	object.faction = who
 
-
 func _on_button_pressed():
 	for i in factions:
 		factions[i].make_decision()
 		break
+
+func launch_mission(location:WorldObject,convoy:WorldObject) -> void:
+	$SceneHandler.transition_to("res://Mission/Mission.tscn",{"location":location,"attacking_convoy":convoy})

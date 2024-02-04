@@ -9,6 +9,7 @@ var vehicles:Array[Vehicle]
 var characters:Array[Character]
 
 var level_id:int = 0 # A level id of 0 means a level must be generated for this object
+var mission_id:int = 0
 var faction:Faction = load("res://World/Factions/Faction_Default.gd").new()
 var ai_info:AI_Info = AI_Info.new()
 
