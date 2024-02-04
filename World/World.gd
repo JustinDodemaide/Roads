@@ -150,6 +150,7 @@ func add_default_research_projects():
 	var file_path:String = "user://" + str(StartGameParameters.save) + "ResearchedFacilities.save"
 	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
 	# Make sure to store the SCRIPT path, NOT the scene path
+	save_file.store_line("res://Level/LevelObjects/LO_Tier0Researcher/LO_Tier0Researcher.gd")
 	save_file.store_line("res://Level/LevelObjects/LO_Tier0Harvester/LO_Tier0Harvester.gd")
 	save_file.store_line("res://Level/LevelObjects/LO_VehicleBuilder/LO_VehicleBuilder.gd")
 	save_file.store_line("res://Level/LevelObjects/LO_ConvoyProgrammer/LO_ConvoyProgrammer.gd")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7d66s1yask0b"]
+
+[ext_resource type="Script" path="res://Level/LevelObjects/LO_Tier0Researcher/LO_Tier0Researcher.gd" id="1_k1f4o"]
+[ext_resource type="Texture2D" uid="uid://biiyvtullnfy7" path="res://Level/LevelObjects/LO_ConvoyProgrammer/Terminal.png" id="2_ydm7x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27nba"]
+atlas = ExtResource("2_ydm7x")
+region = Rect2(0, 0, 66, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xtwcq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27nba")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_noj8k"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qun2y"]
+size = Vector2(61, 61)
+
+[node name="LO_Tier0Researcher" type="Node2D"]
+script = ExtResource("1_k1f4o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xtwcq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_noj8k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_qun2y")
+
+[node name="OptionButton" type="OptionButton" parent="."]
+offset_right = 45.0
+offset_bottom = 20.0

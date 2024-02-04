@@ -1,7 +1,7 @@
 extends LevelObject
 
 func _name():
-	return "Tier1 Harvester"
+	return "Tier0 Harvester"
 
 func is_interaction_valid(_interactor) -> bool:
 	return true
