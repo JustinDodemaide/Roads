@@ -240,23 +240,21 @@ func get_faction_start_locations() -> void:
 
 func initialize_factions() -> void:
 	initialize_player_start(faction_start_locations.pop_back())
-	var default = Faction.new()
-	Global.world.factions[default.faction_name] = default
-	var index:int = 0
+	var id:int = 1 # ID 0 is player
 	for location in faction_start_locations:
 		var faction = Faction.new()
+		faction.id = id
 		faction.faction_name = random_name()
-		Global.world.factions[faction.faction_name] = faction
+		Global.world.factions.append(faction)
 		location.faction = faction
-		index += 1
+		id += 1
 
 func initialize_player_start(location:WorldObject) -> void:
-	Global.player_location = location
-	var faction = Faction.new()
+	var faction = Faction.new(true)
 	location.faction = faction
-	faction.is_player = true
 	faction.faction_name = "Player"
-	Global.world.factions["Player"] = faction
+	faction.id = 0
+	Global.world.factions.append(faction)
 	var starting_items = {load("res://Items/Tier0Harvest/Item_Tier0Harvest.gd").new().item_name(): 100}
 	location.storage = starting_items
 

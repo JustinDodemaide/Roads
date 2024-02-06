@@ -2,9 +2,9 @@ extends StateMachine
 
 func _on_world_ready():
 	Global.scene_handler = self
-	state = load("res://Level/Level.tscn").instantiate()
+	state = load("res://WorldMap/WorldMap.tscn").instantiate()
 	add_child(state)
-	state.enter({"WorldObject": Global.player_location})
+	state.enter({})
 	emit_signal("transitioned", state.name)
 
 func transition_to(target_scene_path:String, msg:Dictionary = {}) -> void:

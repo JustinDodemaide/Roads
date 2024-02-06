@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://btjh78darwmh4"]
+[gd_scene load_steps=7 format=3 uid="uid://btjh78darwmh4"]
 
 [ext_resource type="Script" path="res://World/World.gd" id="1_vshny"]
 [ext_resource type="Script" path="res://World/WorldSceneHandler.gd" id="2_ti2vb"]
 [ext_resource type="Texture2D" uid="uid://c8sqc2wxn1yrv" path="res://World/World_TileMap.png" id="3_uta0c"]
 [ext_resource type="PackedScene" uid="uid://ch74f37s1hwdr" path="res://FPSCounter.tscn" id="4_hspch"]
-[ext_resource type="PackedScene" uid="uid://5i03o7yh47a8" path="res://TimeButtons/TimeButtons.tscn" id="5_4k1c5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l3m1p"]
 texture = ExtResource("3_uta0c")
@@ -55,8 +54,6 @@ script = ExtResource("1_vshny")
 [node name="SceneHandler" type="Node" parent="."]
 script = ExtResource("2_ti2vb")
 
-[node name="WorldUpdate" type="Timer" parent="."]
-
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
 texture_filter = 1
@@ -72,31 +69,41 @@ text = "Save Game"
 
 [node name="FPSCounter" parent="CanvasLayer" instance=ExtResource("4_hspch")]
 
-[node name="TimeButtons" parent="CanvasLayer" instance=ExtResource("5_4k1c5")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-offset_left = -114.0
-offset_top = -70.0
-offset_right = -114.0
-offset_bottom = -70.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="TurnProgression" type="Button" parent="CanvasLayer"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -119.0
-offset_top = -91.0
-offset_bottom = -60.0
+offset_left = -180.0
+offset_top = -243.0
+offset_right = -46.0
+offset_bottom = -212.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Make decision"
+
+[node name="CurrentTurn" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -118.0
+offset_right = -97.0
+offset_bottom = -95.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Options" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [connection signal="world_ready" from="." to="SceneHandler" method="_on_world_ready"]
-[connection signal="timeout" from="WorldUpdate" to="." method="_on_world_update_timeout"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="save"]
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

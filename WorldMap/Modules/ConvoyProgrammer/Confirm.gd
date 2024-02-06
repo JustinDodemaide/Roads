@@ -49,7 +49,7 @@ func exit() -> void:
 #var items_to_collect_strings:Dictionary
 func _on_confirm_pressed():
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new()
-	convoy.faction = Global.player_faction_name
+	convoy.faction = Global.player_faction
 	var vehicles = state_machine.vehicles
 	var deposit = state_machine.items_to_deposit_strings
 	var collect = state_machine.items_to_collect_strings

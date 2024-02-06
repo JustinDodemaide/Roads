@@ -1,20 +1,12 @@
 extends Node
 
 var world
-var level
 var scene_handler
-var player_location:WorldObject
-const WORLD_UPDATE_TIME:float = 1.0
-var time_controls
 
-var player_faction:Faction
+@onready var player_turn_handler = preload("res://PlayerTurn/PlayerTurnHandler.gd").new()
 
 func save_game() -> void:
 	world.save()
 
-func random_color() -> Color:
-	randomize()
-	return Color(randf_range(0,1),randf_range(0,1),randf_range(0,1))
-
-func research_complete(category:String,path:String):
+func research_complete(_category:String,_path:String):
 	pass

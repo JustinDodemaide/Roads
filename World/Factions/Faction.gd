@@ -2,6 +2,7 @@ extends RefCounted
 class_name Faction
 
 var faction_name:String = "Default"
+var id:int
 var personality_profile:int
 var is_player:bool = false
 
@@ -9,6 +10,23 @@ var current_target:WorldObject
 var plan:Array[FactionAction] = []
 
 var needed_resources:Array[String]
+
+signal turn_complete
+
+func _init(player:bool = false):
+	is_player = player
+	if is_player:
+		Global.player_turn_handler.faction = self
+
+var button
+func begin_turn() -> void:
+	if is_player:
+		Global.player_turn_handler.execute()
+		return
+	emit_signal("turn_complete")
+
+func turn_over():
+	emit_signal("turn_complete")
 
 func make_decision():
 	print("Faction ", faction_name, " making plan...")
@@ -61,7 +79,7 @@ func get_target_priority_score(target:WorldObject) -> int:
 	# is to compute)
 	return total_score
 
-func launch_attack(location:WorldObject) -> void:
+func launch_attack(_location:WorldObject) -> void:
 	plan.append(load("res://World/Factions/FactionActions/LaunchAttack.gd").new())
 
 func improve_location(location:WorldObject) -> void:
@@ -73,23 +91,25 @@ func improve_location(location:WorldObject) -> void:
 	if improvement == "Characters":
 		get_better_characters(location)
 
-func get_better_characters(location:WorldObject) -> void:
+func get_better_characters(_location:WorldObject) -> void:
 	# Either get more or improve current ones
 	pass
 
-func get_better_vehicles(location:WorldObject) -> void:
+func get_better_vehicles(_location:WorldObject) -> void:
 	# Either get more or improve current ones
 	pass
 
 func save() -> Dictionary:
 	return {"what":"Faction",
 			"name":faction_name,
+			"id":id,
 			"profile":personality_profile,
 			"player":is_player,
 	}
 
 func _load(data:Dictionary) -> void:
 	faction_name = data["name"]
+	id = data["id"]
 	is_player = data["player"]
 	if is_player:
-		Global.player_faction = self
+		Global.player_turn_handler.faction = self

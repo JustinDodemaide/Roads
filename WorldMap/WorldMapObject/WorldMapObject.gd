@@ -9,7 +9,6 @@ func init(object:WorldObject)->void:
 	world_object = object
 	position = world_object.world_position
 	$Sprite2D.texture = world_object.map_texture()
-	Global.world.world_update.timeout.connect(update)
 	
 func update() -> void:
 	position = world_object.world_position
@@ -41,11 +40,3 @@ func stats() -> String:
 		string += item + ": "
 		string += str(items[item]) + "\n"
 	return string
-
-func _process(_delta):
-	if Global.player_location == world_object:
-		$PlayerIndicator.visible = true
-	else:
-		$PlayerIndicator.visible = false
-	$Label.text = ""
-	$Label.text += str(world_object.level_id) + "\n"

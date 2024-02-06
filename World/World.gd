@@ -2,20 +2,21 @@ extends Node
 
 const FLOOR_LAYER:int = 0
 
-signal world_ready
-signal new_object(world_object)
-signal removed_object(world_object)
-
 var world_objects:Array[WorldObject]
-var factions:Dictionary
+var factions:Array[Faction]
+var turn:int = 0
 
 @onready var astar = AStarGrid2D.new()
 @onready var tilemap:TileMap = $TileMap
-@onready var world_update:Timer = $WorldUpdate
+@onready var ui = $CanvasLayer
+
+signal world_ready
+signal next_turn(who:Faction)
+signal new_object(object:WorldObject)
+signal removed_object(object:WorldObject)
 
 func _ready():
 	Global.world = self
-	Global.time_controls = $CanvasLayer/TimeButtons
 	if StartGameParameters.save == 0:
 		StartGameParameters.save = StartGameParameters.num_saves + 1
 		new_world()
@@ -24,8 +25,8 @@ func _ready():
 		_load()
 	
 	initialize_astar()
-	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)
 	emit_signal("world_ready")
+	start_turns()
 
 func initialize_astar() -> void:
 	astar.size = Vector2i(300,300)
@@ -40,18 +41,26 @@ func initialize_astar() -> void:
 		# if the tile is an impass, astar.set_point_solid(coord)
 		astar.set_point_weight_scale(coord, speed_modifier)
 
-func _on_world_update_timeout():
-	for object in world_objects:
-		object.update()
-	$WorldUpdate.start(Global.WORLD_UPDATE_TIME)
-	
+func start_turns():
+	while(true):
+		var faction = factions[turn]
+		save()
+		$CanvasLayer/CurrentTurn.text = faction.faction_name + "'s turn"
+		emit_signal("next_turn",faction)
+		faction.begin_turn()
+		await faction.turn_complete
+		
+		turn += 1
+		if turn == factions.size():
+			turn = 0
+
 func add_world_object(object:WorldObject) -> void:
 	world_objects.append(object)
-	emit_signal("new_object", object)
+	emit_signal("new_object",object)
 
 func remove_world_object(object:WorldObject) -> void:
 	world_objects.erase(object)
-	emit_signal("removed_object", object)
+	emit_signal("removed_object",object)
 
 func create_timer() -> Timer:
 	var timer = Timer.new()
@@ -92,7 +101,7 @@ func save() -> void:
 	save_file.store_line(JSON.stringify(tilemap_data))
 	
 	# Factions
-	for i in factions:
+	for i in factions.size():
 		save_file.store_line(JSON.stringify(factions[i].save()))
 	
 	# World objects
@@ -125,7 +134,7 @@ func _load() -> void:
 		if data["what"] == "Faction":
 			var faction = Faction.new()
 			faction._load(data)
-			factions[data["name"]] = faction
+			factions.append(faction)
 		if data["what"] == "WorldObject":
 			var object = WorldObject.new()
 			object._load(data)
@@ -166,9 +175,6 @@ func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 	var to_tile = $TileMap.local_to_map(to.world_position)
 	return astar.get_point_path(from_tile,to_tile)
 
-func claim_world_object(object:WorldObject,who:Faction) -> void:
-	object.faction = who
-
 func _on_button_pressed():
 	for i in factions:
 		factions[i].make_decision()
@@ -176,3 +182,8 @@ func _on_button_pressed():
 
 func launch_mission(location:WorldObject,convoy:WorldObject) -> void:
 	$SceneHandler.transition_to("res://Mission/Mission.tscn",{"location":location,"attacking_convoy":convoy})
+
+
+func _on_end_turn_pressed():
+	Global.player_faction.emit_signal("turn_complete")
+	

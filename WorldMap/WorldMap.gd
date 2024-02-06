@@ -5,17 +5,18 @@ signal map_object_clicked(object:WorldMapObject)
 
 var packed_map_object:PackedScene = preload("res://WorldMap/WorldMapObject/WorldMapObject.tscn")
 
-func enter(_msg:Dictionary)->void:
+func enter(_msg:Dictionary = {})->void:
 	for object in Global.world.world_objects:
 		new_map_object(object)
 	Global.world.tilemap.visible = true
 	Global.world.new_object.connect(new_map_object)
 	Global.world.removed_object.connect(new_map_object)
+	$Camera2D.position = Vector2(4000,4000)
 	ui = $UI
-	$Camera2D.position = Global.player_location.world_position - Vector2(100,100)
-	$Camera2D.move_camera_to(Global.player_location.world_position)
 	if _msg.has("module"):
 		load_module(_msg["module"])
+	else:
+		load_module("MapViewer")
 
 func exit()->void:
 	Global.world.tilemap.visible = false
@@ -50,8 +51,8 @@ func _input(event):
 			emit_signal("map_object_clicked",areas.front().get_parent())
 			return
 	
-	if event.is_action_pressed("M"):
-		Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": Global.player_location})
+	#if event.is_action_pressed("M"):
+	#	Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": Global.player_location})
 
 func add_to_ui(element)->void:
 	$UI.add_child(element)

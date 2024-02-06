@@ -8,12 +8,14 @@ var storage:Dictionary
 var vehicles:Array[Vehicle]
 var characters:Array[Character]
 
-var level_id:int = 0 # A level id of 0 means a level must be generated for this object
 var mission_id:int = 0
-var faction:Faction = load("res://World/Factions/Faction_Default.gd").new()
+var faction:Faction = null
 var ai_info:AI_Info = AI_Info.new()
 
 signal moved
+
+func _init():
+	Global.world.next_turn.connect(update)
 
 func init(position:Vector2) -> void:
 	world_position = position
@@ -31,7 +33,7 @@ func info() -> PackedStringArray:
 		arr.append(s)
 	return arr
 
-func update()->void:
+func update(_who = null)->void:
 	for producer in producers:
 		for rate in producer.item_rates:
 			var item_name = rate.item.item_name()
@@ -74,29 +76,29 @@ func save() -> Dictionary:
 # faction
 	var data = {"what": "WorldObject",
 				"world_position": var_to_str(world_position),
-				"level_id":level_id,
-				"faction":faction.faction_name,
+				"faction":null,
 				"resources":[],
 				"producers":[],
 				"storage":storage,
 				"vehicles":[],
 				"player_location":false
 	}
+	if faction != null:
+		data["faction"] = faction.id
 	for i in resources:
 		data["resources"].append(i.save())
 	for i in producers:
 		data["producers"].append(i.save())
 	for i in vehicles:
 		data["vehicles"].append(i.save())
-	if Global.player_location == self:
-		data["player_location"] = true
 	
 	return data
 
 func _load(data:Dictionary) -> void:
 	world_position = str_to_var(data["world_position"])
-	level_id = data["level_id"]
-	faction = Global.world.factions[data["faction"]]
+	var id = data["faction"]
+	if id != null:
+		faction = Global.world.factions[data["faction"]]
 	for save_data in data["resources"]:
 		resources.append(load(save_data["path"]).new())
 	for save_data in data["producers"]:

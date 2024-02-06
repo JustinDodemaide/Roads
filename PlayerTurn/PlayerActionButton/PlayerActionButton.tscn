@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://g37ne0aoiqvn"]
+
+[ext_resource type="Script" path="res://PlayerTurn/PlayerActionButton/PlayerActionButton.gd" id="1_83ekr"]
+
+[node name="PlayerActionButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_83ekr")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
