@@ -15,6 +15,8 @@ signal next_turn(who:Faction)
 signal new_object(object:WorldObject)
 signal removed_object(object:WorldObject)
 
+# World
+
 func _ready():
 	Global.world = self
 	if StartGameParameters.save == 0:
@@ -41,19 +43,6 @@ func initialize_astar() -> void:
 		# if the tile is an impass, astar.set_point_solid(coord)
 		astar.set_point_weight_scale(coord, speed_modifier)
 
-func start_turns():
-	while(true):
-		var faction = factions[turn]
-		save()
-		$CanvasLayer/CurrentTurn.text = faction.faction_name + "'s turn"
-		emit_signal("next_turn",faction)
-		faction.begin_turn()
-		await faction.turn_complete
-		
-		turn += 1
-		if turn == factions.size():
-			turn = 0
-
 func add_world_object(object:WorldObject) -> void:
 	world_objects.append(object)
 	emit_signal("new_object",object)
@@ -61,11 +50,6 @@ func add_world_object(object:WorldObject) -> void:
 func remove_world_object(object:WorldObject) -> void:
 	world_objects.erase(object)
 	emit_signal("removed_object",object)
-
-func create_timer() -> Timer:
-	var timer = Timer.new()
-	add_child(timer)
-	return timer
 
 func _input(event):
 	if event.is_action_pressed("F1"):
@@ -155,6 +139,14 @@ func new_world() -> void:
 	var world_generator = WorldGenerator.new()
 	world_generator.execute(tilemap)
 
+func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
+	var from_tile = $TileMap.local_to_map(from.world_position)
+	var to_tile = $TileMap.local_to_map(to.world_position)
+	return astar.get_point_path(from_tile,to_tile)
+
+
+# Game
+
 func add_default_research_projects():
 	var file_path:String = "user://" + str(StartGameParameters.save) + "ResearchedFacilities.save"
 	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
@@ -170,20 +162,26 @@ func add_default_research_projects():
 	save_file.store_line("res://Vehicles/Vehicle_AllRounder.gd")
 	save_file.close()
 
-func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
-	var from_tile = $TileMap.local_to_map(from.world_position)
-	var to_tile = $TileMap.local_to_map(to.world_position)
-	return astar.get_point_path(from_tile,to_tile)
-
-func _on_button_pressed():
-	for i in factions:
-		factions[i].make_decision()
-		break
-
 func launch_mission(location:WorldObject,convoy:WorldObject) -> void:
 	$SceneHandler.transition_to("res://Mission/Mission.tscn",{"location":location,"attacking_convoy":convoy})
 
-
 func _on_end_turn_pressed():
 	Global.player_faction.emit_signal("turn_complete")
-	
+
+func create_timer() -> Timer:
+	var timer = Timer.new()
+	add_child(timer)
+	return timer
+
+func start_turns():
+	while(true):
+		var faction = factions[turn]
+		save()
+		$CanvasLayer/CurrentTurn.text = faction.faction_name + "'s turn"
+		emit_signal("next_turn",faction)
+		faction.begin_turn()
+		await faction.turn_complete
+		
+		turn += 1
+		if turn == factions.size():
+			turn = 0
