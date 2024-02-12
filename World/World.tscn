@@ -65,22 +65,10 @@ format = 2
 [node name="Save" type="Button" parent="CanvasLayer"]
 offset_right = 94.0
 offset_bottom = 31.0
+disabled = true
 text = "Save Game"
 
 [node name="FPSCounter" parent="CanvasLayer" instance=ExtResource("4_hspch")]
-
-[node name="TurnProgression" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -180.0
-offset_top = -243.0
-offset_right = -46.0
-offset_bottom = -212.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [node name="CurrentTurn" type="Label" parent="CanvasLayer"]
 anchors_preset = 3
@@ -100,14 +88,36 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -33.0
-offset_bottom = -33.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 1
 
-[node name="TurnProgress" type="HBoxContainer" parent="CanvasLayer"]
-offset_right = 40.0
+[node name="TurnProgressButtons" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.5
+offset_right = 102.5
 offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Build" type="Button" parent="CanvasLayer/TurnProgressButtons"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+disabled = true
+text = "Build"
+
+[node name="Attack" type="Button" parent="CanvasLayer/TurnProgressButtons"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+disabled = true
+text = "Attack"
+
+[node name="Reposition" type="Button" parent="CanvasLayer/TurnProgressButtons"]
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+disabled = true
+text = "Reposition"
 
 [connection signal="world_ready" from="." to="SceneHandler" method="_on_world_ready"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="save"]

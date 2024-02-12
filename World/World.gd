@@ -15,6 +15,7 @@ signal next_turn(who:Faction)
 signal new_object(object:WorldObject)
 signal removed_object(object:WorldObject)
 
+#region World
 # World
 
 func _ready():
@@ -143,8 +144,10 @@ func get_astar_path(from:WorldObject,to:WorldObject) -> PackedVector2Array:
 	var from_tile = $TileMap.local_to_map(from.world_position)
 	var to_tile = $TileMap.local_to_map(to.world_position)
 	return astar.get_point_path(from_tile,to_tile)
+#endregion
 
 
+#region Game
 # Game
 
 func add_default_research_projects():
@@ -185,3 +188,5 @@ func start_turns():
 		turn += 1
 		if turn == factions.size():
 			turn = 0
+
+#endregion

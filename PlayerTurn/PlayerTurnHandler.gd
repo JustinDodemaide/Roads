@@ -1,19 +1,23 @@
 extends RefCounted
 
 var faction:Faction
-var progress_button
+var build_button:Button
+var attack_button:Button
+var reposition_button:Button
 var action_container
-
 var action_button_scene:PackedScene = preload("res://PlayerTurn/PlayerActionButton/PlayerActionButton.tscn")
 
 func execute() -> void:
-	progress_button = Global.world.ui.get_node("TurnProgression")
+	var buttons = Global.world.ui.get_node("TurnProgressButtons").get_children()
+	build_button = buttons[0]
+	attack_button = buttons[1]
+	reposition_button = buttons[2]
 	action_container = Global.world.ui.get_node("Options")
+	build_phase()
 
-	progress_button.visible = true
-	# Build phase
-	progress_button.text = "Attack"
-	progress_button.pressed.connect(attack_phase)
+func build_phase():
+	build_button.pressed.connect(attack_phase)
+	build_button.disabled = false
 	
 	# Research, build equipment, build facility, upgrade
 	var modules = [
@@ -26,20 +30,22 @@ func execute() -> void:
 
 func attack_phase() -> void:
 	clear_buttons()
-	progress_button.pressed.disconnect(attack_phase)
-	progress_button.text = "Reposition"
-	progress_button.pressed.connect(reposition_phase)
+	build_button.pressed.disconnect(attack_phase)
+	build_button.disabled = true
+	attack_button.pressed.connect(reposition_phase)
+	attack_button.disabled = false
 
 func reposition_phase() -> void:
 	clear_buttons()
-	progress_button.pressed.disconnect(reposition_phase)
-	progress_button.text = "End turn"
-	progress_button.pressed.connect(turn_over)
+	attack_button.pressed.disconnect(reposition_phase)
+	attack_button.disabled = true
+	reposition_button.pressed.connect(turn_over)
+	reposition_button.disabled = false
 
 func turn_over() -> void:
 	clear_buttons()
-	progress_button.pressed.disconnect(turn_over)
-	progress_button.visible = false
+	reposition_button.pressed.disconnect(turn_over)
+	reposition_button.disabled = true
 	faction.emit_signal("turn_complete")
 
 func clear_buttons() -> void:

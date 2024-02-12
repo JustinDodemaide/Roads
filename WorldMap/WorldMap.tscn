@@ -15,7 +15,7 @@ script = ExtResource("2_d8j44")
 [node name="Cursor" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.25, 0.25)
 shape = SubResource("CircleShape2D_vobcc")
 
 [node name="Stats" type="Label" parent="."]

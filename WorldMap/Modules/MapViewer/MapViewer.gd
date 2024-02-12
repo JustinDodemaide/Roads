@@ -2,6 +2,8 @@ extends Node
 
 var world_map
 var selected_object:WorldObject
+@onready var object_select = $MapObjectSelect
+@onready var object_view = $ObjectView
 
 func _ready():
 	world_map.map_object_clicked.connect(map_object_clicked)
@@ -11,29 +13,20 @@ func _ready():
 #var producers:Array[Producer]
 #var storage:Dictionary
 #var vehicles:Array[Vehicle]
+var ignoring_click:bool = false
 func map_object_clicked(map_object):
-	selected_object = map_object.world_object
-	update()
-
-func update():
-	if selected_object == null:
+	if ignoring_click:
 		return
-	var text = "name: " + selected_object.name() + "\n"
-	if selected_object.faction != null:
-		text += "faction: " + selected_object.faction.faction_name + "\n"
-	text += "position: " + str(selected_object.world_position) + "\n"
-	text += "resources: "
-	for i in selected_object.resources:
-		text += i.item_name() + " "
-	text += "\nstorage: "
-	for i in selected_object.storage:
-		text += i + " (" + str(selected_object.storage[i]) + "), "
-	text += "\nvehicles: "
-	for i in selected_object.vehicles:
-		text += i.name() + ", "
-	$ObjectInfo/Label.text = text
-	$ObjectInfo.visible = true
-	$ObjectInfo.position = selected_object.world_position
+	selected_object = map_object.world_object
+	object_select.init(map_object.world_object)
 
-func _on_travel_pressed():
-	Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": selected_object})
+func _on_map_object_select_view_object():
+	ignoring_click = true
+	object_select.visible = false
+	object_view.visible = true
+	object_view.init(selected_object)
+
+func _on_object_view_close():
+	object_view.visible = false
+	object_select.visible = true
+	ignoring_click = false
