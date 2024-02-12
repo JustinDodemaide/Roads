@@ -1,16 +1,11 @@
 extends Node
 
 var world_map
-@onready var current_location = Global.level.world_object
+@onready var state = $ChooseUnits
 
-signal transitioned(state_name)
-@onready var state = $ChooseVehicles
-
-var vehicles
-var total_fuel_consumption = 0
 var destination
 var upfront_cost
-var units:Array[Character]
+var characters:Array[Character]
 
 func _ready() -> void:
 	for child in get_children():
@@ -22,4 +17,3 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter(msg)
-	emit_signal("transitioned", state.name)

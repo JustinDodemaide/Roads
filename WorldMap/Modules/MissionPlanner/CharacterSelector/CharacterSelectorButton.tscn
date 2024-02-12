@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp80vewtjq56m"]
+
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/VehicleChooserButton.gd" id="1_omj1y"]
+[ext_resource type="Texture2D" uid="uid://dhymqqihg10iu" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/login_FILL0_wght400_GRAD0_opsz24.png" id="3_vofaw"]
+
+[node name="VehicleChooserButton" type="ColorRect"]
+anchors_preset = -1
+anchor_right = 0.146
+anchor_bottom = 0.063
+offset_right = -0.192017
+offset_bottom = 0.175999
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.223529)
+script = ExtResource("1_omj1y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+expand_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Vehicle"
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+icon = ExtResource("3_vofaw")
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

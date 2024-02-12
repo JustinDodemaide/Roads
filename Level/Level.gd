@@ -7,6 +7,7 @@ var tileset_prefab:int
 
 func enter(_msg:Dictionary = {})->void:
 	world_object = _msg["WorldObject"]
+	Global.current_location = world_object
 	if world_object.level_id == 0:
 		generate_level()
 		save()
@@ -22,12 +23,6 @@ func _process(_delta):
 func _input(event):
 	if event.is_action_pressed("M"):
 		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
-	if event.is_action_pressed("B"):
-		var menu = load("res://Level/BuildingMenu/BuildingMenu.tscn").instantiate()
-		menu.building_selected.connect(add_level_object)
-		$UI.add_child(menu)
-	if event.is_action_pressed("1"):
-		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MissionPlanner"})
 
 func new_producer(producer:Producer):
 	world_object.producers.append(producer)
@@ -95,12 +90,6 @@ func generate_level() -> void:
 	# Mission launcher
 	# Resources
 	# Needs to built: Harvesters
-
-func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
-	var dropped_item = load("res://Level/LevelObjects/LO_DroppedItem/LO_DroppedItem.tscn").instantiate()
-	dropped_item.init(item_stack)
-	dropped_item.position = pos
-	add_level_object(dropped_item)
 
 func _on_button_pressed():
 	var file_path:String = "user://test.save"

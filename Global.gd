@@ -2,6 +2,7 @@ extends Node
 
 var world
 var scene_handler
+var current_location:WorldObject
 
 func save_game() -> void:
 	world.save()

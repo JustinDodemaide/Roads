@@ -6,7 +6,7 @@ var resources:Array[Item]
 var producers:Array[Producer]
 var storage:Dictionary
 var vehicles:Array[Vehicle]
-var characters:Array[Character]
+var characters:Array[Character] = [Character.new()]
 var level_id:int
 
 var mission_id:int = 0

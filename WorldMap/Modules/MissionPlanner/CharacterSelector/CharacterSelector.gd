@@ -2,13 +2,13 @@ extends Control
 
 var available_column
 var selected_column
-signal characters_chosen(characters,stats)
+signal units_chosen(characters,stats)
 
 func init(location):
 	available_column = $VBoxContainer/HBoxContainer/A/ScrollContainer/AvailableColumn
 	selected_column = $VBoxContainer/HBoxContainer/S/ScrollContainer/SelectedColumn
 	for character in location.characters:
-		var button = load("res://WorldMap/Modules/MissionPlanner/CharacterSelector/CharacterSelectorButton.tscn").instantiate()
+		var button = load("res://WorldMap/Modules/ConvoyProgrammer/characterSelector/characterChooserButton.tscn").instantiate()
 		button.init(character)
 		button.pressed.connect(button_pressed)
 		available_column.add_child(button)
@@ -38,5 +38,6 @@ func _on_confirm_button_pressed():
 	for button in selected_column.get_children():
 		characters.append(button.character)
 	var stats = {}
+	stats["total_fuel_consumption"] = int($VBoxContainer/HBoxContainer/Stats/Consumption.text)
 	emit_signal("characters_chosen",characters,stats)
 	queue_free()

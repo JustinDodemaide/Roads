@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://de3gs1lr34p1p"]
+[gd_scene load_steps=2 format=3 uid="uid://8j33utqs7p7g"]
 
-[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.gd" id="1_pm7vo"]
+[ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.gd" id="1_wdwyo"]
 
-[node name="UnitSelector" type="Control"]
+[node name="CharacterSelector" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_pm7vo")
+script = ExtResource("1_wdwyo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -19,7 +19,7 @@ offset_bottom = 217.0
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Select Vehicles"
+text = "Select Characters"
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -66,19 +66,9 @@ theme_override_constants/separation = 50
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
+[node name="Placeholder" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
 layout_mode = 2
-text = "Stats:"
-
-[node name="Speed" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
-layout_mode = 2
-tooltip_text = "Convoy only moves as fast as its slowest vehicle."
-
-[node name="Cargo" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
-layout_mode = 2
-
-[node name="Consumption" type="Label" parent="VBoxContainer/HBoxContainer/Stats"]
-layout_mode = 2
+text = "Placeholder stat"
 
 [node name="ConfirmButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

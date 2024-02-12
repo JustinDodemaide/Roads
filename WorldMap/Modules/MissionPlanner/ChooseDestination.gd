@@ -11,7 +11,7 @@ var lines:Dictionary
 
 func enter(_msg := {}) -> void:
 	$UIElements.visible = true
-	determine_valid_followup_locations(state_machine.current_location)
+	determine_valid_followup_locations(Global.current_location)
 	state_machine.world_map.map_object_clicked.connect(map_object_clicked)
 
 func exit() -> void:
@@ -22,16 +22,15 @@ func exit() -> void:
 func determine_valid_followup_locations(from:WorldObject):
 	valid_followups.clear()
 	for location in Global.world.world_objects:
-		if location == from:
-			continue
-		if location.faction == Global.player_faction:
-			continue
+		if location.faction != null:
+			if location.faction.is_player:
+				continue
 		var path = Global.world.get_astar_path(from,location)
-		fuel_costs[location] = path.size() * state_machine.total_fuel_consumption
+		fuel_costs[location] = path.size()
 		valid_followups[location] = {"path": path}
 		draw_path_line(location,path)
 	if valid_followups.is_empty():
-		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
+		return
 
 # Change it to: left click brings up stats, right click chooses location
 func map_object_clicked(map_object):

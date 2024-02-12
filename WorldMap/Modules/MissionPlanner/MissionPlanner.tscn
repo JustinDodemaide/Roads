@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://1eucjjegm47b"]
 
 [ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/MissionPlanner.gd" id="1_ixscy"]
-[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ChooseVehicles.gd" id="2_uiifl"]
-[ext_resource type="PackedScene" uid="uid://de3gs1lr34p1p" path="res://WorldMap/Modules/ConvoyProgrammer/VehicleSelector/ConvoyProgrammerVehicleChooser.tscn" id="3_5pl8h"]
+[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ChooseCharacters.gd" id="2_uiifl"]
 [ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ChooseDestination.gd" id="3_83t6j"]
+[ext_resource type="PackedScene" uid="uid://8j33utqs7p7g" path="res://WorldMap/Modules/MissionPlanner/CharacterSelector/CharacterSelector.tscn" id="3_efbgp"]
 [ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ReviewAndConfirm.gd" id="4_d37sd"]
 [ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ColumnItem.gd" id="5_glc3i"]
 
@@ -13,17 +13,13 @@ process_thread_group_order = 0
 process_thread_messages = 0
 script = ExtResource("1_ixscy")
 
-[node name="ChooseVehicles" type="Node" parent="."]
+[node name="ChooseUnits" type="Node" parent="."]
 script = ExtResource("2_uiifl")
 
-[node name="UIElements" type="CanvasLayer" parent="ChooseVehicles"]
+[node name="UIElements" type="CanvasLayer" parent="ChooseUnits"]
 visible = false
 
-[node name="VehicleSelector" parent="ChooseVehicles/UIElements" instance=ExtResource("3_5pl8h")]
-offset_left = 254.0
-offset_top = 205.0
-offset_right = 254.0
-offset_bottom = 205.0
+[node name="CharacterSelector" parent="ChooseUnits/UIElements" instance=ExtResource("3_efbgp")]
 
 [node name="ChooseDestination" type="Node" parent="."]
 script = ExtResource("3_83t6j")
@@ -120,21 +116,21 @@ text = "Review"
 layout_mode = 2
 alignment = 1
 
-[node name="Vehicles" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Characters" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles"]
+[node name="Label" type="Label" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Characters"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Vehicles"
+text = "Characters"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Characters"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VehicleList" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Vehicles/ScrollContainer"]
+[node name="VehicleList" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Characters/ScrollContainer"]
 layout_mode = 2
 alignment = 1
 
@@ -170,5 +166,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Launch Convoy"
 
+[connection signal="characters_chosen" from="ChooseUnits/UIElements/CharacterSelector" to="ChooseUnits" method="_on_character_selector_characters_chosen"]
 [connection signal="pressed" from="ChooseDestination/UIElements/VBoxContainer/ConfirmButton" to="ChooseDestination" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/Confirm" to="ReviewAndConfirm" method="_on_confirm_pressed"]
