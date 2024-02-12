@@ -5,7 +5,6 @@ var object:WorldObject
 @onready var faction = $VBoxContainer/Faction
 @onready var resources = $VBoxContainer/Resources
 @onready var vehicles = $VBoxContainer/Vehicles
-signal view_object
 
 func init(_object:WorldObject):
 	object = _object
@@ -20,5 +19,5 @@ func init(_object:WorldObject):
 	for i in object.vehicles:
 		vehicles.text = i.name() + ", "
 
-func _on_button_pressed():
-	emit_signal("view_object")
+func _on_level_button_pressed():
+	Global.scene_handler.transition_to("res://Level/Level.tscn",{"WorldObject":object})

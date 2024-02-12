@@ -63,6 +63,7 @@ format = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Save" type="Button" parent="CanvasLayer"]
+visible = false
 offset_right = 94.0
 offset_bottom = 31.0
 disabled = true
@@ -92,32 +93,16 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="TurnProgressButtons" type="HBoxContainer" parent="CanvasLayer"]
+[node name="EndTurn" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(128, 32)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -102.5
-offset_right = 102.5
-offset_bottom = 40.0
+offset_left = -39.0
+offset_right = 39.0
+offset_bottom = 31.0
 grow_horizontal = 2
-
-[node name="Build" type="Button" parent="CanvasLayer/TurnProgressButtons"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 2
-disabled = true
-text = "Build"
-
-[node name="Attack" type="Button" parent="CanvasLayer/TurnProgressButtons"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 2
-disabled = true
-text = "Attack"
-
-[node name="Reposition" type="Button" parent="CanvasLayer/TurnProgressButtons"]
-custom_minimum_size = Vector2(92, 0)
-layout_mode = 2
-disabled = true
-text = "Reposition"
+text = "End Turn"
 
 [connection signal="world_ready" from="." to="SceneHandler" method="_on_world_ready"]
 [connection signal="pressed" from="CanvasLayer/Save" to="." method="save"]

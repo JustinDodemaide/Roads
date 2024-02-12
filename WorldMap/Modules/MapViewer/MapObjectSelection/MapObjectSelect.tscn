@@ -15,7 +15,7 @@ layout_mode = 2
 offset_right = 122.0
 offset_bottom = 139.0
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="LevelButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Level"
 
@@ -35,4 +35,4 @@ text = "Resources: "
 layout_mode = 2
 text = "Vehicles: "
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LevelButton" to="." method="_on_level_button_pressed"]

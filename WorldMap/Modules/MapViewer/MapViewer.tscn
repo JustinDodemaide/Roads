@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bs3h4fqujf2ch"]
+[gd_scene load_steps=3 format=3 uid="uid://bs3h4fqujf2ch"]
 
 [ext_resource type="Script" path="res://WorldMap/Modules/MapViewer/MapViewer.gd" id="1_1ww8x"]
 [ext_resource type="PackedScene" uid="uid://cd15u3admswdm" path="res://WorldMap/Modules/MapViewer/MapObjectSelection/MapObjectSelect.tscn" id="2_1bpj2"]
-[ext_resource type="PackedScene" uid="uid://bmypon6esyltv" path="res://WorldMap/Modules/MapViewer/ObjectView/ObjectView.tscn" id="3_5xg6v"]
 
 [node name="MapViewer" type="Node"]
 process_thread_group = 2
@@ -11,8 +10,3 @@ process_thread_messages = 0
 script = ExtResource("1_1ww8x")
 
 [node name="MapObjectSelect" parent="." instance=ExtResource("2_1bpj2")]
-
-[node name="ObjectView" parent="." instance=ExtResource("3_5xg6v")]
-
-[connection signal="view_object" from="MapObjectSelect" to="." method="_on_map_object_select_view_object"]
-[connection signal="close" from="ObjectView" to="." method="_on_object_view_close"]

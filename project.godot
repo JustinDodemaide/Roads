@@ -26,7 +26,6 @@ StartGameParameters="*res://MainMenu/StartGameParameters.gd"
 folder_colors={
 "res://Level/": "blue",
 "res://Mission/": "red",
-"res://PlayerTurn/": "purple",
 "res://World/": "green",
 "res://World/WorldObjects/": "blue",
 "res://WorldMap/": "teal"

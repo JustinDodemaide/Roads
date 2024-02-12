@@ -15,20 +15,19 @@ signal turn_complete
 
 func _init(player:bool = false):
 	is_player = player
-	if is_player:
-		Global.player_turn_handler.faction = self
 
-var button
 func begin_turn() -> void:
 	if is_player:
-		Global.player_turn_handler.execute()
-		return
+		await Global.world.end_turn_button.pressed
+	else:
+		make_decision()
 	emit_signal("turn_complete")
 
 func turn_over():
 	emit_signal("turn_complete")
 
 func make_decision():
+	return
 	print("Faction ", faction_name, " making plan...")
 	var best_target:WorldObject = null
 	var best_target_score:int = -1000000
@@ -111,5 +110,3 @@ func _load(data:Dictionary) -> void:
 	faction_name = data["name"]
 	id = data["id"]
 	is_player = data["player"]
-	if is_player:
-		Global.player_turn_handler.faction = self

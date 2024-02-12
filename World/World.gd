@@ -9,6 +9,7 @@ var turn:int = 0
 @onready var astar = AStarGrid2D.new()
 @onready var tilemap:TileMap = $TileMap
 @onready var ui = $CanvasLayer
+@onready var end_turn_button = $CanvasLayer/EndTurn
 
 signal world_ready
 signal next_turn(who:Faction)

@@ -10,12 +10,7 @@ func enter(_msg:Dictionary = {})->void:
 	if world_object.level_id == 0:
 		generate_level()
 		save()
-	Global.level = self
-	Global.player_location = world_object
 	load_level()
-	
-	add_child(load("res://Level/PlayerCharacter/PlayerCharacter.tscn").instantiate())
-	#$PlayerCharacter.position = $TileMap.get_node("PlayerStart").position
 
 func exit()->void:
 	save()
@@ -93,9 +88,13 @@ func load_level() -> void:
 
 func generate_level() -> void:
 	world_object.level_id = get_instance_id()
-	# var tilemap = load("res://Level/TileMapPrefabs/LTM_" + str(level_prefab) + ".tscn").instantiate()
-	# tilemap._load({})
-	# add_child(tilemap)
+	# Lab - Research menu
+	# Foundry - Equipment menu
+	# Garage - Relocated units
+	# Armory - Customize units
+	# Mission launcher
+	# Resources
+	# Needs to built: Harvesters
 
 func make_dropped_item(item_stack:ItemStack,pos:Vector2) -> void:
 	var dropped_item = load("res://Level/LevelObjects/LO_DroppedItem/LO_DroppedItem.tscn").instantiate()

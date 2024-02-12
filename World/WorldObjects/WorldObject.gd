@@ -7,6 +7,7 @@ var producers:Array[Producer]
 var storage:Dictionary
 var vehicles:Array[Vehicle]
 var characters:Array[Character]
+var level_id:int
 
 var mission_id:int = 0
 var faction:Faction = null
@@ -76,6 +77,7 @@ func save() -> Dictionary:
 # faction
 	var data = {"what": "WorldObject",
 				"world_position": var_to_str(world_position),
+				"level_id":level_id,
 				"faction":null,
 				"resources":[],
 				"producers":[],
@@ -99,6 +101,7 @@ func _load(data:Dictionary) -> void:
 	var id = data["faction"]
 	if id != null:
 		faction = Global.world.factions[data["faction"]]
+	level_id = data["level_id"]
 	for save_data in data["resources"]:
 		resources.append(load(save_data["path"]).new())
 	for save_data in data["producers"]:
