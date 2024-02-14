@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq2g7oxrc26m"]
+[gd_scene load_steps=7 format=3 uid="uid://bq2g7oxrc26m"]
 
 [ext_resource type="Script" path="res://Level/Level.gd" id="1_wni3i"]
 [ext_resource type="Texture2D" uid="uid://bs6dl5k5a8usu" path="res://Level/OIG4.jpg" id="2_6vadw"]
 [ext_resource type="PackedScene" uid="uid://dl2ikmwamgl54" path="res://Level/LevelObjects/LO_Lab/LO_Lab.tscn" id="3_3x2pv"]
 [ext_resource type="PackedScene" uid="uid://h6sy63yg4s6v" path="res://Level/LevelObjects/LO_Armory/LO_Armory.tscn" id="4_85f00"]
 [ext_resource type="PackedScene" uid="uid://dstaavgbqj6ne" path="res://Level/LevelObjects/LO_MissionCommand/LO_MissionCommand.tscn" id="5_rpguy"]
+[ext_resource type="PackedScene" uid="uid://bj642gll8qteh" path="res://Level/LevelObjects/LO_Garage/LO_Garage.tscn" id="6_yfsg5"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_wni3i")
@@ -34,5 +35,8 @@ position = Vector2(777, 316)
 
 [node name="MissionCommand" parent="UI" instance=ExtResource("5_rpguy")]
 position = Vector2(507, 174)
+
+[node name="Garage" parent="UI" instance=ExtResource("6_yfsg5")]
+position = Vector2(600, 384)
 
 [node name="LevelObjects" type="Node" parent="."]

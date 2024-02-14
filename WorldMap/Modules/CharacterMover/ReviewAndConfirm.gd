@@ -22,5 +22,11 @@ func exit() -> void:
 	pass
 
 func _on_confirm_pressed():
-
-	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
+	var attacking = state_machine.msg["mission"]
+	if attacking:
+		Global.scene_handler.transition_to("res://Mission/Mission.tscn",{"location": state_machine.destination,"attacker":Global.world.factions[0]})
+	if not attacking:
+		var to_be_moved = state_machine.characters
+		Global.current_location.remove_characters(to_be_moved)
+		state_machine.destination.add_characters(to_be_moved)
+		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn")

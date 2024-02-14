@@ -8,7 +8,7 @@ func init(location):
 	available_column = $VBoxContainer/HBoxContainer/A/ScrollContainer/AvailableColumn
 	selected_column = $VBoxContainer/HBoxContainer/S/ScrollContainer/SelectedColumn
 	for character in location.characters:
-		var button = load("res://WorldMap/Modules/MissionPlanner/CharacterSelector/CharacterSelectorButton.tscn").instantiate()
+		var button = load("res://WorldMap/Modules/CharacterMover/CharacterSelector/CharacterSelectorButton.tscn").instantiate()
 		button.init(character)
 		button.pressed.connect(button_pressed)
 		available_column.add_child(button)

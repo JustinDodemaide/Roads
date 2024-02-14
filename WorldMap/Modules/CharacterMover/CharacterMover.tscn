@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://1eucjjegm47b"]
 
-[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/MissionPlanner.gd" id="1_ixscy"]
-[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ChooseCharacters.gd" id="2_uiifl"]
-[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ChooseDestination.gd" id="3_83t6j"]
-[ext_resource type="PackedScene" uid="uid://8j33utqs7p7g" path="res://WorldMap/Modules/MissionPlanner/CharacterSelector/CharacterSelector.tscn" id="3_efbgp"]
-[ext_resource type="Script" path="res://WorldMap/Modules/MissionPlanner/ReviewAndConfirm.gd" id="4_d37sd"]
+[ext_resource type="Script" path="res://WorldMap/Modules/CharacterMover/CharacterMover.gd" id="1_ixscy"]
+[ext_resource type="Script" path="res://WorldMap/Modules/CharacterMover/ChooseCharacters.gd" id="2_uiifl"]
+[ext_resource type="Script" path="res://WorldMap/Modules/CharacterMover/ChooseDestination.gd" id="3_83t6j"]
+[ext_resource type="PackedScene" uid="uid://8j33utqs7p7g" path="res://WorldMap/Modules/CharacterMover/CharacterSelector/CharacterSelector.tscn" id="3_efbgp"]
+[ext_resource type="Script" path="res://WorldMap/Modules/CharacterMover/ReviewAndConfirm.gd" id="4_d37sd"]
 [ext_resource type="Script" path="res://WorldMap/Modules/ConvoyProgrammer/ColumnItem.gd" id="5_glc3i"]
 
-[node name="MissionPlanner" type="Node"]
+[node name="CharacterMover" type="Node"]
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 0
@@ -117,6 +117,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Characters" type="VBoxContainer" parent="ReviewAndConfirm/UIElements/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -164,7 +165,7 @@ text = "Fuel cost per trip:"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Launch Convoy"
+text = "Confirm"
 
 [connection signal="characters_chosen" from="ChooseUnits/UIElements/CharacterSelector" to="ChooseUnits" method="_on_character_selector_characters_chosen"]
 [connection signal="pressed" from="ChooseDestination/UIElements/VBoxContainer/ConfirmButton" to="ChooseDestination" method="_on_confirm_button_pressed"]

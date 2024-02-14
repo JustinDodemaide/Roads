@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dd2sn778bvxqx"
-path="res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-5aa6c81c5eb13a5191368d4b28ca3004.ctex"
+path="res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-2dacbeaa5ef830f7fc99a056f330c754.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://WorldMap/Modules/MissionPlanner/CharacterSelector/login_FILL0_wght400_GRAD0_opsz24.png"
-dest_files=["res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-5aa6c81c5eb13a5191368d4b28ca3004.ctex"]
+source_file="res://WorldMap/Modules/CharacterMover/CharacterSelector/login_FILL0_wght400_GRAD0_opsz24.png"
+dest_files=["res://.godot/imported/login_FILL0_wght400_GRAD0_opsz24.png-2dacbeaa5ef830f7fc99a056f330c754.ctex"]
 
 [params]
 

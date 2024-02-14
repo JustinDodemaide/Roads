@@ -14,7 +14,13 @@ func enter(_msg:Dictionary = {})->void:
 	$Camera2D.position = Vector2(4000,4000)
 	ui = $UI
 	if _msg.has("module"):
-		load_module(_msg["module"])
+		# HACK Not a fan of this but I needed a way for the CharacterMover
+		# to know if an attack was being planned or if characters were
+		# being moved
+		if _msg.has("module_msg"):
+			load_module(_msg["module"],_msg["module_msg"])
+		else:
+			load_module(_msg["module"])
 	else:
 		load_module("MapViewer")
 
@@ -34,10 +40,12 @@ func remove_world_object(object:WorldObject) -> void:
 				i.queue_free()
 				return
 
-func load_module(module_name:String) -> void:
+func load_module(module_name:String,_msg = {}) -> void:
 	var module = load("res://WorldMap/Modules/" + module_name + "/" + module_name + ".tscn").instantiate()
 	module.name = "Module"
 	module.world_map = self
+	if not _msg.is_empty():
+		module.msg = _msg
 	add_child(module)
 
 func _process(_delta):

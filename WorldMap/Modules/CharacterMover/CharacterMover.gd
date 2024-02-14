@@ -1,6 +1,7 @@
 extends Node
 
 var world_map
+var msg:Dictionary
 @onready var state = $ChooseUnits
 
 var destination

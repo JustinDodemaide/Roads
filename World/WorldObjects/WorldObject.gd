@@ -61,6 +61,15 @@ func add_vehicles(new_vehicles:Array[Vehicle]) -> void:
 	vehicles.append_array(new_vehicles)
 	ai_info.update()
 
+func remove_characters(to_remove:Array[Character]) -> void:
+	for character in to_remove:
+		characters.erase(character)
+	ai_info.update()
+
+func add_characters(new_characters:Array[Character]) -> void:
+	characters.append_array(new_characters)
+	ai_info.update()
+
 func launch_convoy(v:Array[Vehicle],destination:WorldObject)->void:
 	#print("launching convoy")
 	var convoy = load("res://World/WorldObjects/WO_Convoy/WO_Convoy.gd").new(faction)

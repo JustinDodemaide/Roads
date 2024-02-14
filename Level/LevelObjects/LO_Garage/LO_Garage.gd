@@ -1,9 +1,9 @@
 extends Node2D
 
-# For launching missions against non-player owned territories
+# For moving characters between player owned territories
 
 func _on_button_pressed():
-	var info = {"mission":true}
+	var info = {"mission":false}
 	# It didn't make sense to split 'mission planner' and 'character mover'
 	# into different scenes, so I needed a way to know which was being use
 	#  in the module

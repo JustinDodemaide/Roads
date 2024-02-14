@@ -14,6 +14,10 @@ func init(_object:WorldObject):
 		faction.text = "Unclaimed"
 	else:
 		faction.text = object.faction.faction_name
+		if object.faction.is_player:
+			$VBoxContainer/LevelButton.disabled = false
+		else:
+			$VBoxContainer/LevelButton.disabled = true
 	for i in object.resources:
 		resources.text = i.item_name() + ", "
 	for i in object.vehicles:

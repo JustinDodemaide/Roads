@@ -21,9 +21,18 @@ func exit() -> void:
 
 func determine_valid_followup_locations(from:WorldObject):
 	valid_followups.clear()
+	var attacking = state_machine.msg["mission"]
 	for location in Global.world.world_objects:
-		if location.faction != null:
-			if location.faction.is_player:
+		if location == Global.current_location:
+			continue
+		if attacking:
+			if location.faction != null:
+				if location.faction.is_player:
+					continue
+		if not attacking:
+			if location.faction == null:
+				continue
+			if not location.faction.is_player:
 				continue
 		var path = Global.world.get_astar_path(from,location)
 		fuel_costs[location] = path.size()
