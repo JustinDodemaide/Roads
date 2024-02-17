@@ -30,10 +30,13 @@ text = "Faction: "
 
 [node name="Resources" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Resources: "
+text = "No Resources"
 
 [node name="Vehicles" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Vehicles: "
+text = "No Vehicles"
+
+[node name="Characters" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/LevelButton" to="." method="_on_level_button_pressed"]

@@ -1,4 +1,4 @@
-extends Node2D
+extends LevelObject
 
 # For launching missions against non-player owned territories
 

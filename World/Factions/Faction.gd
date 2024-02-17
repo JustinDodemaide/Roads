@@ -6,6 +6,8 @@ var id:int
 var personality_profile:int
 var is_player:bool = false
 
+var items:Dictionary
+
 var current_target:WorldObject
 var plan:Array[FactionAction] = []
 
@@ -15,6 +17,8 @@ signal turn_complete
 
 func _init(player:bool = false):
 	is_player = player
+	if is_player:
+		Global.player_faction = self
 
 func begin_turn() -> void:
 	if is_player:
@@ -110,3 +114,5 @@ func _load(data:Dictionary) -> void:
 	faction_name = data["name"]
 	id = data["id"]
 	is_player = data["player"]
+	if is_player:
+		Global.player_faction = self
