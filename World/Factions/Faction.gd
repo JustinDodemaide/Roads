@@ -108,6 +108,7 @@ func save() -> Dictionary:
 			"id":id,
 			"profile":personality_profile,
 			"player":is_player,
+			"inventory":inventory,
 	}
 
 func _load(data:Dictionary) -> void:
@@ -116,3 +117,4 @@ func _load(data:Dictionary) -> void:
 	is_player = data["player"]
 	if is_player:
 		Global.player_faction = self
+	inventory = data["inventory"]

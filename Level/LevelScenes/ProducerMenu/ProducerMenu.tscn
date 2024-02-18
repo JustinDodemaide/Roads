@@ -86,7 +86,8 @@ text = "Producing nothing"
 
 [node name="UpgradeButton" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item/HBoxContainer"]
 layout_mode = 2
-text = "New Producer"
+text = "New Producer
+(1 gold)"
 
 [node name="Close" type="Button" parent="Control/PanelContainer"]
 modulate = Color(1, 0, 0, 1)

@@ -256,6 +256,7 @@ func initialize_player_start(location:WorldObject) -> void:
 	faction.faction_name = "Player"
 	faction.id = 0
 	Global.world.factions.append(faction)
+	Global.player_faction.inventory["Gold"] = 100
 
 func random_name() -> String:
 	var pre = ["Glee", "Sblabo", "Sluba", "Wompa","Ubla","Glurp","Slomp"]

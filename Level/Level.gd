@@ -8,10 +8,10 @@ var tileset_prefab:int
 func enter(_msg:Dictionary = {})->void:
 	world_object = _msg["WorldObject"]
 	Global.current_location = world_object
-	if world_object.level_id == 0:
-		generate_level()
-		save()
-	load_level()
+	#if world_object.level_id == 0:
+	#	generate_level()
+	#	save()
+	#load_level()
 
 func exit()->void:
 	#save()

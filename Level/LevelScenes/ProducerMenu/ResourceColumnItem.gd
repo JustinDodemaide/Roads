@@ -21,6 +21,6 @@ func init(resource:WO_Resource):
 	visible = true
 
 func _on_upgrade_button_pressed():
-	if res.production_tier < res.max_tiers:
-		res.production_tier += 1
+	Global.player_faction.inventory["Gold"] -= 1
+	res.production_tier += 1
 	init(res)

@@ -14,6 +14,8 @@ func _init(item:String, load_data:Dictionary = {}):
 	item_name = item
 
 func update(wo:WorldObject) -> void:
+	if production_tier == -1:
+		return
 	var quantity = production_rates[production_tier]
 	var inventory = wo.faction.inventory
 	if inventory.has(item_name):

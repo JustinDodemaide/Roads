@@ -191,3 +191,7 @@ func start_turns():
 			turn = 0
 
 #endregion
+
+
+func _on_inventory_pressed():
+	ui.add_child(load("res://InventoryDisplay/Inventory.tscn").instantiate())
