@@ -1,6 +1,10 @@
-[gd_scene format=3 uid="uid://dr1viv3hxeqe2"]
+[gd_scene load_steps=3 format=3 uid="uid://dr1viv3hxeqe2"]
+
+[ext_resource type="Script" path="res://Level/LevelScenes/ProducerMenu/ProducerMenu.gd" id="1_wxmjw"]
+[ext_resource type="Script" path="res://Level/LevelScenes/ProducerMenu/ResourceColumnItem.gd" id="2_x6cj4"]
 
 [node name="ProducerMenu" type="Node"]
+script = ExtResource("1_wxmjw")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -11,45 +15,85 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.5
+offset_top = -43.0
+offset_right = 88.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Manage Resources"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Resources" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Resources" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/Resources"]
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources"]
 layout_mode = 2
 text = "Resources"
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/Resources"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer"]
+[node name="ResourceColumn" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer"]
 layout_mode = 2
 
-[node name="Producers" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Item" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_x6cj4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/Producers"]
-layout_mode = 2
-text = "Producers"
-
-[node name="PanelContainer" type="PanelContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/Producers"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item/HBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/Producers/PanelContainer"]
+[node name="Tier" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Rate" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Producing nothing"
+
+[node name="UpgradeButton" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item/HBoxContainer"]
+layout_mode = 2
+text = "New Producer"
+
+[node name="Close" type="Button" parent="Control/PanelContainer"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "X"
+
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item/HBoxContainer/UpgradeButton" to="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Resources/PanelContainer/ResourceColumn/Item" method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/Close" to="." method="_on_close_pressed"]

@@ -1,18 +1,26 @@
 extends PanelContainer
 
-func init(resource:Item,producers:Array[Producer]):
-	var label = $HBoxContainer/Label
-	var button = $HBoxContainer/ProducerButton
-	label.text = resource.item_name()
-	for producer in producers:
-		for rate in producer.item_rates:
-			if rate.item.equals(resource):
-				# If this resource is already being harvested, don't
-				# allow another harvester to be made
-				button.disabled = true
-				return
+signal upgrade_producer(resource:Item)
 
+var res:WO_Resource
 
+func init(resource:WO_Resource):
+	res = resource
+	var name_label = $HBoxContainer/Label
+	var tier_label = $HBoxContainer/VBoxContainer/Tier
+	var rate_label = $HBoxContainer/VBoxContainer/Rate
+	var button = $HBoxContainer/UpgradeButton
+	name_label.text = resource.item_name
+	tier_label.text = "Production tier: " + str(resource.production_tier)
+	if resource.production_tier != -1:
+		var quantity:String = str(resource.production_rates[resource.production_tier])
+		rate_label.text = quantity + " " + resource.item_name + "(s) per turn"
+	if resource.production_tier == resource.max_tiers:
+		button.disabled = true
+		button.text = "Max tier!"
+	visible = true
 
-func _on_producer_button_pressed():
-	pass # Replace with function body.
+func _on_upgrade_button_pressed():
+	if res.production_tier < res.max_tiers:
+		res.production_tier += 1
+	init(res)

@@ -199,17 +199,17 @@ func reduce_available_positions(available_positions,center:Vector2i):
 var ZONE_RESOURCES = [
 	# Zone 0
 	[
-	WG_RP.new("res://Items/Tier0Harvest/Item_Tier0Harvest.gd",90),
+	WG_RP.new("Tier0Harvest",90),
 	],
 	
 	# Zone 1
 	[
-	WG_RP.new("res://Items/Tier1Harvest/Item_Tier1Harvest.gd",90),
+	WG_RP.new("Tier1Harvest",90),
 	],
 	
 	# Zone 2
 	[
-	WG_RP.new("res://Items/Tier2Harvest/Item_Tier2Harvest.gd",90),
+	WG_RP.new("Tier2Harvest",90),
 	],
 ]
 
@@ -219,7 +219,8 @@ func distribute_resources():
 			for resource in ZONE_RESOURCES[zone]:
 				var dice_roll = randi_range(0,100)
 				if dice_roll < resource.percent_chance:
-					object.resources.append(load(resource.item_path).new())
+					var res:WO_Resource = WO_Resource.new(resource.item_name)
+					object.resources.append(res)
 
 var faction_start_locations:Array[WorldObject]
 func get_faction_start_locations() -> void:
@@ -259,6 +260,6 @@ func initialize_player_start(location:WorldObject) -> void:
 	location.storage = starting_items
 
 func random_name() -> String:
-	var pre = ["Gle", "Sbla", "Slub", "Wompa","Ubla","Glurp"]
-	var suf = ["bling","glomp","slomp","shboing","binkly","glab"]
+	var pre = ["Glee", "Sblabo", "Sluba", "Wompa","Ubla","Glurp","Slomp"]
+	var suf = ["bling","glomp","slomp","shboing","blinkly","glab","glurp"]
 	return pre.pick_random() + suf.pick_random()

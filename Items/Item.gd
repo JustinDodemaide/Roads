@@ -19,3 +19,6 @@ func size() -> int:
 
 func save() -> Dictionary:
 	return {"path":path()}
+
+func equals(item:Item) -> bool:
+	return item.item_name() == item_name()

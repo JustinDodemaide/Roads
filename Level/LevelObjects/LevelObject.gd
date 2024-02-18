@@ -27,9 +27,6 @@ func components() -> Dictionary:
 func get_collision_shape() -> Shape2D:
 	return $Area2D/CollisionShape2D.shape
 
-func producers() -> Array[Producer]:
-	return []
-
 func save() -> Dictionary:
 	var save_dict:Dictionary = {
 		"filepath": get_scene_file_path(),

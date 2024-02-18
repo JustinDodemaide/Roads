@@ -14,7 +14,7 @@ func enter(_msg:Dictionary = {})->void:
 	load_level()
 
 func exit()->void:
-	save()
+	#save()
 	Global.save_game()
 
 func _process(_delta):
@@ -23,23 +23,6 @@ func _process(_delta):
 func _input(event):
 	if event.is_action_pressed("M"):
 		Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",{"module": "MapViewer"})
-
-func new_producer(producer:Producer):
-	world_object.producers.append(producer)
-
-func add_level_object(object:LevelObject) -> void:
-	$LevelObjects.add_child(object)
-	for producer in object.producers():
-		new_producer(producer)
-
-func remove_level_object(object:LevelObject):
-	var to_be_erased:Array[Producer] = []
-	for producer in world_object.producers:
-		if producer.level_object_id == object.id:
-			to_be_erased.append(producer)
-	for i in to_be_erased:
-		world_object.producers.erase(i)
-	object.queue_free()
 
 func save():
 	# What needs to be saved:
@@ -54,10 +37,6 @@ func save():
 	# tilemap_data = JSON.stringify(tilemap_data)
 	# save_file.store_line(tilemap_data)
 	
-	for i in $LevelObjects.get_children():
-		var data = i.save()
-		var json_string = JSON.stringify(data)
-		save_file.store_line(json_string)
 	save_file.close()
 
 func load_level() -> void:

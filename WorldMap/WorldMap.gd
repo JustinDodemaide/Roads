@@ -58,9 +58,9 @@ func _input(event):
 		if not areas.is_empty():
 			emit_signal("map_object_clicked",areas.front().get_parent())
 			return
-	
-	#if event.is_action_pressed("M"):
-	#	Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": Global.player_location})
+	if event.is_action_pressed("M"):
+		if Global.current_location != null:
+				Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": Global.current_location})
 
 func add_to_ui(element)->void:
 	$UI.add_child(element)

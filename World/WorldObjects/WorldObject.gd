@@ -2,8 +2,7 @@ extends Resource
 class_name WorldObject
 
 var world_position:Vector2
-var resources:Array[Item]
-var producers:Array[Producer]
+var resources:Array[WO_Resource]
 var storage:Dictionary
 var vehicles:Array[Vehicle]
 var characters:Array[Character] = [Character.new()]
@@ -35,27 +34,12 @@ func info() -> PackedStringArray:
 	return arr
 
 func update(_who = null)->void:
-	for producer in producers:
-		for rate in producer.item_rates:
-			var item_name = rate.item.item_name()
-			if rate.slope < 0:
-				# If producer needs an item to make something, and that item
-				# isn't available, skip that producer.
-				if not storage.has(item_name):
-					break
-				var required_amount = rate.slope * Global.WORLD_UPDATE_TIME
-				if storage[item_name] < required_amount:
-					break
-			if not storage.has(item_name):
-				storage[item_name] = 0
-			storage[item_name] += rate.slope * Global.WORLD_UPDATE_TIME
+	for resource in resources:
+		resource.update(self)
 	additional_updates()
 
 func additional_updates() -> void:
 	pass
-
-func add_production(producer:Producer) -> void:
-	producers.append(producer)
 
 func add_vehicles(new_vehicles:Array[Vehicle]) -> void:
 	vehicles.append_array(new_vehicles)
@@ -89,7 +73,6 @@ func save() -> Dictionary:
 				"level_id":level_id,
 				"faction":null,
 				"resources":[],
-				"producers":[],
 				"storage":storage,
 				"vehicles":[],
 				"player_location":false
@@ -98,8 +81,6 @@ func save() -> Dictionary:
 		data["faction"] = faction.id
 	for i in resources:
 		data["resources"].append(i.save())
-	for i in producers:
-		data["producers"].append(i.save())
 	for i in vehicles:
 		data["vehicles"].append(i.save())
 	
@@ -112,9 +93,7 @@ func _load(data:Dictionary) -> void:
 		faction = Global.world.factions[data["faction"]]
 	level_id = data["level_id"]
 	for save_data in data["resources"]:
-		resources.append(load(save_data["path"]).new())
-	for save_data in data["producers"]:
-		producers.append(Producer.new([],0,save_data))
+		resources.append(WO_Resource.new("",save_data))
 	for save_data in data["vehicles"]:
 		var vehicle = load(save_data["path"]).new()
 		vehicle._load(save_data)

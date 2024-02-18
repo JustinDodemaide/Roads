@@ -21,7 +21,7 @@ func init(_object:WorldObject):
 		else:
 			$VBoxContainer/LevelButton.disabled = true
 	for i in object.resources:
-		resources.text = i.item_name() + ", "
+		resources.text = i.item_name + ", "
 	for i in object.vehicles:
 		vehicles.text = i.name() + ", "
 	characters.text = ""

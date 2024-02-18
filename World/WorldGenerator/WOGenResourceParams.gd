@@ -2,13 +2,13 @@ extends RefCounted
 class_name WG_RP
 # WorldGen ResourceParameters
 
-var item_path:String
+var item_name:String
 var percent_chance
 #var current:int = 0
 #var max:int
 
-func _init(_item_path:String,percent:float):
-	item_path = _item_path
+func _init(_item_name:String,percent:float):
+	item_name = _item_name
 	percent_chance = percent
 	#max = round((percent / 100.0) * world_generator.OBJECTS_PER_ZONE_MULTIPLIER * world_generator.OBJECTS_PER_ZONE_RATIOS[zone])
 	#pass
