@@ -24,7 +24,7 @@ func _ready():
 	if StartGameParameters.save == 0:
 		StartGameParameters.save = StartGameParameters.num_saves + 1
 		new_world()
-		add_default_research_projects()
+		# add_default_research_projects()
 	else:
 		_load()
 	

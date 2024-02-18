@@ -199,17 +199,17 @@ func reduce_available_positions(available_positions,center:Vector2i):
 var ZONE_RESOURCES = [
 	# Zone 0
 	[
-	WG_RP.new("Tier0Harvest",90),
+	WG_RP.new("Gold",100),
 	],
 	
 	# Zone 1
 	[
-	WG_RP.new("Tier1Harvest",90),
+	WG_RP.new("Gold",100),
 	],
 	
 	# Zone 2
 	[
-	WG_RP.new("Tier2Harvest",90),
+	WG_RP.new("Gold",100),
 	],
 ]
 
@@ -256,8 +256,6 @@ func initialize_player_start(location:WorldObject) -> void:
 	faction.faction_name = "Player"
 	faction.id = 0
 	Global.world.factions.append(faction)
-	var starting_items = {load("res://Items/Tier0Harvest/Item_Tier0Harvest.gd").new().item_name(): 100}
-	location.storage = starting_items
 
 func random_name() -> String:
 	var pre = ["Glee", "Sblabo", "Sluba", "Wompa","Ubla","Glurp","Slomp"]

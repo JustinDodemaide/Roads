@@ -6,7 +6,7 @@ var id:int
 var personality_profile:int
 var is_player:bool = false
 
-var items:Dictionary
+var inventory:Dictionary
 
 var current_target:WorldObject
 var plan:Array[FactionAction] = []
