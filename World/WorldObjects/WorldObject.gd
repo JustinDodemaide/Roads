@@ -3,7 +3,6 @@ class_name WorldObject
 
 var world_position:Vector2
 var resources:Array[WO_Resource]
-var storage:Dictionary
 var vehicles:Array[Vehicle]
 var characters:Array[Character] = [Character.new()]
 var level_id:int
@@ -26,14 +25,9 @@ func name() -> String:
 func map_texture() -> Texture2D:
 	return load("res://World/WorldObjects/WO_Test/wo.png")
 
-func info() -> PackedStringArray:
-	var arr:PackedStringArray = [name()]
-	for item in storage:
-		var s = item + ": " + str(storage[item])
-		arr.append(s)
-	return arr
-
-func update(_who = null)->void:
+func update(faction_whose_turn_it_is:Faction)->void:
+	if not faction_whose_turn_it_is == faction:
+		return
 	for resource in resources:
 		resource.update(self)
 	additional_updates()
@@ -73,7 +67,6 @@ func save() -> Dictionary:
 				"level_id":level_id,
 				"faction":null,
 				"resources":[],
-				"storage":storage,
 				"vehicles":[],
 				"player_location":false
 	}
@@ -99,6 +92,5 @@ func _load(data:Dictionary) -> void:
 		vehicle._load(save_data)
 		vehicles.append(vehicle)
 		
-	storage = data["storage"]
 	if data["player_location"]:
 		Global.player_location = self

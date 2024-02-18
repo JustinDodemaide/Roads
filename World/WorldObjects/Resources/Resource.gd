@@ -15,10 +15,11 @@ func _init(item:String, load_data:Dictionary = {}):
 
 func update(wo:WorldObject) -> void:
 	var quantity = production_rates[production_tier]
-	if wo.storage.has(item_name):
-		wo.storage[item_name] += quantity
+	var inventory = wo.faction.inventory
+	if inventory.has(item_name):
+		inventory[item_name] += quantity
 	else:
-		wo.storage[item_name] = quantity
+		inventory[item_name] = quantity
 
 func save() -> Dictionary:
 	return {"item":item_name,
