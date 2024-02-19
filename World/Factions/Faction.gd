@@ -24,13 +24,18 @@ func begin_turn() -> void:
 	if is_player:
 		await Global.world.end_turn_button.pressed
 	else:
-		make_decision()
+		await make_decision()
 	emit_signal("turn_complete")
 
 func turn_over():
+	Global.mission_launched = false
 	emit_signal("turn_complete")
 
 func make_decision():
+	var timer = Global.world.create_timer()
+	timer.start(3)
+	await timer.timeout
+	timer.queue_free()
 	return
 	print("Faction ", faction_name, " making plan...")
 	var best_target:WorldObject = null

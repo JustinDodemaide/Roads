@@ -14,7 +14,7 @@ func enter(_msg:Dictionary = {})->void:
 	$Camera2D.position = Vector2(4000,4000)
 	ui = $UI
 	if _msg.has("module"):
-		# HACK Not a fan of this but I needed a way for the CharacterMover
+		# HACK Not ideal but I needed a way for the CharacterMover
 		# to know if an attack was being planned or if characters were
 		# being moved
 		if _msg.has("module_msg"):
@@ -31,6 +31,7 @@ func exit()->void:
 func new_map_object(object:WorldObject) -> void:
 	var new_wmo = packed_map_object.instantiate()
 	new_wmo.init(object)
+	new_wmo.clicked.connect(clicked)
 	add_child(new_wmo)
 
 func remove_world_object(object:WorldObject) -> void:
@@ -53,14 +54,9 @@ func _process(_delta):
 	$UI/GeneralInfo/WorldPosition.text = "(" + str(round($Cursor.position.x)) + ", " + str(round($Cursor.position.y)) + ")"
 
 func _input(event):
-	if event.is_action_pressed("LeftClick"):
-		var areas = $Cursor.get_overlapping_areas()
-		if not areas.is_empty():
-			emit_signal("map_object_clicked",areas.front().get_parent())
-			return
 	if event.is_action_pressed("M"):
 		if Global.current_location != null:
-				Global.scene_handler.transition_to("res://Level/Level.tscn",  {"WorldObject": Global.current_location})
+				Global.scene_handler.transition_to("res://Level/Level.tscn", {"WorldObject": Global.current_location})
 
 func add_to_ui(element)->void:
 	$UI.add_child(element)
@@ -70,3 +66,6 @@ func clear_ui() -> void:
 		if child.name == "GeneralInfo":
 			continue
 		child.queue_free()
+
+func clicked(object:WorldMapObject):
+	emit_signal("map_object_clicked",object)

@@ -2,6 +2,10 @@ extends LevelObject
 
 # For launching missions against non-player owned territories
 
+func _ready():
+	if Global.mission_launched:
+		$Button.disabled = true
+
 func _on_button_pressed():
 	var info = {"mission":true}
 	# It didn't make sense to split 'mission planner' and 'character mover'

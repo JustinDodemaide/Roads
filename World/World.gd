@@ -195,3 +195,4 @@ func start_turns():
 
 func _on_inventory_pressed():
 	ui.add_child(load("res://InventoryDisplay/Inventory.tscn").instantiate())
+	ui.get_node("Inventory").visible = false

@@ -24,6 +24,7 @@ func exit() -> void:
 func _on_confirm_pressed():
 	var attacking = state_machine.msg["mission"]
 	if attacking:
+		Global.mission_launched = true
 		Global.scene_handler.transition_to("res://Mission/Mission.tscn",{"location": state_machine.destination,"attacker":Global.world.factions[0]})
 	if not attacking:
 		var to_be_moved = state_machine.characters
