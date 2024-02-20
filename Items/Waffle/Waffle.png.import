@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clebe1uhaddrg"
-path="res://.godot/imported/wo.png-2430c339a601d3c9fd58a60c94d5f0e7.ctex"
+uid="uid://2kg038643qb2"
+path="res://.godot/imported/Waffle.png-19addf8793190e5b4f6ac44ddf65dba5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/WorldObjects/WO_Test/wo.png"
-dest_files=["res://.godot/imported/wo.png-2430c339a601d3c9fd58a60c94d5f0e7.ctex"]
+source_file="res://Items/Waffle/Waffle.png"
+dest_files=["res://.godot/imported/Waffle.png-19addf8793190e5b4f6ac44ddf65dba5.ctex"]
 
 [params]
 

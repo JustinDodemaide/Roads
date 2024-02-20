@@ -23,7 +23,7 @@ func name() -> String:
 	return "World Object"
 
 func map_texture() -> Texture2D:
-	return load("res://World/WorldObjects/WO_Test/wo.png")
+	return load("res://World/placeholder.png")
 
 func update(faction_whose_turn_it_is:Faction)->void:
 	if not faction_whose_turn_it_is == faction:

@@ -24,6 +24,7 @@ StartGameParameters="*res://MainMenu/StartGameParameters.gd"
 [file_customization]
 
 folder_colors={
+"res://Character/": "yellow",
 "res://Level/": "blue",
 "res://Mission/": "red",
 "res://World/": "green",

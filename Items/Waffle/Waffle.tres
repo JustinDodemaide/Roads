@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://4o7qeporfc3"]
+
+[ext_resource type="Texture2D" uid="uid://2kg038643qb2" path="res://Items/Waffle/Waffle.png" id="1_0o81o"]
+[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="2_brd5u"]
+
+[resource]
+script = ExtResource("2_brd5u")
+equippable = false
+offensive_score = 1
+name = "Waffle"
+icon = ExtResource("1_0o81o")
+tooltip_text = "
+"
+cost = {
+"Gold": 1
+}
+build_time = 0

@@ -1,24 +1,19 @@
-extends RefCounted
+extends Resource
 class_name Item
 
-func item_name() -> String:
-	return "Item"
+@export var name:String
+@export var icon:Texture2D = load("res://Items/DefaultItemIcon.png")
+@export var tooltip_text:String = "\n"
 
-func path() -> String:
-	var underscored = item_name().replace(" ", "_")
-	return "res://Items/"+ underscored +"/Item_" + underscored + ".gd"
-
-func world_texture() -> Texture2D:
-	return null
-
-func menu_icon() -> Texture2D:
-	return load("res://Items/DefaultItemIcon.png")
-
-func size() -> int:
-	return 0
-
-func save() -> Dictionary:
-	return {"path":path()}
-
-func equals(item:Item) -> bool:
-	return item.item_name() == item_name()
+@export var cost:Dictionary
+@export var build_time:int
+#@export var execute_logic:Script
+#
+#var num_uses: int
+#var available: bool
+#var map
+#var target_select: bool
+#var no_selection: bool
+#var cooldown: int
+#var current_cooldown: int = 0 # current_cooldown should be 0 by default. to start the cooldown, set it equal to cooldown
+#signal complete

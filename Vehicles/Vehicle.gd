@@ -17,18 +17,6 @@ func ui_texture() -> Texture2D:
 func cargo_capacity()->int:
 	return 0
 
-func stack_can_be_added(_stack:ItemStack) -> bool:
-	return true
-
-func add_item_stack(stack:ItemStack) -> void:
-	if storage.has(stack.item):
-		storage[stack.item] += stack.quantity
-	else:
-		storage[stack.item] = stack.quantity
-
-#func add_item_stack_array(stack_array:Array[ItemStack]) -> void:
-#	storage.append_array(stack_array)
-
 func personnel_capacity()->int:
 	return 0
 

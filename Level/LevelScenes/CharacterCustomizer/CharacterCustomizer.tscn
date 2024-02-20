@@ -1,0 +1,113 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqpwmqcil0l8o"]
+
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CharacterContainer.gd" id="1_ftbbs"]
+
+[node name="CharacterCustomizer" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="E" type="Button" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Equippables"
+
+[node name="U" type="Button" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Utilities"
+
+[node name="VSeparator" type="VSeparator" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterContainer" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_ftbbs")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Character"
+horizontal_alignment = 1
+
+[node name="EquippablesContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/EquippablesContainer"]
+layout_mode = 2
+text = "Equippables"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/EquippablesContainer"]
+layout_mode = 2
+
+[node name="UtilitiesContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer"]
+layout_mode = 2
+text = "Utilities"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2

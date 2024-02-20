@@ -11,3 +11,7 @@ func save_game() -> void:
 
 func research_complete(_category:String,_path:String):
 	pass
+
+func string2item(string:String) -> Item:
+	var path:String = "res://Items/" + string + "/" + string + ".tres" 
+	return load(path)

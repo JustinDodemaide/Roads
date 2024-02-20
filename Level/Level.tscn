@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq2g7oxrc26m"]
+[gd_scene load_steps=9 format=3 uid="uid://bq2g7oxrc26m"]
 
 [ext_resource type="Script" path="res://Level/Level.gd" id="1_wni3i"]
 [ext_resource type="Texture2D" uid="uid://bs6dl5k5a8usu" path="res://Level/OIG4.jpg" id="2_6vadw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dstaavgbqj6ne" path="res://Level/LevelObjects/LO_MissionCommand/LO_MissionCommand.tscn" id="5_rpguy"]
 [ext_resource type="PackedScene" uid="uid://bj642gll8qteh" path="res://Level/LevelObjects/LO_Garage/LO_Garage.tscn" id="6_yfsg5"]
 [ext_resource type="PackedScene" uid="uid://b4cphyaiklvgo" path="res://Level/LevelObjects/LO_ResourceExtraction/LO_ResourceExtraction.tscn" id="7_523wt"]
+[ext_resource type="PackedScene" uid="uid://fabm5tfo4suh" path="res://Level/LevelObjects/LO_Foundry/LO_Foundry.tscn" id="8_f12iu"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_wni3i")
@@ -41,4 +42,7 @@ position = Vector2(507, 174)
 position = Vector2(600, 384)
 
 [node name="LO_ResourceExtraction" parent="UI" instance=ExtResource("7_523wt")]
-position = Vector2(288, 312)
+position = Vector2(656, 448)
+
+[node name="LO_Foundry" parent="UI" instance=ExtResource("8_f12iu")]
+position = Vector2(336, 312)

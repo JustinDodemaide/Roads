@@ -7,6 +7,7 @@ var personality_profile:int
 var is_player:bool = false
 
 var inventory:Dictionary
+var character_items:Dictionary
 
 var current_target:WorldObject
 var plan:Array[FactionAction] = []
@@ -114,6 +115,7 @@ func save() -> Dictionary:
 			"profile":personality_profile,
 			"player":is_player,
 			"inventory":inventory,
+			"character_items":character_items,
 	}
 
 func _load(data:Dictionary) -> void:
@@ -123,3 +125,32 @@ func _load(data:Dictionary) -> void:
 	if is_player:
 		Global.player_faction = self
 	inventory = data["inventory"]
+	character_items = data["character_items"]
+
+func add_items(item:String,amount:int,character:bool = false) -> void:
+	if character:
+		if character_items.has(item):
+			character_items[item] += amount
+		else:
+			character_items[item] = amount
+	
+	if not character:
+		if inventory.has(item):
+			inventory[item] += amount
+		else:
+			inventory[item] = amount
+
+func remove_items(item:String,amount:int,character:bool = false) -> void:
+	if character:
+		if not character_items.has(item):
+			return
+		character_items[item] -= amount
+		if character_items[item] <= 0:
+			character_items.erase(item)
+	
+	if not character:
+		if not inventory.has(item):
+			return
+		inventory[item] -= amount
+		if inventory[item] <= 0:
+			inventory.erase(item)
