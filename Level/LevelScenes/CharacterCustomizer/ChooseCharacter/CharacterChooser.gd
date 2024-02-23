@@ -11,7 +11,7 @@ func _ready():
 		list.add_child(dup)
 
 func _on_character_chosen(character):
-	var customization_menu = load("res://Level/LevelScenes/CharacterCustomizer/CharacterCustomizer.tscn").instantiate()
+	var customization_menu = load("res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/CharacterCustomizer.tscn").instantiate()
 	level_object.add_child(customization_menu)
 	customization_menu.init(character,level_object)
 	queue_free()

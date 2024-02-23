@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtn85axq84qdm"]
 
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CharacterChooser/CharacterChooser.gd" id="1_ybxty"]
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CharacterChooser/Button.gd" id="2_kw7bx"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/ChooseCharacter/CharacterChooser.gd" id="1_ybxty"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/ChooseCharacter/Button.gd" id="2_kw7bx"]
 
 [node name="CharacterChooser" type="Control" node_paths=PackedStringArray("list", "button")]
 layout_mode = 3

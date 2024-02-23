@@ -1,6 +1,6 @@
 extends Node
 
-@export var item_list:VBoxContainer
+@export var item_column:VBoxContainer
 @export var utility_container:HBoxContainer
 
 var character:Character
@@ -12,11 +12,7 @@ func init(_character:Character,_level_object):
 	utility_container.init(character)
 	
 	var player_items = Global.player_faction.character_items
-	for item_name in player_items:
-		var item_list_item = item_list.get_node("Item").duplicate()
-		var item:Item = Global.string2item(item_name)
-		item_list_item.init(item,player_items[item_name])
-		item_list.add_child(item_list_item)
+	item_column.init(player_items)
 
 func _on_inventory_item_clicked(item:Item):
 	if item.equippable:
@@ -24,10 +20,9 @@ func _on_inventory_item_clicked(item:Item):
 	else:
 		utility_container.add_item(item)
 
-func _on_item_deselected(item):
+func _on_character_item_deselected(item:Item):
 	# Re-add the item to faction.character_item list
-	for item_list_item in item_list.get_children(): # Really gotta work on these names
-		pass
+	item_column.add_item(item)
 
 func _on_back_pressed():
 	var menu = load("res://Level/LevelScenes/CharacterCustomizer/CharacterChooser/CharacterChooser.tscn").instantiate()

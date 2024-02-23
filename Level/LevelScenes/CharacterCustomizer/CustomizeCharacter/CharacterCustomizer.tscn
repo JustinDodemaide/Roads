@@ -1,13 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqpwmqcil0l8o"]
+[gd_scene load_steps=4 format=3 uid="uid://bqpwmqcil0l8o"]
 
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CharacterCustomizer.gd" id="1_ftbbs"]
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/UtilityBoxes.gd" id="2_otb1w"]
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/InventoryItem.gd" id="2_ssllx"]
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/SpaceButton.gd" id="3_x2llr"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/CharacterCustomizer.gd" id="1_ftbbs"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/CharacterSection/InventorySpaces/UtilitySpaces.gd" id="2_otb1w"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/InventorySection/ItemColumn.gd" id="2_top4l"]
 
-[node name="CharacterCustomizer" type="Node" node_paths=PackedStringArray("item_list", "utility_container")]
+[node name="CharacterCustomizer" type="Node" node_paths=PackedStringArray("item_column", "utility_container")]
 script = ExtResource("1_ftbbs")
-item_list = NodePath("Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList")
+item_column = NodePath("Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList")
 utility_container = NodePath("Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/UtilityBoxes")
 
 [node name="Control" type="Control" parent="."]
@@ -64,31 +63,11 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ItemList" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer"]
+[node name="ItemList" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("root")]
 layout_mode = 2
 alignment = 1
-
-[node name="Item" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList" node_paths=PackedStringArray("icon", "label")]
-visible = false
-layout_mode = 2
-script = ExtResource("2_ssllx")
-icon = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList/Item"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList/Item/HBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList/Item/HBoxContainer"]
-layout_mode = 2
-text = "Item"
-
-[node name="Button" type="Button" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList/Item/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "->"
+script = ExtResource("2_top4l")
+root = NodePath("../../../../../../../..")
 
 [node name="VSeparator" type="VSeparator" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -121,20 +100,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Utilities"
 
-[node name="UtilityBoxes" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer" node_paths=PackedStringArray("empty_space")]
+[node name="UtilityBoxes" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer" node_paths=PackedStringArray("root")]
 layout_mode = 2
 script = ExtResource("2_otb1w")
-empty_space = NodePath("EmptySpace")
-
-[node name="EmptySpace" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/UtilityBoxes"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/UtilityBoxes/EmptySpace"]
-visible = false
-layout_mode = 2
-script = ExtResource("3_x2llr")
+root = NodePath("../../../../../../../../..")
 
 [node name="Confirm" type="Button" parent="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -149,9 +118,5 @@ size_flags_vertical = 0
 disabled = true
 text = "<-"
 
-[connection signal="item_chosen" from="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList/Item" to="." method="_on_inventory_item_clicked"]
-[connection signal="pressed" from="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList/Item/HBoxContainer/Button" to="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer/ItemList/Item" method="_on_button_pressed"]
-[connection signal="clicked" from="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/UtilityBoxes/EmptySpace/Button" to="." method="_on_item_deselected"]
-[connection signal="pressed" from="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/UtilityBoxes/EmptySpace/Button" to="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/UtilityBoxes/EmptySpace/Button" method="_on_pressed"]
 [connection signal="pressed" from="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
 [connection signal="pressed" from="Control/PanelContainer/Back" to="." method="_on_back_pressed"]

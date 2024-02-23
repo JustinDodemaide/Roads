@@ -26,6 +26,10 @@ StartGameParameters="*res://MainMenu/StartGameParameters.gd"
 folder_colors={
 "res://Character/": "yellow",
 "res://Level/": "blue",
+"res://Level/LevelScenes/CharacterCustomizer/ChooseCharacter/": "red",
+"res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/": "blue",
+"res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/CharacterSection/": "yellow",
+"res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/InventorySection/": "purple",
 "res://Mission/": "red",
 "res://World/": "green",
 "res://World/WorldObjects/": "blue",
