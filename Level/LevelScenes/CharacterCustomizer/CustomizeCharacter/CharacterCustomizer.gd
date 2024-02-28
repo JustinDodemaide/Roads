@@ -34,4 +34,10 @@ func _on_confirm_pressed():
 # Don't remove anything from faction.character_items
 # and don't add anything to character
 # until the confirm button is pressed
-	pass # Replace with function body.
+	var utility_items:Array[String] = utility_container.get_items()
+	# Add them to character
+	character.add_utilities(utility_items)
+	for item:String in utility_container.get_items():
+		# Remove them from player inventory
+		Global.player_faction.remove_items(item,1,true)
+	queue_free()

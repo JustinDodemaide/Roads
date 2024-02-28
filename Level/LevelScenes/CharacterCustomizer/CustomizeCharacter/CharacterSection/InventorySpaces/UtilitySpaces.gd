@@ -20,3 +20,11 @@ func add_item(item:Item):
 		if space.is_available:
 			space.add_item(item)
 			return
+
+func get_items() -> Array[String]:
+	var items:Array[String] = []
+	for space in get_children():
+		if space.is_available: # Space doesnt have an item in it
+			continue
+		items.append(space.item.name)
+	return items

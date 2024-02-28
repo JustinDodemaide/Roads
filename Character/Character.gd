@@ -14,3 +14,6 @@ func _load(data:Dictionary) -> void:
 func save() -> Dictionary:
 	return {"name":name,
 	}
+
+func add_utilities(items:Array[String]) -> void:
+	utilities.append_array(items)
