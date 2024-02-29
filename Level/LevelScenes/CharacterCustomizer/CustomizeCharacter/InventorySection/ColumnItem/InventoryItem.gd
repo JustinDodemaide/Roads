@@ -1,11 +1,11 @@
 extends PanelContainer
 
+var utility_spaces:HBoxContainer
 @export var icon:TextureRect
 @export var label:Label
 
 var item:Item
 var amount:int
-signal item_chosen(item:Item)
 
 func init(_item:Item,_amount:int):
 	item = _item
@@ -18,9 +18,13 @@ func add_one():
 	amount += 1
 	label.text = item.name + ", " + str(amount)
 
-func _on_button_pressed():
+func remove_one():
 	amount -= 1
 	label.text = item.name + ", " + str(amount)
-	emit_signal("item_chosen",item)
 	if amount <= 0:
 		queue_free()
+
+func _on_button_pressed():
+	var successfully_added = utility_spaces.add_item(item)
+	if successfully_added:
+		remove_one()

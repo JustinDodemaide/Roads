@@ -15,5 +15,5 @@ func save() -> Dictionary:
 	return {"name":name,
 	}
 
-func add_utilities(items:Array[String]) -> void:
-	utilities.append_array(items)
+func set_utilities(items:Array[String]) -> void:
+	utilities = items

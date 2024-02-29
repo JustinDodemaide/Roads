@@ -16,6 +16,5 @@ func _on_character_chosen(character):
 	customization_menu.init(character,level_object)
 	queue_free()
 
-
 func _on_close_pressed():
 	queue_free()

@@ -14,12 +14,13 @@ func init(character:Character):
 		var item:Item = Global.string2item(character.utilities[index])
 		empty_spaces[index].add_item(item)
 
-func add_item(item:Item):
+func add_item(item:Item) -> bool:
 	# Add the item to the first empty slot
 	for space in get_children():
 		if space.is_available:
 			space.add_item(item)
-			return
+			return true
+	return false
 
 func get_items() -> Array[String]:
 	var items:Array[String] = []

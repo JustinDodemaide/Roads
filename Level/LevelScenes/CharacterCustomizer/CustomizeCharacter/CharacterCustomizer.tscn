@@ -63,10 +63,11 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ItemList" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("root")]
+[node name="ItemList" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/HBoxContainer/ItemContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("utility_spaces", "root")]
 layout_mode = 2
 alignment = 1
 script = ExtResource("2_top4l")
+utility_spaces = NodePath("../../../../CharacterContainer/MarginContainer/VBoxContainer/UtilitiesContainer/UtilityBoxes")
 root = NodePath("../../../../../../../..")
 
 [node name="VSeparator" type="VSeparator" parent="Control/PanelContainer/MarginContainer/HBoxContainer"]
@@ -115,7 +116,6 @@ modulate = Color(0, 0.45098, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-disabled = true
 text = "<-"
 
 [connection signal="pressed" from="Control/PanelContainer/MarginContainer/HBoxContainer/CharacterContainer/MarginContainer/VBoxContainer/Confirm" to="." method="_on_confirm_pressed"]

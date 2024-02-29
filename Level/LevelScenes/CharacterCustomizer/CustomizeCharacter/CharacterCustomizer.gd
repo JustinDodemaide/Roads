@@ -14,19 +14,13 @@ func init(_character:Character,_level_object):
 	var player_items = Global.player_faction.character_items
 	item_column.init(player_items)
 
-func _on_inventory_item_clicked(item:Item):
-	if item.equippable:
-		pass
-	else:
-		utility_container.add_item(item)
-
 func _on_character_item_deselected(item:Item):
 	# Re-add the item to faction.character_item list
 	item_column.add_item(item)
 
 func _on_back_pressed():
-	var menu = load("res://Level/LevelScenes/CharacterCustomizer/CharacterChooser/CharacterChooser.tscn").instantiate()
-	menu.level_object = self
+	var menu = load("res://Level/LevelScenes/CharacterCustomizer/ChooseCharacter/CharacterChooser.tscn").instantiate()
+	menu.level_object = level_object
 	level_object.add_child(menu)
 	queue_free()
 
@@ -36,7 +30,7 @@ func _on_confirm_pressed():
 # until the confirm button is pressed
 	var utility_items:Array[String] = utility_container.get_items()
 	# Add them to character
-	character.add_utilities(utility_items)
+	character.set_utilities(utility_items)
 	for item:String in utility_container.get_items():
 		# Remove them from player inventory
 		Global.player_faction.remove_items(item,1,true)
