@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://cao1fyytyve1l"]
+
+[ext_resource type="Script" path="res://Level/LevelScenes/FoundryMenu/ItemColumnItem/Item.gd" id="1_6blpf"]
+[ext_resource type="Texture2D" uid="uid://dd2sn778bvxqx" path="res://WorldMap/Modules/CharacterMover/CharacterSelector/login_FILL0_wght400_GRAD0_opsz24.png" id="2_0xlw4"]
+
+[node name="Item" type="PanelContainer" node_paths=PackedStringArray("texture", "name_label", "select_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("1_6blpf")
+texture = NodePath("MarginContainer/HBoxContainer/TextureRect")
+name_label = NodePath("MarginContainer/HBoxContainer/Label")
+select_button = NodePath("MarginContainer/HBoxContainer/Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+icon = ExtResource("2_0xlw4")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
