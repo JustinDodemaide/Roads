@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bktcnsaiq5gwa"]
+
+[ext_resource type="Script" path="res://Mission/Unit/Unit.gd" id="1_us7gp"]
+
+[node name="Unit" type="Node3D"]
+script = ExtResource("1_us7gp")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

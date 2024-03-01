@@ -1,19 +1,22 @@
 extends Node
 
-# Assumes the player is the only one that can launch missions
-var attacker:Faction
-var defender:Faction
-
 var world_object:WorldObject
+
+# Assumes the player is the only one that can launch missions
+var player:Faction
+var non_player:Faction
+var teams:Array[Team] = [Team.new([],true), Team.new([])]
+signal turn_complete
 
 func enter(_msg:Dictionary = {})->void:
 	world_object = _msg["location"]
-	defender = world_object.faction
-	attacker = _msg["attacker"]
+
 	if world_object.mission_id == 0:
 		assign_level()
 	else:
 		load_level()
+	
+	teams.append(Team.new(_msg["offense"]))
 
 func exit()->void:
 	pass
@@ -24,9 +27,17 @@ func assign_level() -> void:
 func load_level() -> void:
 	var file_path:String = "res://Mission/MissionLevels/" + str(world_object.mission_id) + ".tres"
 
-func attacker_victory() -> void:
-	world_object.faction = attacker
-	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",)
+#region gameplay loop
 
-func attacker_defeat() -> void:
-	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",)
+func start():
+	# Player goes first
+	while true:
+		for team in teams:
+			new_turn(team)
+			await turn_complete
+
+func new_turn(team:Team):
+	team.new_turn()
+	
+
+#endregion

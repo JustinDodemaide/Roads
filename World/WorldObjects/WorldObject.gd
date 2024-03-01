@@ -68,6 +68,7 @@ func save() -> Dictionary:
 				"faction":null,
 				"resources":[],
 				"vehicles":[],
+				"characters":[],
 				"player_location":false
 	}
 	if faction != null:
@@ -76,6 +77,8 @@ func save() -> Dictionary:
 		data["resources"].append(i.save())
 	for i in vehicles:
 		data["vehicles"].append(i.save())
+	for i in characters:
+		data["characters"].append(i.save())
 	
 	return data
 
@@ -91,6 +94,9 @@ func _load(data:Dictionary) -> void:
 		var vehicle = load(save_data["path"]).new()
 		vehicle._load(save_data)
 		vehicles.append(vehicle)
+	for save_data in data["characters"]:
+		var character = Character.new()
+		character._load(save_data)
 		
 	if data["player_location"]:
 		Global.player_location = self
