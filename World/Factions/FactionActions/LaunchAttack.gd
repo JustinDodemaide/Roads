@@ -1,8 +1,8 @@
 extends RefCounted
 class_name FactionAction
 
-func is_valid(actor:Faction, data:Dictionary = {}) -> bool:
+func is_valid(_actor:Faction, _data:Dictionary = {}) -> bool:
 	return false
 
-func execute(actor:Faction, _data:Dictionary = {}) -> void:
+func execute(_actor:Faction, _data:Dictionary = {}) -> void:
 	pass

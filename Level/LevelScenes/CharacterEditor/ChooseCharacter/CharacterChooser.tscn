@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtn85axq84qdm"]
+[gd_scene load_steps=2 format=3 uid="uid://dtn85axq84qdm"]
 
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/ChooseCharacter/CharacterChooser.gd" id="1_ybxty"]
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/ChooseCharacter/Button.gd" id="2_kw7bx"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterEditor/ChooseCharacter/CharacterChooser.gd" id="1_ybxty"]
 
-[node name="CharacterChooser" type="Control" node_paths=PackedStringArray("list", "button")]
+[node name="CharacterChooser" type="Control" node_paths=PackedStringArray("list")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +11,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ybxty")
 list = NodePath("PanelContainer/MarginContainer/VBoxContainer/CharacterList")
-button = NodePath("PanelContainer/MarginContainer/VBoxContainer/CharacterList/Button")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -45,11 +43,6 @@ text = "Choose Character"
 [node name="CharacterList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CharacterList"]
-visible = false
-layout_mode = 2
-script = ExtResource("2_kw7bx")
-
 [node name="Close" type="Button" parent="PanelContainer"]
 modulate = Color(1, 0, 0, 1)
 layout_mode = 2
@@ -57,6 +50,4 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "X"
 
-[connection signal="chosen" from="PanelContainer/MarginContainer/VBoxContainer/CharacterList/Button" to="." method="_on_character_chosen"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CharacterList/Button" to="PanelContainer/MarginContainer/VBoxContainer/CharacterList/Button" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer/Close" to="." method="_on_close_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://blpowmcte8ubk"]
 
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/InventorySection/ColumnItem/InventoryItem.gd" id="1_qccdg"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterEditor/ChooseEquipment/InventorySection/ColumnItem/InventoryItem.gd" id="1_qccdg"]
 [ext_resource type="Texture2D" uid="uid://dd2sn778bvxqx" path="res://WorldMap/Modules/CharacterMover/CharacterSelector/login_FILL0_wght400_GRAD0_opsz24.png" id="2_chi4y"]
 
 [node name="ColumnItem" type="PanelContainer" node_paths=PackedStringArray("icon", "label")]

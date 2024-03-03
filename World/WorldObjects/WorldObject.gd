@@ -4,7 +4,7 @@ class_name WorldObject
 var world_position:Vector2
 var resources:Array[WO_Resource]
 var vehicles:Array[Vehicle]
-var characters:Array[Character] = [Character.new()]
+var characters:Array[Character] = []
 var level_id:int
 
 var mission_id:int = 0
@@ -97,6 +97,7 @@ func _load(data:Dictionary) -> void:
 	for save_data in data["characters"]:
 		var character = Character.new()
 		character._load(save_data)
+		characters.append(character)
 		
 	if data["player_location"]:
 		Global.player_location = self

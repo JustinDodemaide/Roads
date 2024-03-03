@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://duenbhw0le544"]
+
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterEditor/CharacterEditor.gd" id="1_15d5d"]
+[ext_resource type="PackedScene" uid="uid://dtn85axq84qdm" path="res://Level/LevelScenes/CharacterEditor/ChooseCharacter/CharacterChooser.tscn" id="2_dj0oq"]
+[ext_resource type="PackedScene" uid="uid://catl5jki51hqs" path="res://Level/LevelScenes/CharacterEditor/ChooseOption/ChooseOption.tscn" id="3_rnegh"]
+[ext_resource type="PackedScene" uid="uid://bqpwmqcil0l8o" path="res://Level/LevelScenes/CharacterEditor/ChooseEquipment/ChooseEquipment.tscn" id="4_wabci"]
+[ext_resource type="PackedScene" uid="uid://nmdbjx83txd8" path="res://Level/LevelScenes/CharacterEditor/CustomizeCharacter/CharacterCustomizer.tscn" id="5_mrdm5"]
+
+[node name="CharacterEditor" type="Node"]
+script = ExtResource("1_15d5d")
+
+[node name="CharacterChooser" parent="." instance=ExtResource("2_dj0oq")]
+
+[node name="EditorOptions" parent="." instance=ExtResource("3_rnegh")]
+visible = false
+
+[node name="ChooseEquipment" parent="." instance=ExtResource("4_wabci")]
+visible = false
+
+[node name="CharacterCustomizer" parent="." instance=ExtResource("5_mrdm5")]
+visible = false

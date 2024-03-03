@@ -1,12 +1,11 @@
 extends HBoxContainer
 
 @export var root:Node
-@onready var empty_space:PackedScene = preload("res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/CharacterSection/InventorySpaces/InventorySpace.tscn")
+@onready var empty_space:PackedScene = preload("res://Level/LevelScenes/CharacterEditor/ChooseEquipment/CharacterSection/InventorySpaces/InventorySpace.tscn")
 
 func init(character:Character):
 	for i in character.utility_slots:
 		var space = empty_space.instantiate()
-		space.clicked.connect(root._on_character_item_deselected)
 		add_child(space)
 	
 	var empty_spaces = get_children()

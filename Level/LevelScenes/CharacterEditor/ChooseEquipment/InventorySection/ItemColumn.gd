@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 @export var utility_spaces:HBoxContainer
-@export var column_item:PackedScene = preload("res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/InventorySection/ColumnItem/ColumnItem.tscn")
+@export var column_item:PackedScene = preload("res://Level/LevelScenes/CharacterEditor/ChooseEquipment/InventorySection/ColumnItem/ColumnItem.tscn")
 @export var root:Node
 
 func init(items:Dictionary):

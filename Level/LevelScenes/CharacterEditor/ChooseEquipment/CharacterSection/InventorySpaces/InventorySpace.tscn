@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ockrd2ny16c3"]
 
-[ext_resource type="Script" path="res://Level/LevelScenes/CharacterCustomizer/CustomizeCharacter/CharacterSection/InventorySpaces/InventorySpace.gd" id="1_b1gi5"]
+[ext_resource type="Script" path="res://Level/LevelScenes/CharacterEditor/ChooseEquipment/CharacterSection/InventorySpaces/InventorySpace.gd" id="1_b1gi5"]
 
 [node name="InventorySpace" type="PanelContainer"]
 custom_minimum_size = Vector2(32, 32)
