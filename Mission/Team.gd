@@ -11,3 +11,11 @@ func _init(_units:Array[Unit],player:bool = false):
 func new_turn() -> void:
 	for unit in units:
 		unit.new_turn()
+	
+	if is_player:
+		pass
+	else:
+		make_decision()
+
+func make_decision():
+	pass
