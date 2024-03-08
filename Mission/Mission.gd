@@ -8,17 +8,20 @@ var non_player:Faction
 var teams:Array[Team]
 
 @onready var tilemap:TileMap = $TileMap
-@onready var ui:CanvasLayer = $UI
+@onready var ui:Control = $UI/MissionUI
 @onready var cursor:Area2D = $CursorArea
+@onready var player_state_machine:Node = $PlayerTurnStateMachine
 
 signal turn_complete
 signal unit_left_clicked(unit:Unit)
+signal position_left_clicked(pos:Vector2)
 
 #region initialization
-func _ready():
+func _ready(): # Just for test purposes, remove later
 	enter()
 
 func enter(_msg:Dictionary = {})->void:
+	Global.mission = self
 	var chars1:Array[Character] = [Character.new(), Character.new()]
 	var chars2:Array[Character] = [Character.new(), Character.new()]
 	
@@ -84,9 +87,11 @@ func _input(event):
 	if event.is_action_pressed("LeftClick"):
 		var clicked_area = cursor.get_overlapping_areas().front()
 		if clicked_area == null:
-			pass
+			emit_signal("position_left_clicked",cursor.position)
 		else:
 			var clicked_object = clicked_area.get_parent()
 			if clicked_object is Unit:
 				emit_signal("unit_left_clicked",clicked_object)
+				return
+				
 #endregion

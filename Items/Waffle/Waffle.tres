@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_brd5u")
 equippable = false
+num_uses = 0
 offensive_score = 1
 name = "Waffle"
 icon = ExtResource("1_0o81o")

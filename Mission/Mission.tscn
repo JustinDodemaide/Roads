@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bn338ihmt6umy"]
+[gd_scene load_steps=10 format=3 uid="uid://bn338ihmt6umy"]
 
 [ext_resource type="Script" path="res://Mission/Mission.gd" id="1_bgrlc"]
 [ext_resource type="Script" path="res://Mission/MissionCamera.gd" id="2_1k1e8"]
 [ext_resource type="Texture2D" uid="uid://c8sqc2wxn1yrv" path="res://World/World_TileMap.png" id="2_5d3wx"]
 [ext_resource type="Script" path="res://Mission/MissionLevel.gd" id="2_6sx5l"]
 [ext_resource type="PackedScene" uid="uid://cgbvn8ge5r58d" path="res://Mission/PlayerTurnStateMachine/PlayerStateMachine.tscn" id="5_6eut0"]
+[ext_resource type="PackedScene" uid="uid://vcw8v5b5wpfw" path="res://Mission/UIElements/MissionUI.tscn" id="6_0uv3u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0rntm"]
 texture = ExtResource("2_5d3wx")
@@ -51,6 +52,8 @@ position_smoothing_enabled = true
 script = ExtResource("2_1k1e8")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MissionUI" parent="UI" instance=ExtResource("6_0uv3u")]
 
 [node name="CursorArea" type="Area2D" parent="."]
 

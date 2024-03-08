@@ -18,8 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Global.gd"
-SignalBus="*res://SignalBus.gd"
 StartGameParameters="*res://MainMenu/StartGameParameters.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [file_customization]
 
