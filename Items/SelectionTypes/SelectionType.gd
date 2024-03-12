@@ -1,4 +1,4 @@
-extends RefCounted
+extends Resource
 class_name SelectionType
 
 # In a mission, after choosing the item as a utility, some follow-up input

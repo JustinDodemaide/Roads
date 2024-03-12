@@ -85,13 +85,12 @@ func _input(event):
 	# This doesn't feel like the right place to define all the input/signal
 	# functionalities, but I'm refraining from overthinking it
 	if event.is_action_pressed("LeftClick"):
-		var clicked_area = cursor.get_overlapping_areas().front()
-		if clicked_area == null:
+		if cursor.get_overlapping_areas().is_empty():
 			emit_signal("position_left_clicked",cursor.position)
-		else:
-			var clicked_object = clicked_area.get_parent()
-			if clicked_object is Unit:
-				emit_signal("unit_left_clicked",clicked_object)
-				return
+			return
+		var clicked_object = cursor.get_overlapping_areas().front().get_parent()
+		if clicked_object is Unit:
+			emit_signal("unit_left_clicked",clicked_object)
+			return
 				
 #endregion
