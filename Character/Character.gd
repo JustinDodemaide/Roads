@@ -2,6 +2,7 @@ extends RefCounted
 class_name Character
 
 var name:String = "Character"
+var faction:Faction
 
 var equip_slots:int = 1
 var equipment:Array[String] = []

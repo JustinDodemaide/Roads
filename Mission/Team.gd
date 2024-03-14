@@ -4,9 +4,11 @@ class_name Team
 var units:Array[Unit]
 var is_player:bool
 
-func _init(_units:Array[Unit],player:bool = false):
+func _init(_units:Array[Unit],player:bool):
 	is_player = player
 	units = _units
+	for i in units:
+		i.team = self
 	if is_player:
 		Global.mission.ui.init(self)
 

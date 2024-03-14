@@ -15,6 +15,9 @@ func _ready():
 func unit_selected(_unit:Unit):
 	# Check if its player's turn
 	# Check if unit is player controlled
+	if not _unit.team.is_player:
+		transition_to("Observation")
+		return
 	print("Unit selected: ", _unit)
 	unit = _unit
 	Global.mission.ui.unit_selected(unit)
