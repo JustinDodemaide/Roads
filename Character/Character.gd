@@ -6,7 +6,7 @@ var name:String = "Character"
 var equip_slots:int = 1
 var equipment:Array[String] = []
 var utility_slots:int = 2
-var utilities:Array[String] = []
+var utilities:Array[String] = ["Waffle"]
 
 func _load(data:Dictionary) -> void:
 	name = data["name"]

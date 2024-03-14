@@ -11,6 +11,9 @@ func enter(_msg:Dictionary={}) -> void:
 	Global.mission.ui.clear_utilities()
 	var button_scene:PackedScene = load("res://Mission/UIElements/UtilityButton.tscn")
 	for utility in state_machine.unit.utilities:
+		# Making the button *should* be the responsibility of the UI,
+		# but this way is much better than daisy-chaining several different
+		# signal calls just so this script knows when a button is pressed
 		var button = button_scene.instantiate()
 		button.init(utility)
 		button.utility_chosen.connect(utility_chosen)

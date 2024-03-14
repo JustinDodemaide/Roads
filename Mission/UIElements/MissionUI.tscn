@@ -42,11 +42,18 @@ texture = ExtResource("2_3kf87")
 [node name="LowerElements" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SelectedUnitInfoPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
+layout_mode = 2
+
+[node name="SelectedUnitInfoPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("2_3kf87")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/VBoxContainer2"]
+layout_mode = 2
+text = "Selected Unit Info"
 
 [node name="Utilities" type="HFlowContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
 layout_mode = 2
@@ -58,8 +65,15 @@ alignment = 1
 layout_mode = 2
 icon = ExtResource("2_3kf87")
 
-[node name="UtilityInfoPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
+layout_mode = 2
+
+[node name="UtilityInfoPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("2_3kf87")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/VBoxContainer"]
+layout_mode = 2
+text = "Utility Info"

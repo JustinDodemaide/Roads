@@ -13,6 +13,9 @@ func _ready():
 		i.state_machine = self
 
 func unit_selected(_unit:Unit):
+	# Check if its player's turn
+	# Check if unit is player controlled
+	print("Unit selected: ", _unit)
 	unit = _unit
 	Global.mission.ui.unit_selected(unit)
 	transition_to("ChooseUtility")

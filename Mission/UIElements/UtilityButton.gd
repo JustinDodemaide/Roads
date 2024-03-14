@@ -10,4 +10,4 @@ func init(_utility:Item) -> void:
 	$Button.tooltip_text = utility.tooltip_text
 
 func _on_button_pressed():
-	emit_signal("utility_selected",utility)
+	emit_signal("utility_chosen",utility)

@@ -63,3 +63,5 @@ shape = SubResource("RectangleShape2D_npgqm")
 [node name="PlayerTurnStateMachine" parent="." instance=ExtResource("5_6eut0")]
 
 [node name="Units" type="Node" parent="."]
+
+[connection signal="unit_left_clicked" from="." to="PlayerTurnStateMachine" method="unit_selected"]
