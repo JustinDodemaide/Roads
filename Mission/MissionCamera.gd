@@ -20,7 +20,7 @@ func _process(delta):
 		if zoom > Vector2(0.5,0.5):
 			zoom -= Vector2(0.025,0.025)
 
-func move_camera_to(target):
+func move_to(target):
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(self, "position", target, 0.33)

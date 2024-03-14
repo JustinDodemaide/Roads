@@ -8,6 +8,7 @@ var non_player:Faction
 var teams:Array[Team]
 
 @onready var tilemap:TileMap = $TileMap
+@onready var camera:Camera2D = $Camera2D
 @onready var ui:Control = $UI/MissionUI
 @onready var cursor:Area2D = $CursorArea
 @onready var player_state_machine:Node = $PlayerTurnStateMachine
@@ -56,7 +57,10 @@ func make_new_team(characters:Array[Character],player:bool = false) -> void:
 		new_unit.init(character)
 		$Units.add_child(new_unit)
 		units.append(new_unit)
-	teams.append(Team.new(units,player))
+	var team = Team.new(units,player)
+	teams.append(team)
+	if player:
+		ui.init(team)
 
 func load_tilemap() -> void:
 	var file_path:String = "res://Mission/Missiontilemaps/" + str(world_object.mission_id) + ".tres"
@@ -91,6 +95,7 @@ func _input(event):
 		var clicked_object = cursor.get_overlapping_areas().front().get_parent()
 		if clicked_object is Unit:
 			emit_signal("unit_left_clicked",clicked_object)
+			camera.move_to(clicked_object.position)
 			return
-				
+
 #endregion

@@ -3,11 +3,21 @@ class_name Character
 
 var name:String = "Character"
 var faction:Faction
+var icon:Texture2D = load("res://Character/jerma.jpg")
 
+var max_health:int = 100
 var equip_slots:int = 1
 var equipment:Array[String] = []
 var utility_slots:int = 2
 var utilities:Array[String] = ["Waffle"]
+
+func _init():
+	name = random_name()
+
+func random_name() -> String:
+	var first = ["Garbly","Glupman","Watto","Shmarvin","Qwinkly","John","Brad","Cheepcheep","Balthazar","Steeljaw","Flotsum","Joe","Wallop","Crikey","Snacho",", First of His Name","Squibbledoo"]
+	# var last = ["Binkly",]
+	return first.pick_random() + " " + first.pick_random()
 
 func _load(data:Dictionary) -> void:
 	name = data["name"]

@@ -9,8 +9,6 @@ func _init(_units:Array[Unit],player:bool):
 	units = _units
 	for i in units:
 		i.team = self
-	if is_player:
-		Global.mission.ui.init(self)
 
 func new_turn() -> void:
 	for unit in units:

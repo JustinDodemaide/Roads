@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b7xf7dtklwkkv"]
+
+[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="3_02wyc"]
+
+[resource]
+script = ExtResource("3_02wyc")
+equippable = false
+num_uses = 0
+offensive_score = 0
+name = "Move"
+tooltip_text = "Move"
+cost = {}
+build_time = 0

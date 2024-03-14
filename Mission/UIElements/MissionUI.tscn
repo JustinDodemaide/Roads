@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ctu77s5un1tfs" path="res://icon.svg" id="2_3kf87"]
 [ext_resource type="Script" path="res://Mission/UIElements/SelectedUnitInfo.gd" id="3_aai57"]
 
-[node name="MissionUI" type="Control" node_paths=PackedStringArray("utility_container", "selected_unit_info")]
+[node name="MissionUI" type="Control" node_paths=PackedStringArray("team_cards", "utility_container", "selected_unit_info")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,8 +12,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g5bwa")
+team_cards = NodePath("MarginContainer/VBoxContainer/TeamCards")
 utility_container = NodePath("MarginContainer/VBoxContainer/LowerElements/Utilities")
-selected_unit_info = NodePath("MarginContainer/VBoxContainer/LowerElements/SelectedUnitInfo")
+selected_unit_info = NodePath("MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -35,32 +36,29 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="TeamCardsPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/TeamCards"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-texture = ExtResource("2_3kf87")
-
 [node name="LowerElements" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SelectedUnitInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
+layout_mode = 2
+
+[node name="SelectedUnitInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer"]
 layout_mode = 2
 script = ExtResource("3_aai57")
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements/SelectedUnitInfo"]
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("2_3kf87")
 
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/SelectedUnitInfo"]
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
 layout_mode = 2
 
-[node name="Team" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/SelectedUnitInfo"]
+[node name="Team" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
 layout_mode = 2
 
-[node name="Health" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/SelectedUnitInfo"]
+[node name="Health" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
 layout_mode = 2
 
 [node name="Utilities" type="HFlowContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
@@ -68,10 +66,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 alignment = 1
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/LowerElements/Utilities"]
-layout_mode = 2
-icon = ExtResource("2_3kf87")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
 layout_mode = 2

@@ -9,7 +9,7 @@ func enter(_msg:Dictionary={}) -> void:
 	
 	# Make buttons for all the unit's utilities
 	Global.mission.ui.clear_utilities()
-	var button_scene:PackedScene = load("res://Mission/UIElements/UtilityButton.tscn")
+	var button_scene:PackedScene = load("res://Mission/UIElements/UtilityButton/UtilityButton.tscn")
 	for utility in state_machine.unit.utilities:
 		# Making the button *should* be the responsibility of the UI,
 		# but this way is much better than daisy-chaining several different
