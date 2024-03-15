@@ -18,7 +18,6 @@ func unit_selected(_unit:Unit):
 	if not _unit.team.is_player:
 		transition_to("Observation")
 		return
-	print("Unit selected: ", _unit)
 	unit = _unit
 	Global.mission.ui.unit_selected(unit)
 	transition_to("ChooseUtility")

@@ -11,7 +11,19 @@ var available:bool = true
 var max_health:int
 var health:int
 
+@onready var nav_agent = $NavigationAgent2D
+
 signal changed(unit:Unit)
+
+func _ready():
+	call_deferred("actor_setup")
+	actor_setup()
+	
+func actor_setup():
+	# Wait for the first physics frame so the NavigationServer can sync.
+	await get_tree().physics_frame
+	# Now that the navigation map is no longer empty, set the movement target.
+	$NavigationAgent2D.set_target_position(position)
 
 func init(_character:Character) -> void:
 	character = _character

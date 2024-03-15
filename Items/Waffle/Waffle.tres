@@ -1,16 +1,16 @@
 [gd_resource type="Resource" load_steps=5 format=3 uid="uid://4o7qeporfc3"]
 
 [ext_resource type="Texture2D" uid="uid://2kg038643qb2" path="res://Items/Waffle/Waffle.png" id="1_0o81o"]
-[ext_resource type="Script" path="res://Items/ExecutionBehavior/Waffle.gd" id="1_px8hf"]
+[ext_resource type="Script" path="res://Items/Waffle/Execute.gd" id="1_nj1yn"]
 [ext_resource type="Script" path="res://Items/CharacterItem.gd" id="2_brd5u"]
-[ext_resource type="Script" path="res://Items/SelectionTypes/FreeSelect.gd" id="3_alqop"]
+[ext_resource type="Script" path="res://Items/Waffle/Select.gd" id="4_iloqq"]
 
 [resource]
 script = ExtResource("2_brd5u")
 equippable = false
-num_uses = 0
-selection_type = ExtResource("3_alqop")
-execution_behavior = ExtResource("1_px8hf")
+num_uses = 3
+selection_type = ExtResource("4_iloqq")
+execution_behavior = ExtResource("1_nj1yn")
 offensive_score = 1
 name = "Waffle"
 icon = ExtResource("1_0o81o")

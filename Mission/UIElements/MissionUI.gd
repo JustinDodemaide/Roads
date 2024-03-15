@@ -8,6 +8,7 @@ extends Control
 @export var team_cards:VFlowContainer
 @export var utility_container:HFlowContainer
 @export var selected_unit_info:VBoxContainer
+@export var confirm_button:Button
 
 func init(player_team:Team):
 	var card_scene:PackedScene = load("res://Mission/UIElements/UnitCard/UnitCard.tscn")

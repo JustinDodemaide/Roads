@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ctu77s5un1tfs" path="res://icon.svg" id="2_3kf87"]
 [ext_resource type="Script" path="res://Mission/UIElements/SelectedUnitInfo.gd" id="3_aai57"]
 
-[node name="MissionUI" type="Control" node_paths=PackedStringArray("team_cards", "utility_container", "selected_unit_info")]
+[node name="MissionUI" type="Control" node_paths=PackedStringArray("team_cards", "utility_container", "selected_unit_info", "confirm_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,8 @@ grow_vertical = 2
 script = ExtResource("1_g5bwa")
 team_cards = NodePath("MarginContainer/VBoxContainer/TeamCards")
 utility_container = NodePath("MarginContainer/VBoxContainer/LowerElements/Utilities")
-selected_unit_info = NodePath("MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo")
+selected_unit_info = NodePath("MarginContainer/VBoxContainer/LowerElements/PanelContainer/MarginContainer/SelectedUnitInfo")
+confirm_button = NodePath("MarginContainer/Confirm")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -42,23 +43,31 @@ layout_mode = 2
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
 layout_mode = 2
 
-[node name="SelectedUnitInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="SelectedUnitInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
 script = ExtResource("3_aai57")
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/MarginContainer/SelectedUnitInfo"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("2_3kf87")
 
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/MarginContainer/SelectedUnitInfo"]
 layout_mode = 2
 
-[node name="Team" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
+[node name="Team" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/MarginContainer/SelectedUnitInfo"]
 layout_mode = 2
 
-[node name="Health" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/SelectedUnitInfo"]
+[node name="Health" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/PanelContainer/MarginContainer/SelectedUnitInfo"]
 layout_mode = 2
 
 [node name="Utilities" type="HFlowContainer" parent="MarginContainer/VBoxContainer/LowerElements"]
@@ -79,3 +88,10 @@ texture = ExtResource("2_3kf87")
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/LowerElements/VBoxContainer"]
 layout_mode = 2
 text = "Utility Info"
+
+[node name="Confirm" type="Button" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Confirm"

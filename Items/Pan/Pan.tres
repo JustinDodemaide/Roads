@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dnrdykrp7j6yf"]
+
+[ext_resource type="Texture2D" uid="uid://o7vdfdvsywbc" path="res://Items/Pan/Anti-SkeletonPan.png" id="1_3r57h"]
+[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="3_bmuet"]
+
+[resource]
+script = ExtResource("3_bmuet")
+equippable = false
+num_uses = 0
+offensive_score = 2
+name = "Pan"
+icon = ExtResource("1_3r57h")
+tooltip_text = "Yeah its a pan"
+cost = {
+"Gold": 1
+}
+build_time = 0

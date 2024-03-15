@@ -21,6 +21,8 @@ func update() -> void:
 		$Button.disabled = true
 
 func _on_button_pressed():
+	Global.mission.camera.move_to(unit.position)
+	Global.mission.player_state_machine.unit_selected(unit)
 	var tween = create_tween()
 	tween.tween_property(self,"scale",Vector2(1.5,1.5),0.1)
 	await tween.finished
