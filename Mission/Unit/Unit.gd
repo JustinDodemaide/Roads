@@ -10,8 +10,11 @@ var effects:Array[Effect]
 var available:bool = true
 var max_health:int
 var health:int
+var max_sensor_radius:int
+var sensor_radius:int
 
 @onready var nav_agent = $NavigationAgent2D
+@onready var sensors = $Sensors
 
 signal changed(unit:Unit)
 
@@ -31,6 +34,8 @@ func init(_character:Character) -> void:
 		add_utility(utility_name)
 	max_health = character.max_health
 	health = max_health
+	max_sensor_radius = character.max_sensor_radius
+	sensor_radius = max_sensor_radius
 
 func add_utility(_name:String) -> void:
 	var item = Global.string2item(_name)

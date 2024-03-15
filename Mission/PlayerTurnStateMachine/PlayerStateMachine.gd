@@ -19,6 +19,7 @@ func unit_selected(_unit:Unit):
 		transition_to("Observation")
 		return
 	unit = _unit
+	unit.sensors.update()
 	Global.mission.ui.unit_selected(unit)
 	transition_to("ChooseUtility")
 

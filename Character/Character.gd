@@ -6,6 +6,7 @@ var faction:Faction
 var icon:Texture2D = load("res://Character/jerma.jpg")
 
 var max_health:int = 100
+var max_sensor_radius:int = 5
 var equip_slots:int = 1
 var equipment:Array[String] = []
 var utility_slots:int = 2
