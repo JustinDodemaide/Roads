@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://b7xf7dtklwkkv"]
 
 [ext_resource type="Script" path="res://Items/Move/Execute.gd" id="1_dldyy"]
-[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="3_02wyc"]
+[ext_resource type="Script" path="res://Items/Utilities/Utility_Generic.gd" id="3_02wyc"]
 [ext_resource type="Script" path="res://Items/Waffle/Select.gd" id="3_ujwnu"]
 
 [resource]

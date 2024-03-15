@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8vwmeklwqrk8"]
+
+[ext_resource type="Script" path="res://Mission/MissionObjects/Bullet_Generic/Bullet.gd" id="1_b232v"]
+[ext_resource type="Texture2D" uid="uid://ctu77s5un1tfs" path="res://icon.svg" id="2_1r045"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxxy2"]
+
+[node name="Bullet" type="Node2D"]
+z_index = 1
+script = ExtResource("1_b232v")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mxxy2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1r045")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

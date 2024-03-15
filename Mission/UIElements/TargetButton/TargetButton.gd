@@ -14,7 +14,7 @@ func init(_target:Unit,_percent:int) -> void:
 	percent_label.text = str(percent)
 
 func _on_button_pressed():
-	emit_signal("target_selected",target)
+	emit_signal("target_selected",target,percent)
 
 func _on_button_mouse_entered():
-	Global.mission.camera.move_to(target.position,percent)
+	Global.mission.camera.move_to(target.position)

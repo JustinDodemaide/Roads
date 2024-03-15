@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://o7vdfdvsywbc" path="res://Items/Pan/Anti-SkeletonPan.png" id="1_3r57h"]
 [ext_resource type="Script" path="res://Items/Pan/Execute.gd" id="1_rrw2m"]
-[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="3_bmuet"]
+[ext_resource type="Script" path="res://Items/Utilities/Utility_Generic.gd" id="3_bmuet"]
 [ext_resource type="Script" path="res://Items/Pan/Select.gd" id="4_tg7wm"]
 
 [resource]

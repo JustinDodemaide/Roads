@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://2kg038643qb2" path="res://Items/Waffle/Waffle.png" id="1_0o81o"]
 [ext_resource type="Script" path="res://Items/Waffle/Execute.gd" id="1_nj1yn"]
-[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="2_brd5u"]
+[ext_resource type="Script" path="res://Items/Utilities/Utility_Generic.gd" id="2_brd5u"]
 [ext_resource type="Script" path="res://Items/Waffle/Select.gd" id="4_iloqq"]
 
 [resource]
