@@ -28,6 +28,10 @@ func clear_utilities() -> void:
 func add_utility(button:Control) -> void:
 	utility_container.add_child(button)
 
+func add_target(button:Control) -> void:
+	# Utility container is also used for storing target selection buttons
+	utility_container.add_child(button)
+
 func set_utility_info(utility:Item) -> void:
 	pass
 
