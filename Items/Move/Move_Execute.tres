@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cs1cu1m0ef5wq"]
+
+[sub_resource type="GDScript" id="GDScript_w476o"]
+script/source = "extends UtilityExecutionBehavior
+
+func execute(utility:Item,actor:Unit,_selection_info:Dictionary) -> void:
+	var agent:NavigationAgent2D = actor.nav_agent
+	agent.set_target_position(_selection_info[\"position\"])
+	if agent.is_target_reachable():
+		# !! This is a load-bearing if statement. Removing this causes
+		# the navigation agent to stop working
+		pass
+	var index:int = 0
+	for point in agent.get_current_navigation_path():
+		var tween:Tween = actor.create_tween()
+		tween.tween_property(actor,\"position\",point,0.1)
+		await tween.finished
+		_selection_info[\"dots\"][index].queue_free()
+		index += 1
+		#(object: Object, property: NodePath, final_val: Variant, duration: float)
+	
+	emit_signal(\"complete\")
+"
+
+[resource]
+script = SubResource("GDScript_w476o")

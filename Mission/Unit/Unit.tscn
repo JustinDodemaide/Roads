@@ -20,4 +20,4 @@ texture = ExtResource("2_qxqff")
 shape = SubResource("RectangleShape2D_p85xy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
+path_postprocessing = 1

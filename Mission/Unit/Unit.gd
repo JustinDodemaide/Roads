@@ -14,6 +14,7 @@ var max_sensor_radius:int
 var sensor_radius:int
 
 @onready var nav_agent = $NavigationAgent2D
+var moving:bool = false
 @onready var sensors = $Sensors
 
 signal changed(unit:Unit)
@@ -40,7 +41,7 @@ func init(_character:Character) -> void:
 func add_utility(_name:String) -> void:
 	var item = Global.string2item(_name)
 	utilities.append(item)
-	
+
 func new_turn():
 	for effect in effects:
 		effect.apply(self)

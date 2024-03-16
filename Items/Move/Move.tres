@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://b7xf7dtklwkkv"]
 
-[ext_resource type="Script" path="res://Items/Move/Execute.gd" id="1_dldyy"]
+[ext_resource type="Resource" uid="uid://cs1cu1m0ef5wq" path="res://Items/Move/Move_Execute.tres" id="1_h3bdi"]
 [ext_resource type="Script" path="res://Items/CharacterItem.gd" id="3_02wyc"]
-[ext_resource type="Resource" uid="uid://dhcw6fmxg8rpt" path="res://Items/SelectionTypes/FreeSelect.tres" id="3_tb0vs"]
+[ext_resource type="Resource" uid="uid://brgnxtf1mx4sp" path="res://Items/Move/Move_Select.tres" id="3_x72vp"]
 
 [resource]
 script = ExtResource("3_02wyc")
 equippable = false
 num_uses = -1
-selection_type = ExtResource("3_tb0vs")
-execution_behavior = ExtResource("1_dldyy")
+selection_type = ExtResource("3_x72vp")
+execution_behavior = ExtResource("1_h3bdi")
 offensive_score = 0
 name = "Move"
 tooltip_text = "Move"

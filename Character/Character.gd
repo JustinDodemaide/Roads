@@ -10,7 +10,7 @@ var max_sensor_radius:int = 5
 var equip_slots:int = 1
 var equipment:Array[String] = []
 var utility_slots:int = 2
-var utilities:Array[String] = ["Waffle","Pan"]
+var utilities:Array[String] = ["Pan"]
 
 func _init():
 	name = random_name()

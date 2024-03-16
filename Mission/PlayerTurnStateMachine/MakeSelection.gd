@@ -13,6 +13,7 @@ func enter(_msg:Dictionary={}) -> void:
 	selection_script.start(state_machine.unit)
 
 func selection_made(info:Dictionary) -> void:
+	selection_script.selection_made.disconnect(selection_made)
 	selection_script = null
 	state_machine.selection_info = info
 	state_machine.transition_to("Confirm")
