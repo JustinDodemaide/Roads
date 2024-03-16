@@ -77,7 +77,6 @@ func start():
 
 func new_turn(team:Team):
 	team.new_turn()
-	
 
 #endregion
 

@@ -8,7 +8,7 @@ func enter(_msg:Dictionary={}) -> void:
 	if state_machine.chosen_utility.selection_type == null:
 		state_machine.transition_to("Confirm")
 		return
-	selection_script = state_machine.chosen_utility.selection_type.new()
+	selection_script = state_machine.chosen_utility.selection_type
 	selection_script.selection_made.connect(selection_made)
 	selection_script.start(state_machine.unit)
 
@@ -19,3 +19,4 @@ func selection_made(info:Dictionary) -> void:
 
 func exit() -> void:
 	pass
+#	selection_script.selection_made.disconnect(selection_made)

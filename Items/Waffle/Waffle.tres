@@ -1,16 +1,20 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://4o7qeporfc3"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://4o7qeporfc3"]
 
 [ext_resource type="Texture2D" uid="uid://2kg038643qb2" path="res://Items/Waffle/Waffle.png" id="1_0o81o"]
-[ext_resource type="Script" path="res://Items/Waffle/Execute.gd" id="1_nj1yn"]
-[ext_resource type="Script" path="res://Items/Utilities/Utility_Generic.gd" id="2_brd5u"]
-[ext_resource type="Script" path="res://Items/Waffle/Select.gd" id="4_iloqq"]
+[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="3_a2q0x"]
+[ext_resource type="Resource" uid="uid://dhcw6fmxg8rpt" path="res://Items/SelectionTypes/FreeSelect.tres" id="3_roe2w"]
+
+[sub_resource type="GDScript" id="GDScript_46v3c"]
+
+[sub_resource type="Resource" id="Resource_n4i0s"]
+script = SubResource("GDScript_46v3c")
 
 [resource]
-script = ExtResource("2_brd5u")
+script = ExtResource("3_a2q0x")
 equippable = false
 num_uses = 3
-selection_type = ExtResource("4_iloqq")
-execution_behavior = ExtResource("1_nj1yn")
+selection_type = ExtResource("3_roe2w")
+execution_behavior = SubResource("Resource_n4i0s")
 offensive_score = 1
 name = "Waffle"
 icon = ExtResource("1_0o81o")

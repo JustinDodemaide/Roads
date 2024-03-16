@@ -1,14 +1,14 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://b7xf7dtklwkkv"]
 
 [ext_resource type="Script" path="res://Items/Move/Execute.gd" id="1_dldyy"]
-[ext_resource type="Script" path="res://Items/Utilities/Utility_Generic.gd" id="3_02wyc"]
-[ext_resource type="Script" path="res://Items/Waffle/Select.gd" id="3_ujwnu"]
+[ext_resource type="Script" path="res://Items/CharacterItem.gd" id="3_02wyc"]
+[ext_resource type="Resource" uid="uid://dhcw6fmxg8rpt" path="res://Items/SelectionTypes/FreeSelect.tres" id="3_tb0vs"]
 
 [resource]
 script = ExtResource("3_02wyc")
 equippable = false
 num_uses = -1
-selection_type = ExtResource("3_ujwnu")
+selection_type = ExtResource("3_tb0vs")
 execution_behavior = ExtResource("1_dldyy")
 offensive_score = 0
 name = "Move"

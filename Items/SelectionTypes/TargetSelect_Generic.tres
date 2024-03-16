@@ -1,8 +1,11 @@
-extends SelectionType
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c7g1yevrmx3pc"]
+
+[sub_resource type="GDScript" id="GDScript_mtsfj"]
+script/source = "extends SelectionType
 
 func start(_unit) -> void:
 	Global.mission.ui.clear_utilities() # HACK
-	var target_scene:PackedScene = load("res://Mission/UIElements/TargetButton/TargetButton.tscn")
+	var target_scene:PackedScene = load(\"res://Mission/UIElements/TargetButton/TargetButton.tscn\")
 	for enemy in _unit.sensors.visible_enemies:
 		var button = target_scene.instantiate()
 		button.init(enemy,get_percent(enemy))
@@ -15,5 +18,9 @@ func get_percent(target:Unit) -> int:
 
 func target_selected(target:Unit,percent:int):
 	Global.mission.ui.clear_utilities() # HACK
-	var info:Dictionary = {"target":target,"percent":percent}
-	emit_signal("selection_made",info)
+	var info:Dictionary = {\"target\":target,\"percent\":percent}
+	emit_signal(\"selection_made\",info)
+"
+
+[resource]
+script = SubResource("GDScript_mtsfj")

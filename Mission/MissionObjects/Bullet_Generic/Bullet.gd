@@ -20,9 +20,9 @@ func init(_utility:Item,_from:Unit,_to:Variant) -> void:
 	elif _to is Vector2:
 		set_rotation_to(_to)
 
-	$Timer.start(7) #Time to live
 	velocity = velocity.rotated(rotation)# * Vector2(100,100)
 	Global.mission.tilemap.add_child(self)
+	$Timer.start(7) #Time to live
 
 func set_rotation_to(to:Vector2):
 	rotation = get_angle_to(to)
