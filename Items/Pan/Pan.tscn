@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://caol1aulro8vl"]
+
+[ext_resource type="Script" path="res://Items/CharacterItems/GenericSelectionTypes/Target.gd" id="1_tqh0y"]
+[ext_resource type="Texture2D" uid="uid://o7vdfdvsywbc" path="res://Items/Pan/Anti-SkeletonPan.png" id="1_wc4hu"]
+
+[sub_resource type="GDScript" id="GDScript_4jm0k"]
+script/source = "extends CharacterItem_BulletFiring
+"
+
+[node name="Pan" type="Node"]
+script = SubResource("GDScript_4jm0k")
+equippable = true
+num_uses = 3
+selection_type = ExtResource("1_tqh0y")
+item_name = "Pan"
+icon = ExtResource("1_wc4hu")
+tooltip_text = "Anti-Skeleton Pan (works on people, too)"

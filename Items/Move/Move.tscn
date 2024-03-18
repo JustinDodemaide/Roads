@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://uvu7ow6epanr"]
+
+[ext_resource type="Script" path="res://Items/Move/Move.gd" id="1_oow1j"]
+[ext_resource type="Texture2D" uid="uid://bg7k6bvf4g7w0" path="res://Items/DefaultItemIcon.png" id="2_be25g"]
+[ext_resource type="Script" path="res://Items/Move/Select.gd" id="2_wv4we"]
+
+[node name="Move" type="Node"]
+script = ExtResource("1_oow1j")
+num_uses = -1
+selection_type = ExtResource("2_wv4we")
+item_name = "Move"
+icon = ExtResource("2_be25g")
+tooltip_text = "Yep, move"

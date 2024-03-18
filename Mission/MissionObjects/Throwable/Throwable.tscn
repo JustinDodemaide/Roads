@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://drd72qy1dq8cg"]
+
+[ext_resource type="Script" path="res://Mission/MissionObjects/Throwable/Throwable.gd" id="1_ge5uv"]
+[ext_resource type="Texture2D" uid="uid://2kg038643qb2" path="res://Items/Waffle/Waffle.png" id="1_qwanp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_588e3"]
+
+[node name="Throwable" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp = 1.0
+script = ExtResource("1_ge5uv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_588e3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qwanp")

@@ -4,7 +4,7 @@ class_name Unit
 var character:Character
 var team:Team
 
-var utilities:Array[Item] = [load("res://Items/Move/Move.tres")]
+var utilities:Array[Variant] = [load("res://Items/Move/Move.tscn").instantiate(),Global.string2item("Waffle")]
 var effects:Array[Effect]
 
 var available:bool = true

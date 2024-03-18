@@ -1,13 +1,10 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://brgnxtf1mx4sp"]
-
-[sub_resource type="GDScript" id="GDScript_to1be"]
-script/source = "extends SelectionType
+extends SelectionType
 # FreeSelect: The selection is position of the next mouse click
 
 var actor:Unit
 var dots = []
 
-func start(_unit) -> void:
+func start(_unit:Unit,_utility:Variant) -> void:
 	actor = _unit
 	Global.mission.position_left_clicked.connect(position_selected)
 
@@ -18,16 +15,12 @@ func position_selected(position:Vector2):
 		Global.mission.position_left_clicked.disconnect(position_selected)
 		for point in agent.get_current_navigation_path():
 			make_sprite(point)
-		var info:Dictionary = {\"position\":position,\"dots\":dots}
-		emit_signal(\"selection_made\",info)
+		var info:Dictionary = {"position":position,"dots":dots}
+		emit_signal("selection_made",info)
 
 func make_sprite(pos) -> void:
 	var sprite = Sprite2D.new()
 	sprite.position = pos
-	sprite.texture = load(\"res://dot.png\")
+	sprite.texture = load("res://dot.png")
 	dots.append(sprite)
 	Global.mission.tilemap.add_child(sprite)
-"
-
-[resource]
-script = SubResource("GDScript_to1be")

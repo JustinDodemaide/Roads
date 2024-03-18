@@ -3,7 +3,7 @@ extends Node
 @export var mission:Node
 var state:Variant
 var unit:Unit
-var chosen_utility:Item
+var chosen_utility:Variant
 var selection_info:Dictionary
 
 signal transitioned(state_name)

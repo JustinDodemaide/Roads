@@ -13,5 +13,8 @@ class_name SelectionType
 
 signal selection_made(selection:Dictionary)
 
-func start(_unit) -> void:
+func start(_unit:Unit,_utility:Variant) -> void:
+	pass
+
+func clear() -> void:
 	pass

@@ -1,9 +1,9 @@
 extends Button
 
-var utility:Item
-signal utility_chosen(utility:Item)
+var utility:Variant
+signal utility_chosen(utility:Variant)
 
-func init(_utility:Item) -> void:
+func init(_utility:Variant) -> void:
 	utility = _utility
 	text = utility.name
 	icon = utility.icon

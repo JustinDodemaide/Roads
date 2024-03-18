@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpk4tjvndnque"]
+
+[ext_resource type="Script" path="res://Items/CharacterItems/Types/Throwable.gd" id="1_ehujs"]
+[ext_resource type="Script" path="res://Items/CharacterItems/GenericSelectionTypes/Throwable_Slider.gd" id="2_v4oc0"]
+[ext_resource type="Texture2D" uid="uid://2kg038643qb2" path="res://Items/Waffle/Waffle.png" id="3_a8hah"]
+
+[node name="Waffle" type="Node"]
+script = ExtResource("1_ehujs")
+equippable = true
+num_uses = -1
+selection_type = ExtResource("2_v4oc0")
+offensive_score = 1
+item_name = "Waffle"
+icon = ExtResource("3_a8hah")
+tooltip_text = "Throw a waffle"

@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3qkh7r134phj"]
+
+[ext_resource type="Script" path="res://Mission/UIElements/ThrowableElements/ThrowableSlider.gd" id="1_jgvy1"]
+
+[node name="ThrowableSlider" type="PanelContainer" node_paths=PackedStringArray("label", "slider")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -132.0
+offset_right = -104.0
+offset_bottom = 132.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_jgvy1")
+label = NodePath("MarginContainer/VBoxContainer/Label")
+slider = NodePath("MarginContainer/VBoxContainer/VSlider")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Release
+ to throw!"
+horizontal_alignment = 1
+
+[node name="VSlider" type="VSlider" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+value = 100.0
+scrollable = false
+
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/VSlider" to="." method="_on_v_slider_drag_ended"]
+[connection signal="drag_started" from="MarginContainer/VBoxContainer/VSlider" to="." method="_on_v_slider_drag_started"]
