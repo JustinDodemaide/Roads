@@ -23,3 +23,4 @@ func exit() -> void:
 	if selection_script != null:
 		selection_script.selection_made.disconnect(selection_made)
 		selection_script.clear()
+	selection_script = null

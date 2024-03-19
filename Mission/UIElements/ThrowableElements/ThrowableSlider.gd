@@ -2,6 +2,7 @@ extends PanelContainer
 
 @export var label:Label
 @export var slider:VSlider
+var dragging:bool = false
 signal force_chosen(force:int)
 
 func init(item:Variant) -> void:
@@ -9,6 +10,7 @@ func init(item:Variant) -> void:
 	slider.add_theme_icon_override("grabber_highlight",item.icon)
 
 func _on_v_slider_drag_ended(_value_changed):
+	dragging = false
 	label.visible = false
 	if slider.value > 95:
 		slider.value = 100
@@ -22,3 +24,4 @@ func _on_v_slider_drag_ended(_value_changed):
 
 func _on_v_slider_drag_started():
 	label.visible = true
+	dragging = true
