@@ -12,6 +12,7 @@ var teams:Array[Team]
 @onready var ui:Control = $UI/MissionUI
 @onready var cursor:Area2D = $CursorArea
 @onready var player_state_machine:Node = $PlayerTurnStateMachine
+@onready var effect_areas:Node = $EffectAreas
 
 signal turn_complete
 signal unit_left_clicked(unit:Unit)
@@ -98,3 +99,6 @@ func _input(event):
 			return
 
 #endregion
+
+func string2effect(string:String) -> Effect:
+	return load("res://Mission/Effects/" + string + "/" + string + ".gd").new()

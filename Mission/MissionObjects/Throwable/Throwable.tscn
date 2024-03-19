@@ -5,13 +5,16 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_588e3"]
 
-[node name="Throwable" type="RigidBody2D"]
+[node name="Throwable" type="RigidBody2D" node_paths=PackedStringArray("timer")]
 gravity_scale = 0.0
 linear_damp = 1.0
 script = ExtResource("1_ge5uv")
+timer = NodePath("Timer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_588e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_qwanp")
+
+[node name="Timer" type="Timer" parent="."]

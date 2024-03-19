@@ -98,5 +98,7 @@ mission = NodePath("..")
 
 [node name="Units" type="Node" parent="."]
 
+[node name="EffectAreas" type="Node" parent="."]
+
 [connection signal="unit_left_clicked" from="." to="UI/MissionUI" method="unit_selected"]
 [connection signal="unit_left_clicked" from="." to="PlayerTurnStateMachine" method="unit_selected"]

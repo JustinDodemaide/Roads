@@ -6,6 +6,7 @@
 
 [node name="Waffle" type="Node"]
 script = ExtResource("1_ehujs")
+effects = PackedStringArray("Fire")
 equippable = true
 num_uses = -1
 selection_type = ExtResource("2_v4oc0")

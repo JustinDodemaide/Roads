@@ -48,6 +48,7 @@ func new_turn():
 
 func add_effect(effect:Effect) -> void:
 	effects.append(effect)
+	effect.apply(self)
 
 func damage(amount:int) -> void:
 	health -= amount
