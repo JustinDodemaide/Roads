@@ -13,6 +13,7 @@ func enter(_msg:Dictionary={}) -> void:
 	if info["has_valid_selection"] == false:
 		# display info["msg"]
 		state_machine.transition_to("ChooseUtility")
+		return
 	selection_script.selection_made.connect(selection_made)
 	selection_script.start(state_machine.unit,state_machine.chosen_utility)
 

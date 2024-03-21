@@ -30,6 +30,12 @@ folder_colors={
 "res://Level/LevelScenes/CharacterEditor/ChooseEquipment/CharacterSection/": "yellow",
 "res://Level/LevelScenes/CharacterEditor/ChooseEquipment/InventorySection/": "purple",
 "res://Mission/": "red",
+"res://Mission/Effects/": "orange",
+"res://Mission/MissionLevels/": "green",
+"res://Mission/MissionObjects/": "yellow",
+"res://Mission/PlayerTurnStateMachine/": "gray",
+"res://Mission/UIElements/": "blue",
+"res://Mission/Unit/": "purple",
 "res://World/": "green",
 "res://World/WorldObjects/": "blue",
 "res://WorldMap/": "teal"
