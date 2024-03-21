@@ -26,5 +26,9 @@ func utility_chosen(utility:Item) -> void:
 	Global.mission.ui.clear_utilities()
 	state_machine.transition_to("MakeSelection")
 
+func input(event) -> void:
+	if event.is_action_pressed("Esc"):
+		state_machine.transition_to("Observation")
+
 func exit() -> void:
 	pass

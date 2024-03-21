@@ -1,5 +1,11 @@
 extends SelectionType
 
+func has_valid_selections(_unit:Unit,_utility:Variant) -> Dictionary:
+	if _unit.sensors.visible_enemies.is_empty():
+		var msg = _unit.name + " can't see any enemies!"
+		return {"has_valid_selection":false,"msg":msg}
+	return {"has_valid_selection":true,"msg":null}
+
 func start(_unit:Unit,_utility:Variant) -> void:
 	Global.mission.ui.clear_utilities() # HACK
 	var target_scene:PackedScene = load("res://Mission/UIElements/TargetButton/TargetButton.tscn")

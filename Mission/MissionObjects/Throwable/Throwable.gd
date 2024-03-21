@@ -21,7 +21,6 @@ func set_force(_force:int) -> void:
 
 var first_check:bool = true
 func _physics_process(_delta):
-	print("velocity: ", linear_velocity)
 	if not moving:
 		return
 	if (linear_velocity.x > -10 and linear_velocity.x < 10) and (linear_velocity.y > -10 and linear_velocity.y < 10):

@@ -23,6 +23,9 @@ func unit_selected(_unit:Unit):
 	Global.mission.ui.unit_selected(unit)
 	transition_to("ChooseUtility")
 
+func _input(event):
+	state.input(event)
+
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if state != null:
 		state.exit()

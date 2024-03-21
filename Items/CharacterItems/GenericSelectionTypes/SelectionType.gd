@@ -13,6 +13,9 @@ class_name SelectionType
 
 signal selection_made(selection:Dictionary)
 
+func get_validity_info(_unit:Unit,_utility:Variant) -> Dictionary:
+	return {"has_valid_selection":true,"msg":""}
+
 func start(_unit:Unit,_utility:Variant) -> void:
 	pass
 

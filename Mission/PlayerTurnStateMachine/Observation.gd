@@ -8,5 +8,8 @@ func enter(_msg:Dictionary={}) -> void:
 	Global.mission.ui.clear_utility_info()
 	Global.mission.ui.clear_utilities()
 
+func input(_event) -> void:
+	pass
+
 func exit() -> void:
 	pass

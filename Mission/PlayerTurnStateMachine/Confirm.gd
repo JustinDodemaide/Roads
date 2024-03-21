@@ -13,6 +13,10 @@ func confirm_button_pressed():
 	utility.execute(unit,info)
 	state_machine.transition_to("Observation")
 
+func input(event) -> void:
+	if event.is_action_pressed("Esc"):
+		state_machine.transition_to("MakeSelection")
+
 func exit() -> void:
 	state_machine.mission.ui.confirm_button.visible = false
 	state_machine.mission.ui.confirm_button.pressed.disconnect(confirm_button_pressed)

@@ -92,11 +92,12 @@ func _input(event):
 		if cursor.get_overlapping_areas().is_empty():
 			emit_signal("position_left_clicked",cursor.position)
 			return
-		var clicked_object = cursor.get_overlapping_areas().front().get_parent()
-		if clicked_object is Unit:
-			emit_signal("unit_left_clicked",clicked_object)
-			camera.move_to(clicked_object.position)
-			return
+		for area in cursor.get_overlapping_areas():
+			var clicked_object = area.get_parent()
+			if clicked_object is Unit:
+				emit_signal("unit_left_clicked",clicked_object)
+				camera.move_to(clicked_object.position)
+				return
 
 #endregion
 

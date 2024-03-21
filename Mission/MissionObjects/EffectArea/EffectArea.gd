@@ -25,6 +25,8 @@ func _on_area_2d_area_entered(area):
 	var parent = area.get_parent()
 	if parent == null:
 		return
+	if not parent.has_method("add_effect"):
+		return
 	for effect in effects:
 		parent.add_effect(effect)
 
