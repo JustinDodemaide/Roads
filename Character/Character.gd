@@ -11,14 +11,15 @@ var equip_slots:int = 1
 var equipment:Array[String] = []
 var utility_slots:int = 2
 var utilities:Array[String] = ["Pan"]
+var action_points:int = 2
 
 func _init():
 	name = random_name()
 
 func random_name() -> String:
-	var first = ["Garbly","Glupman","Watto","Shmarvin","Qwinkly","John","Brad","Cheepcheep","Balthazar","Steeljaw","Flotsum","Joe","Wallop","Crikey","Snacho",", First of His Name","Squibbledoo"]
+	var first = ["Garbly","Glupman","Watto","Shmarvin","Qwinkly","John","Brad","Cheepcheep","Balthazar","Steeljaw","Flotsum","Joe","Wallop","Crikey","Snacho","Squibbledoo"]
 	# var last = ["Binkly",]
-	return first.pick_random() + " " + first.pick_random()
+	return first.pick_random() #+ " " + first.pick_random()
 
 func _load(data:Dictionary) -> void:
 	name = data["name"]

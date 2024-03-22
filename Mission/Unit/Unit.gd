@@ -8,6 +8,8 @@ var utilities:Array[Variant] = [load("res://Items/Move/Move.tscn").instantiate()
 var effects:Array[Effect]
 
 var available:bool = true
+var max_action_points:int
+var action_points:int
 var max_health:int
 var health:int
 var max_sensor_radius:int
@@ -33,6 +35,8 @@ func init(_character:Character) -> void:
 	character = _character
 	for utility_name in character.utilities:
 		add_utility(utility_name)
+	max_action_points = character.action_points
+	action_points = max_action_points
 	max_health = character.max_health
 	health = max_health
 	max_sensor_radius = character.max_sensor_radius
@@ -55,3 +59,4 @@ func damage(amount:int) -> void:
 	if health <= 0:
 		health = 0
 		available = false
+	emit_signal("changed")

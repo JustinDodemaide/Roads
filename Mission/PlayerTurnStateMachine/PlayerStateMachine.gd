@@ -18,6 +18,8 @@ func unit_selected(_unit:Unit):
 	if not _unit.team.is_player:
 		transition_to("Observation")
 		return
+	if _unit.action_points <= 0:
+		return
 	unit = _unit
 	unit.sensors.update()
 	Global.mission.ui.unit_selected(unit)
@@ -32,3 +34,9 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state = get_node(target_state_name)
 	state.enter(msg)
 	emit_signal("transitioned", state.name)
+
+func unit_turn_finished() -> void:
+	unit.action_points -= chosen_utility.action_point_cost
+	# if unit.action_points <= 0:
+	# Check if all units are done. If they are, end the turn
+	# Otherwise, select first unit with action points available
