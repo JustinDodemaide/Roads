@@ -1,6 +1,7 @@
 extends SelectionType
 
-func has_valid_selections(_unit:Unit,_utility:Variant) -> Dictionary:
+func get_validity_info(_unit:Unit,_utility:Variant) -> Dictionary:
+	Log.prn(_unit.sensors.visible_enemies)
 	if _unit.sensors.visible_enemies.is_empty():
 		var msg = _unit.name + " can't see any enemies!"
 		return {"has_valid_selection":false,"msg":msg}

@@ -60,3 +60,6 @@ func damage(amount:int) -> void:
 		health = 0
 		available = false
 	emit_signal("changed")
+
+func _process(delta):
+	$Label.text = "ap: " + str(action_points)

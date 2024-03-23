@@ -17,6 +17,7 @@ func confirm_button_pressed():
 
 var in_progress:bool = false
 func utility_complete() -> void:
+	state_machine.chosen_utility.complete.disconnect(utility_complete)
 	in_progress = false
 	state_machine.unit_turn_finished()
 	state_machine.transition_to("Observation")

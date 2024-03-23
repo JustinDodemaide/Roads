@@ -21,3 +21,9 @@ shape = SubResource("RectangleShape2D_p85xy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = -18.0
+offset_top = 16.0
+offset_right = 22.0
+offset_bottom = 39.0

@@ -12,3 +12,15 @@ signal complete
 
 func execute(_actor:Unit,_selection_info:Dictionary) -> void:
 	pass
+
+func is_valid(_actor:Unit) -> bool:
+	if _actor.action_points < action_point_cost:
+		return false
+	
+	var selection_script = selection_type.new()
+	var info = selection_script.get_validity_info(_actor,self)
+	if info["has_valid_selection"] == false:
+		# display info["msg"]
+		return false
+		
+	return true

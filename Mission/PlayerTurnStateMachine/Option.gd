@@ -5,6 +5,8 @@ var state_machine
 func enter(_msg:Dictionary={}) -> void:
 	# Clear selected utility related things
 	state_machine.chosen_utility = null
+	var unit = state_machine.unit
+	
 	Global.mission.ui.clear_utility_info()
 	
 	# Make buttons for all the unit's utilities
@@ -18,6 +20,8 @@ func enter(_msg:Dictionary={}) -> void:
 		button.init(utility)
 		button.utility_chosen.connect(utility_chosen)
 		Global.mission.ui.add_utility(button)
+		if not utility.is_valid(unit):
+			button.disabled = true
 
 func utility_chosen(utility:Item) -> void:
 	# Just putting all the "exit" things here

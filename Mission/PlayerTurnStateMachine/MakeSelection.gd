@@ -9,11 +9,6 @@ func enter(_msg:Dictionary={}) -> void:
 		state_machine.transition_to("Confirm")
 		return
 	selection_script = state_machine.chosen_utility.selection_type.new()
-	var info = selection_script.get_validity_info(state_machine.unit,state_machine.chosen_utility)
-	if info["has_valid_selection"] == false:
-		# display info["msg"]
-		state_machine.transition_to("ChooseUtility")
-		return
 	selection_script.selection_made.connect(selection_made)
 	selection_script.start(state_machine.unit,state_machine.chosen_utility)
 
