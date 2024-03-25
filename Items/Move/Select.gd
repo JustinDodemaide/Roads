@@ -2,6 +2,7 @@ extends SelectionType
 # FreeSelect: The selection is position of the next mouse click
 
 var actor:Unit
+var dot_scene:PackedScene = load("res://Items/Move/PathDot/PathDot.tscn")
 var dots = []
 
 func start(_unit:Unit,_utility:Variant) -> void:
@@ -14,13 +15,14 @@ func position_selected(position:Vector2):
 	if agent.is_target_reachable():
 		Global.mission.position_left_clicked.disconnect(position_selected)
 		for point in agent.get_current_navigation_path():
-			make_sprite(point)
+			var tween = actor.create_tween()
+			tween.tween_interval(0.005)
+			await tween.finished
+			new_dot(point)
 		var info:Dictionary = {"position":position,"dots":dots}
 		emit_signal("selection_made",info)
 
-func make_sprite(pos) -> void:
-	var sprite = Sprite2D.new()
-	sprite.position = pos
-	sprite.texture = load("res://dot.png")
-	dots.append(sprite)
-	Global.mission.tilemap.add_child(sprite)
+func new_dot(pos) -> void:
+	var path_dot = dot_scene.instantiate()
+	path_dot.position = pos
+	Global.mission.tilemap.add_child(path_dot)

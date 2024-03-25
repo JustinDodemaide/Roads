@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc64e8pbd6b8v"]
+
+[ext_resource type="Texture2D" uid="uid://b6kh2b4focphi" path="res://dot.png" id="1_ncrul"]
+[ext_resource type="Script" path="res://Items/Move/PathDot/PathDot.gd" id="2_xpnkn"]
+
+[node name="PathDot" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_ncrul")
+script = ExtResource("2_xpnkn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -16,6 +16,8 @@ func update_radius() -> void:
 	radius.scale = Vector2(r,r) * 7
 
 func update():
+	visible_enemies.clear()
+	visible_allies.clear()
 	for area in radius.get_overlapping_areas():
 		var parent = area.get_parent()
 		if parent == null:

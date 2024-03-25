@@ -44,6 +44,5 @@ func unit_turn_finished() -> void:
 	# Otherwise, select first unit with action points available
 	for unit in unit.team.units:
 		if unit.action_points > 0:
-			unit_selected(unit)
 			return
 	Global.mission.emit_signal("turn_complete")

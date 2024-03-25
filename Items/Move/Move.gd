@@ -12,7 +12,7 @@ func execute(_actor:Unit,_selection_info:Dictionary) -> void:
 		var tween:Tween = _actor.create_tween()
 		tween.tween_property(_actor,"position",point,0.1)
 		await tween.finished
-		_selection_info["dots"][index].queue_free()
+		# _selection_info["dots"][index].queue_free()
 		index += 1
 		#(object: Object, property: NodePath, final_val: Variant, duration: float)
 	

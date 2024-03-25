@@ -20,7 +20,6 @@ signal position_left_clicked(pos:Vector2)
 
 #region initialization
 func _ready(): # Just for test purposes, remove later
-	Log.prn("hello")
 	enter()
 
 func enter(_msg:Dictionary = {})->void:

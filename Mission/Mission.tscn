@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bn338ihmt6umy"]
+[gd_scene load_steps=15 format=3 uid="uid://bn338ihmt6umy"]
 
 [ext_resource type="Script" path="res://Mission/Mission.gd" id="1_bgrlc"]
 [ext_resource type="Script" path="res://Mission/MissionCamera.gd" id="2_1k1e8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Mission/MissionLevel.gd" id="2_6sx5l"]
 [ext_resource type="PackedScene" uid="uid://cgbvn8ge5r58d" path="res://Mission/PlayerTurnStateMachine/PlayerStateMachine.tscn" id="5_6eut0"]
 [ext_resource type="PackedScene" uid="uid://vcw8v5b5wpfw" path="res://Mission/UIElements/MissionUI.tscn" id="6_0uv3u"]
+[ext_resource type="PackedScene" uid="uid://dbxnbo7beyemk" path="res://Mission/MissionObjects/MiscObjects/GarbageCan/Garbage.tscn" id="7_efxji"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1plf0"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -99,6 +100,11 @@ mission = NodePath("..")
 [node name="Units" type="Node" parent="."]
 
 [node name="EffectAreas" type="Node" parent="."]
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="Garbage" parent="Objects" instance=ExtResource("7_efxji")]
+position = Vector2(282, 132)
 
 [connection signal="unit_left_clicked" from="." to="UI/MissionUI" method="unit_selected"]
 [connection signal="unit_left_clicked" from="." to="PlayerTurnStateMachine" method="unit_selected"]
