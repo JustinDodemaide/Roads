@@ -90,6 +90,7 @@ script = ExtResource("2_1k1e8")
 [node name="MissionUI" parent="UI" instance=ExtResource("6_0uv3u")]
 
 [node name="CursorArea" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CursorArea"]
 shape = SubResource("RectangleShape2D_npgqm")

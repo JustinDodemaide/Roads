@@ -15,3 +15,14 @@ shape = SubResource("CircleShape2D_md3vv")
 
 [node name="SightCast" type="RayCast2D" parent="."]
 collision_mask = 3
+
+[node name="CoverN" type="RayCast2D" parent="."]
+target_position = Vector2(0, -50)
+
+[node name="CoverE" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+
+[node name="CoverS" type="RayCast2D" parent="."]
+
+[node name="CoverW" type="RayCast2D" parent="."]
+target_position = Vector2(-50, 0)
