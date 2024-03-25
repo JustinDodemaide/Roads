@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://beual8nhf2442"]
+
+[ext_resource type="Script" path="res://Mission/Unit/Sensors/CoverSensor/CoverSensor.gd" id="1_ihsnx"]
+
+[node name="CoverSensor" type="Node2D"]
+script = ExtResource("1_ihsnx")
+
+[node name="CoverN" type="RayCast2D" parent="."]
+target_position = Vector2(0, -50)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CoverNE" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(25, -25)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CoverE" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CoverSE" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(25, 25)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CoverS" type="RayCast2D" parent="."]
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CoverSW" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(-25, 25)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CoverW" type="RayCast2D" parent="."]
+target_position = Vector2(-50, 0)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CoverNW" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(-25, -25)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false

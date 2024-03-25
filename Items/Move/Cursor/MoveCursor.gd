@@ -10,14 +10,11 @@ func _on_update_timeout():
 	$SpriteW.visible = false
 	$Impassable.visible = false
 	
-	if $CoverN.is_colliding() or $CoverNE.is_colliding() or $CoverNW.is_colliding():
-		$SpriteN.visible = true
-	if $CoverE.is_colliding() or $CoverNE.is_colliding() or $CoverSE.is_colliding():
-		$SpriteE.visible = true
-	if $CoverS.is_colliding() or $CoverSE.is_colliding() or $CoverSW.is_colliding():
-		$SpriteS.visible = true
-	if $CoverW.is_colliding() or $CoverSW.is_colliding() or $CoverNW.is_colliding():
-		$SpriteW.visible = true
+	$CoverSensor.update()
+	$SpriteN.visible = $CoverSensor.north
+	$SpriteE.visible = $CoverSensor.east
+	$SpriteS.visible = $CoverSensor.south
+	$SpriteW.visible = $CoverSensor.west
 	
 	if not $ImpassArea.get_overlapping_areas().is_empty():
 		$Impassable.visible = true

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwkdmilrk7vs6"]
+[gd_scene load_steps=6 format=3 uid="uid://dwkdmilrk7vs6"]
 
 [ext_resource type="Script" path="res://Items/Move/Cursor/MoveCursor.gd" id="1_4dpgg"]
 [ext_resource type="Texture2D" uid="uid://bfmt21n28kmvq" path="res://Items/Move/Cursor/shield_FILL0_wght400_GRAD0_opsz48.png" id="2_4304b"]
+[ext_resource type="PackedScene" uid="uid://beual8nhf2442" path="res://Mission/Unit/Sensors/CoverSensor/CoverSensor.tscn" id="3_horss"]
 [ext_resource type="Texture2D" uid="uid://cblo75yqirc8y" path="res://Items/Move/Cursor/close_FILL0_wght400_GRAD0_opsz24.png" id="3_nqb0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvq4v"]
@@ -29,52 +30,7 @@ visible = false
 position = Vector2(-41, 0)
 texture = ExtResource("2_4304b")
 
-[node name="CoverN" type="RayCast2D" parent="."]
-target_position = Vector2(0, -50)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="CoverNE" type="RayCast2D" parent="."]
-target_position = Vector2(25, -25)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="CoverE" type="RayCast2D" parent="."]
-target_position = Vector2(50, 0)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="CoverSE" type="RayCast2D" parent="."]
-target_position = Vector2(25, 25)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="CoverS" type="RayCast2D" parent="."]
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="CoverSW" type="RayCast2D" parent="."]
-target_position = Vector2(-25, 25)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="CoverW" type="RayCast2D" parent="."]
-target_position = Vector2(-50, 0)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="CoverNW" type="RayCast2D" parent="."]
-target_position = Vector2(-25, -25)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
+[node name="CoverSensor" parent="." instance=ExtResource("3_horss")]
 
 [node name="ImpassArea" type="Area2D" parent="."]
 monitorable = false

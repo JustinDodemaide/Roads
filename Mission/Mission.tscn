@@ -107,5 +107,8 @@ mission = NodePath("..")
 [node name="Garbage" parent="Objects" instance=ExtResource("7_efxji")]
 position = Vector2(282, 132)
 
+[node name="Garbage2" parent="Objects" instance=ExtResource("7_efxji")]
+position = Vector2(191, 129)
+
 [connection signal="unit_left_clicked" from="." to="UI/MissionUI" method="unit_selected"]
 [connection signal="unit_left_clicked" from="." to="PlayerTurnStateMachine" method="unit_selected"]

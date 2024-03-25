@@ -6,6 +6,7 @@ var visible_allies:Array[Unit]
 
 @onready var radius = $Area2D
 @onready var sightcast:RayCast2D = $SightCast
+@onready var cover = $CoverSensor
 
 func _ready():
 	unit = get_parent()

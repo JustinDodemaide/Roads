@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://spoqir6fm3gt"]
+[gd_scene load_steps=4 format=3 uid="uid://spoqir6fm3gt"]
 
 [ext_resource type="Script" path="res://Mission/Unit/Sensors/Sensors.gd" id="1_8sncs"]
+[ext_resource type="PackedScene" uid="uid://beual8nhf2442" path="res://Mission/Unit/Sensors/CoverSensor/CoverSensor.tscn" id="2_et0xq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_md3vv"]
 
@@ -16,13 +17,4 @@ shape = SubResource("CircleShape2D_md3vv")
 [node name="SightCast" type="RayCast2D" parent="."]
 collision_mask = 3
 
-[node name="CoverN" type="RayCast2D" parent="."]
-target_position = Vector2(0, -50)
-
-[node name="CoverE" type="RayCast2D" parent="."]
-target_position = Vector2(50, 0)
-
-[node name="CoverS" type="RayCast2D" parent="."]
-
-[node name="CoverW" type="RayCast2D" parent="."]
-target_position = Vector2(-50, 0)
+[node name="CoverSensor" parent="." instance=ExtResource("2_et0xq")]
