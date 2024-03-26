@@ -12,7 +12,7 @@ func init(item:Variant) -> void:
 func _on_v_slider_drag_ended(_value_changed):
 	dragging = false
 	label.visible = false
-	if slider.value > 95:
+	if slider.value > 99:
 		slider.value = 100
 		return # If the reset it to the top, it cancels it
 	var force = round(int(100 - slider.value) / 10)
@@ -23,5 +23,5 @@ func _on_v_slider_drag_ended(_value_changed):
 
 
 func _on_v_slider_drag_started():
-	label.visible = true
+	# label.visible = true
 	dragging = true

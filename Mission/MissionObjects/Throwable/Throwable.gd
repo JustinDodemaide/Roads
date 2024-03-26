@@ -10,7 +10,7 @@ signal stopped_moving
 func init(from:Vector2,to:Vector2,lifetime:float = -1) -> void:
 	position = from
 	var direction = (to - from).normalized() * 5000 * force
-	print(direction)
+	# print(direction)
 	Global.mission.tilemap.add_child(self)
 	apply_force(direction)
 	if lifetime != -1:

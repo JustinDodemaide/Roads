@@ -7,7 +7,8 @@ var team:Team
 var utilities:Array[Variant] = [load("res://Items/Move/Move.tscn").instantiate(),Global.string2item("Waffle")]
 var effects:Array[Effect]
 
-var available:bool = true
+var alive:bool = true
+var stunned:bool = true
 var max_action_points:int
 var action_points:int
 var max_health:int
@@ -20,6 +21,7 @@ var moving:bool = false
 @onready var sensors = $Sensors
 
 signal changed(unit:Unit)
+signal died(unit:Unit)
 
 func _ready():
 	call_deferred("actor_setup")
@@ -58,8 +60,9 @@ func damage(amount:int) -> void:
 	health -= amount
 	if health <= 0:
 		health = 0
-		available = false
-	emit_signal("changed")
+		alive = false
+		emit_signal("died",self)
+	emit_signal("changed",self)
 
 func _process(delta):
 	$Label.text = "ap: " + str(action_points)

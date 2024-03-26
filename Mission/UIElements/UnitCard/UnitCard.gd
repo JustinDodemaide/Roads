@@ -14,10 +14,12 @@ func init(_unit:Unit) -> void:
 	health_bar.value = health_bar.max_value
 	unit.changed.connect(update)
 
-func update() -> void:
+func update(_unit) -> void:
 	# Assuming name and icon won't change during the mission
-	health_bar.value = unit.health
-	if not unit.available:
+	var tween = create_tween()
+	tween.tween_property(health_bar,"value",unit.health,3).set_ease(Tween.EASE_IN_OUT)
+	# health_bar.value = unit.health
+	if not unit.alive:
 		$Button.disabled = true
 
 func _on_button_pressed():

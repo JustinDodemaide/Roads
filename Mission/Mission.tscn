@@ -71,6 +71,7 @@ sources/0 = SubResource("TileSetAtlasSource_0rntm")
 script = ExtResource("1_bgrlc")
 
 [node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_ynoxc")
 format = 2
 layer_0/name = "Ground"

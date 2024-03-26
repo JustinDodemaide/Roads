@@ -23,6 +23,8 @@ func unit_selected(_unit:Unit):
 		return
 	if _unit.action_points <= 0:
 		return
+	if not _unit.alive:
+		return
 	unit = _unit
 	unit.sensors.update()
 	Global.mission.ui.unit_selected(unit)

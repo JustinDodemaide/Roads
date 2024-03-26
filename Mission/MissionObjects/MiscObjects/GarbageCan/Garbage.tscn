@@ -6,6 +6,7 @@
 size = Vector2(48, 76)
 
 [node name="Garbage" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 5
