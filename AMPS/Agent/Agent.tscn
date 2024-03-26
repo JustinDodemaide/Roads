@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j12pdftkijwi"]
+
+[ext_resource type="Script" path="res://AMPS/Agent/Agent.gd" id="1_7ipsx"]
+
+[node name="MissionAgent" type="Node"]
+script = ExtResource("1_7ipsx")

@@ -27,6 +27,8 @@ enabled=PackedStringArray("res://addons/log/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://AMPS/Actions/Faction/": "green",
+"res://AMPS/Actions/Mission/": "red",
 "res://Character/": "yellow",
 "res://Level/": "blue",
 "res://Level/LevelScenes/CharacterEditor/ChooseCharacter/": "red",

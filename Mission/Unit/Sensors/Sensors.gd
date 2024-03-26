@@ -24,6 +24,8 @@ func update():
 		if parent == null:
 			continue
 		if parent is Unit:
+			if parent == unit:
+				continue
 			process_unit(parent)
 	pass
 

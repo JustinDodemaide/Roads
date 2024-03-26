@@ -20,7 +20,7 @@ func utility_complete() -> void:
 	state_machine.chosen_utility.complete.disconnect(utility_complete)
 	in_progress = false
 	state_machine.unit_turn_finished()
-	state_machine.transition_to("Observation")
+	state_machine.transition_to("ChooseUtility")
 
 func input(event) -> void:
 	if in_progress:

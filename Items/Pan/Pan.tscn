@@ -9,6 +9,7 @@ script/source = "extends CharacterItem_BulletFiring
 
 [node name="Pan" type="Node"]
 script = SubResource("GDScript_4jm0k")
+damage = 100
 equippable = true
 num_uses = 3
 selection_type = ExtResource("1_tqh0y")

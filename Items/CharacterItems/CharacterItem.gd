@@ -8,6 +8,8 @@ class_name CharacterItem
 
 @export var offensive_score:int = 0
 
+@export var associated_action:String
+
 signal complete
 
 func execute(_actor:Unit,_selection_info:Dictionary) -> void:

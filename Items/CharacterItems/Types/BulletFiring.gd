@@ -47,6 +47,7 @@ func bullet_hit_area(bullet,area) -> void:
 
 func hit(object) -> void:
 	apply_effects(object)
+	object.damage(damage)
 	bullet.queue_free()
 	emit_signal("complete")
 	
