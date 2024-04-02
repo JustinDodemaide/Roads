@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn338ihmt6umy"]
+[gd_scene load_steps=16 format=3 uid="uid://bn338ihmt6umy"]
 
 [ext_resource type="Script" path="res://Mission/Mission.gd" id="1_bgrlc"]
 [ext_resource type="Script" path="res://Mission/MissionCamera.gd" id="2_1k1e8"]
 [ext_resource type="Texture2D" uid="uid://c8sqc2wxn1yrv" path="res://World/World_TileMap.png" id="2_5d3wx"]
 [ext_resource type="Script" path="res://Mission/MissionLevel.gd" id="2_6sx5l"]
 [ext_resource type="PackedScene" uid="uid://cgbvn8ge5r58d" path="res://Mission/PlayerTurnStateMachine/PlayerStateMachine.tscn" id="5_6eut0"]
+[ext_resource type="PackedScene" uid="uid://dxoutidamsck8" path="res://Mission/UIElements/UnitInfoPanel/UnitInfoPanel.tscn" id="5_82aha"]
 [ext_resource type="PackedScene" uid="uid://vcw8v5b5wpfw" path="res://Mission/UIElements/MissionUI.tscn" id="6_0uv3u"]
 [ext_resource type="PackedScene" uid="uid://dbxnbo7beyemk" path="res://Mission/MissionObjects/MiscObjects/GarbageCan/Garbage.tscn" id="7_efxji"]
 
@@ -86,6 +87,8 @@ script = ExtResource("2_6sx5l")
 position_smoothing_enabled = true
 script = ExtResource("2_1k1e8")
 
+[node name="UnitInfo" parent="." instance=ExtResource("5_82aha")]
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="MissionUI" parent="UI" instance=ExtResource("6_0uv3u")]
@@ -108,8 +111,6 @@ mission = NodePath("..")
 [node name="Garbage" parent="Objects" instance=ExtResource("7_efxji")]
 position = Vector2(282, 132)
 
-[node name="Garbage2" parent="Objects" instance=ExtResource("7_efxji")]
-position = Vector2(191, 129)
-
 [connection signal="unit_left_clicked" from="." to="UI/MissionUI" method="unit_selected"]
 [connection signal="unit_left_clicked" from="." to="PlayerTurnStateMachine" method="unit_selected"]
+[connection signal="unit_left_clicked" from="." to="UnitInfo" method="init"]

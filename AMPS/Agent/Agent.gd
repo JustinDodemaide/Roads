@@ -19,7 +19,7 @@ var current_action:Action
 
 
 func act():
-	action_map = AIActionMaps.action_maps[map_key]
+	# action_map = AIActionMaps.action_maps[map_key]
 	# Finish the current action
 	if current_action != null:
 		if current_action.is_running:

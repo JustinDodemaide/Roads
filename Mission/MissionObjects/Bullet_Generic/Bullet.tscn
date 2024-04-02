@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8vwmeklwqrk8"]
+[gd_scene load_steps=5 format=3 uid="uid://c8vwmeklwqrk8"]
 
 [ext_resource type="Script" path="res://Mission/MissionObjects/Bullet_Generic/Bullet.gd" id="1_b232v"]
-[ext_resource type="Texture2D" uid="uid://ctu77s5un1tfs" path="res://icon.svg" id="2_1r045"]
+[ext_resource type="Texture2D" uid="uid://o8bbbekab8lg" path="res://Mission/MissionObjects/Bullet_Generic/bullet1.png" id="2_wyl3f"]
+[ext_resource type="Texture2D" uid="uid://700kn0cxutb" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="3_di3i1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxxy2"]
 
@@ -15,8 +16,10 @@ script = ExtResource("1_b232v")
 shape = SubResource("RectangleShape2D_mxxy2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_1r045")
+texture = ExtResource("2_wyl3f")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.509804, 0, 1)
+texture = ExtResource("3_di3i1")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
