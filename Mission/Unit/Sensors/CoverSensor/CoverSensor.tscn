@@ -12,7 +12,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CoverNE" type="RayCast2D" parent="."]
-enabled = false
 target_position = Vector2(25, -25)
 collision_mask = 4
 collide_with_areas = true
@@ -25,7 +24,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CoverSE" type="RayCast2D" parent="."]
-enabled = false
 target_position = Vector2(25, 25)
 collision_mask = 4
 collide_with_areas = true
@@ -37,7 +35,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CoverSW" type="RayCast2D" parent="."]
-enabled = false
 target_position = Vector2(-25, 25)
 collision_mask = 4
 collide_with_areas = true
@@ -50,7 +47,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CoverNW" type="RayCast2D" parent="."]
-enabled = false
 target_position = Vector2(-25, -25)
 collision_mask = 4
 collide_with_areas = true

@@ -14,18 +14,18 @@ func update():
 func has_cover_in_direction(direction:Global.CARDINAL) -> bool:
 	if direction == Global.CARDINAL.NORTH and north:
 		return true
-	if direction == Global.CARDINAL.NORTHEAST and (north or east):
+	if direction == Global.CARDINAL.NORTHEAST and (north and east):
 		return true
 	if direction == Global.CARDINAL.EAST and east:
 		return true
-	if direction == Global.CARDINAL.SOUTHEAST and (south or east):
+	if direction == Global.CARDINAL.SOUTHEAST and (south and east):
 		return true
 	if direction == Global.CARDINAL.SOUTH and south:
 		return true
-	if direction == Global.CARDINAL.SOUTHWEST and (south or west):
+	if direction == Global.CARDINAL.SOUTHWEST and (south and west):
 		return true
 	if direction == Global.CARDINAL.WEST and west:
 		return true
-	if direction == Global.CARDINAL.NORTHWEST and (north or west):
+	if direction == Global.CARDINAL.NORTHWEST and (north and west):
 		return true
 	return false

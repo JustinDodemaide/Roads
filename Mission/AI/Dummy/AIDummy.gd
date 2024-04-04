@@ -21,8 +21,13 @@ func get_score_at_position(pos:Vector2) -> int:
 	var score:int = 0
 	for enemy in enemies:
 		score += distance_score(enemy)
-		score += await cover_score() # Important to have this before flanking_score
+		score += cover_score() # Important to have this before flanking_score
 		score += flanking_score(enemy)
+	var label = Label.new()
+	label.text = str(score)
+	label.position = pos
+	label.scale *= 0.75
+	Global.mission.tilemap.add_child(label)
 	return score
 
 func distance_score(enemy:Unit) -> int:
@@ -35,9 +40,6 @@ func distance_score(enemy:Unit) -> int:
 func cover_score() -> int:
 	var score:int = 0
 	cover_sensor.update()
-	var tween = create_tween()
-	tween.tween_interval(0.001)
-	await tween.finished
 	if cover_sensor.north:
 		score += 1
 	if cover_sensor.south:
@@ -62,28 +64,19 @@ func flanking_score(enemy:Unit) -> int:
 
 func is_flanking(enemy:Unit) -> bool:
 	var cardinal = Global.card_from_pos(position,enemy.position)
-	# Log.prn(n + " is " + Global.CARDINAL.keys()[cardinal] + " of " + enemy.character.name)
-	
 	if enemy.sensors.cover_sensor.has_cover_in_direction(cardinal):
-		# Log.prn(n + " is not flanking " + enemy.character.name)
 		return false
 	# Genuinely going to be impossible to debug if I didnt get this right the
 	# first time
-	# Log.prn(n + " is flanking " + enemy.character.name)
+	# Got the programming right, got the idea wrong. Decided that if a unit is
+	# looking at another unit from NE, SE, etc, the target is being flanked if
+	# either direction is uncovered (as opposed to only one direction needing
+	# to be covered
 	return true
 
 func is_being_flanked_by(enemy:Unit) -> bool:
 	var cardinal = Global.card_from_pos(enemy.position,position)
-	var c = Global.CARDINAL.keys()[cardinal]
-	Log.prn(position, " is ", c, " of ", enemy.position)
-	
 	if cover_sensor.has_cover_in_direction(cardinal):
 		Log.prn(n + " is not being flanked by " + enemy.character.name)
 		return false
-	# Log.prn(n + " is being flanked by " + enemy.character.name)
-	var sprite = Sprite2D.new()
-	sprite.position = position
-	sprite.texture = load("res://dot.png")
-	sprite.modulate = Color.BLACK
-	Global.mission.tilemap.add_child(sprite)
 	return true

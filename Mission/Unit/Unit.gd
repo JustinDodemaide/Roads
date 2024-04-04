@@ -88,10 +88,10 @@ func make_decision() -> void:
 			if not nav_agent.is_target_reachable():
 				y += step
 				continue
-			var sprite = Sprite2D.new()
-			sprite.position = pos
-			sprite.texture = load("res://dot.png")
-			Global.mission.tilemap.add_child(sprite)
+			#var sprite = Sprite2D.new()
+			#sprite.position = pos
+			#sprite.texture = load("res://dot.png")
+			#Global.mission.tilemap.add_child(sprite)
 			positions.append(pos)
 			
 			y += step
@@ -106,7 +106,7 @@ func make_decision() -> void:
 	var highest_score:int = -1000000
 	var highest_score_position:Vector2 = position
 	for pos in positions:
-		var score = await dummy.get_score_at_position(pos)
+		var score = dummy.get_score_at_position(pos)
 		if score > highest_score:
 			highest_score = score
 			highest_score_position = pos
