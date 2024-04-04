@@ -31,6 +31,9 @@ func unit_selected(_unit:Unit):
 	transition_to("ChooseUtility")
 
 func _input(event):
+	if event.is_action_pressed("Space"):
+		Global.mission.emit_signal("turn_complete")
+		return
 	state.input(event)
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:

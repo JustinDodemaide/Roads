@@ -23,6 +23,8 @@ func new_turn() -> void:
 		make_decision()
 
 func make_decision():
+	for i in units:
+		i.make_decision()
 	pass
 
 func unit_died(unit:Unit) -> void:

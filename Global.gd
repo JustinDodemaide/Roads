@@ -17,7 +17,9 @@ func string2item(string:String) -> Variant:
 	var path:String = "res://Items/" + string + "/" + string + ".tscn" 
 	return load(path).instantiate()
 
-func deg_to_cardinal(degree:float)->Vector2i:
+enum CARDINAL{NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST}
+
+func deg_to_vector2(degree:float)->Vector2i:
 	var d:int = round(degree/45)
 	if d == 0:
 		# West
@@ -49,7 +51,39 @@ func deg_to_cardinal(degree:float)->Vector2i:
 	# West
 	return Vector2i(-1,0)
 
-func deg_to_cardinal_string(degree:float)->String:
+func deg_to_card(degree:float)->CARDINAL:
+	var d:int = round(degree/45)
+	if d == 0:
+		# West
+		return CARDINAL.WEST
+	if d == 1:
+		# Northwest
+		return CARDINAL.NORTHWEST
+	if d == 2:
+		# North
+		return CARDINAL.NORTH
+	if d == 3:
+		# Northeast
+		return CARDINAL.NORTHEAST
+	if d == 4:
+		# East
+		return CARDINAL.EAST
+	if d == -4:
+		# East
+		return CARDINAL.EAST
+	if d == -3:
+		# Southeast
+		return CARDINAL.SOUTHEAST
+	if d == -2:
+		# South
+		return CARDINAL.SOUTH
+	if d == -1:
+		# Southwest
+		return CARDINAL.SOUTHWEST
+	# West
+	return CARDINAL.WEST
+
+func deg_to_card_string(degree:float)->String:
 	var d:int = round(degree/45)
 	if d == 0:
 		# West
@@ -80,3 +114,7 @@ func deg_to_cardinal_string(degree:float)->String:
 		return "Southwest"
 	# West
 	return "West"
+
+func card_from_pos(origin:Vector2,to:Vector2) -> CARDINAL:
+	var deg = rad_to_deg(origin.angle_to_point(to))
+	return deg_to_card(deg)

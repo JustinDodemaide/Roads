@@ -21,12 +21,13 @@ signal position_left_clicked(pos:Vector2)
 
 #region initialization
 func _ready(): # Just for test purposes, remove later
+	
 	enter()
 
 func enter(_msg:Dictionary = {})->void:
 	Global.mission = self
 	var chars1:Array[Character] = [Character.new(), Character.new()]
-	var chars2:Array[Character] = [Character.new(), Character.new()]
+	var chars2:Array[Character] = [Character.new()]#, Character.new()]
 	
 	make_new_team(chars1,true,true)
 	make_new_team(chars2,false)
@@ -79,9 +80,9 @@ func load_tilemap() -> void:
 func start():
 	# Player goes first
 	while true:
-		new_turn(attacking_team)
+		attacking_team.new_turn()
 		await turn_complete
-		new_turn(defending_team)
+		defending_team.new_turn()
 		await turn_complete
 
 func new_turn(team:Team):
@@ -99,6 +100,9 @@ func _process(delta):
 	cursor.position = tilemap.get_local_mouse_position()
 
 func _input(event):
+	if event.is_action_pressed("F1"):
+		print($TileMap.get_global_mouse_position())
+		return
 	# This doesn't feel like the right place to define all the input/signal
 	# functionalities, but I'm refraining from overthinking it
 	if event.is_action_pressed("LeftClick"):

@@ -4,9 +4,9 @@ var unit:Unit
 var visible_enemies:Array[Unit]
 var visible_allies:Array[Unit]
 
-@onready var radius = $Area2D
+@onready var radius = $SensorCircle
 @onready var sightcast:RayCast2D = $SightCast
-@onready var cover = $CoverSensor
+@onready var cover_sensor = $CoverSensor
 
 func _ready():
 	unit = get_parent()
@@ -14,7 +14,7 @@ func _ready():
 
 func update_radius() -> void:
 	var r = unit.sensor_radius
-	radius.scale = Vector2(r,r) * 7
+	radius.scale = Vector2(r,r)
 
 func update():
 	visible_enemies.clear()
@@ -27,7 +27,6 @@ func update():
 			if parent == unit:
 				continue
 			process_unit(parent)
-	pass
 
 func can_see(pos:Vector2) -> bool:
 	sightcast.target_position = pos - sightcast.global_position

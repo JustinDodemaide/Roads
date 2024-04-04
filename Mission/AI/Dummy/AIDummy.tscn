@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgwb08byjwuxa"]
+
+[ext_resource type="Script" path="res://Mission/AI/Dummy/AIDummy.gd" id="1_e2yrg"]
+[ext_resource type="PackedScene" uid="uid://beual8nhf2442" path="res://Mission/Unit/Sensors/CoverSensor/CoverSensor.tscn" id="2_5jg01"]
+
+[node name="AIDummy" type="Node2D"]
+script = ExtResource("1_e2yrg")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 3
+
+[node name="CoverSensor" parent="." instance=ExtResource("2_5jg01")]

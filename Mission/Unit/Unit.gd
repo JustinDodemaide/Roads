@@ -66,3 +66,59 @@ func damage(amount:int) -> void:
 
 func _process(delta):
 	$Label.text = "ap: " + str(action_points)
+
+func make_decision() -> void:
+	# 1. Get set of potential positions to move to
+	var positions:PackedVector2Array
+	
+	var origin = position
+	var movement_radius:int = 10
+	var step = Global.mission.tilemap.tile_set.tile_size.x
+	var max = movement_radius * step
+	
+	var x:int = -max
+	while x < max:
+		var y:int = -max
+		while y < max:
+			var pos:Vector2 = Vector2(x,y) + origin
+			if origin.distance_to(pos) > max:
+				y += step
+				continue
+			nav_agent.set_target_position(pos)
+			if not nav_agent.is_target_reachable():
+				y += step
+				continue
+			var sprite = Sprite2D.new()
+			sprite.position = pos
+			sprite.texture = load("res://dot.png")
+			Global.mission.tilemap.add_child(sprite)
+			positions.append(pos)
+			
+			y += step
+		x += step
+
+	var dummy = load("res://Mission/AI/Dummy/AIDummy.tscn").instantiate()
+	Global.mission.add_child(dummy)
+	dummy.init(self)
+	
+	# 2. Get position with highest score
+	# Can move this inside the step 1 loop to optimize
+	var highest_score:int = -1000000
+	var highest_score_position:Vector2 = position
+	for pos in positions:
+		var score = await dummy.get_score_at_position(pos)
+		if score > highest_score:
+			highest_score = score
+			highest_score_position = pos
+	dummy.queue_free()
+	Log.prn("highest score position: ", highest_score_position)
+	var sprite = Sprite2D.new()
+	sprite.position = highest_score_position
+	sprite.texture = load("res://dot.png")
+	sprite.modulate = Color.BLUE
+	sprite.z_index = 2
+	Global.mission.tilemap.add_child(sprite)
+	
+	if highest_score_position == position:
+		# Don't need to move, do something else
+		pass
