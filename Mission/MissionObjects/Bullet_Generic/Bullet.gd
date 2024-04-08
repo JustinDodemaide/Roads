@@ -25,7 +25,7 @@ func _physics_process(delta):
 		queue_free()
 
 func _on_area_2d_area_entered(area):
-	print("bullet hit ", area.get_parent().name)
+	# print("bullet hit ", area.get_parent().name)
 	emit_signal("hit_area",self,area)
 
 # Builder functions. Need to be called before init

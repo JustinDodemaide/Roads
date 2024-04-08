@@ -6,11 +6,12 @@ extends Node2D
 var ideal_distance:int = 7
 var enemies:Array[Unit]
 
-var n
+var n # DEBUG, remove later
 
 func init(unit:Unit) -> void:
 	# circle.scale = Vector2(unit.sensor_radius,unit.sensor_radius)
 	n = unit.character.name
+	
 	if unit.team == Global.mission.attacking_team:
 		enemies = Global.mission.defending_team.units
 	else:
@@ -23,11 +24,11 @@ func get_score_at_position(pos:Vector2) -> int:
 		score += distance_score(enemy)
 		score += cover_score() # Important to have this before flanking_score
 		score += flanking_score(enemy)
-	var label = Label.new()
-	label.text = str(score)
-	label.position = pos
-	label.scale *= 0.75
-	Global.mission.tilemap.add_child(label)
+	#var label = Label.new()
+	#label.text = str(score)
+	#label.position = pos
+	#label.scale *= 0.75
+	#Global.mission.tilemap.add_child(label)
 	return score
 
 func distance_score(enemy:Unit) -> int:
@@ -77,6 +78,6 @@ func is_flanking(enemy:Unit) -> bool:
 func is_being_flanked_by(enemy:Unit) -> bool:
 	var cardinal = Global.card_from_pos(enemy.position,position)
 	if cover_sensor.has_cover_in_direction(cardinal):
-		Log.prn(n + " is not being flanked by " + enemy.character.name)
+		# Log.prn(n + " is not being flanked by " + enemy.character.name)
 		return false
 	return true

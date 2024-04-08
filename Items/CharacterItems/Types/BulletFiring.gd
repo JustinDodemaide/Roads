@@ -59,3 +59,31 @@ func apply_effects(to):
 
 func bullet_traveled_max_distance(bullet) -> void:
 	emit_signal("complete")
+
+func ai_score(unit:Unit) -> Dictionary:
+	var targets:Array[Unit] = unit.sensors.visible_enemies
+	var selection = selection_type.new() # HACK
+	selection.unit = unit
+	var get_percent:Callable = selection.get_percent
+	
+	var highest_score_target:Unit = targets.front()
+	var highest_chance
+	var highest_score:int = -100000
+	for target in targets:
+		if not target.alive:
+			continue
+		var score:int = 0
+		# Get percent chance to hit
+		var chance = get_percent.call(target)
+		score += round(chance / 10)
+		
+		# Get one-shot potential
+		if (target.health - damage) <= 0:
+			score += 3 # Arbitrary number
+		
+		if score > highest_score:
+			highest_score = score
+			highest_score_target = target
+			highest_chance = chance
+	Log.prn(item_name, " score: ", highest_score)
+	return {"score":highest_score,"target":highest_score_target,"percent":highest_chance}

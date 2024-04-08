@@ -5,6 +5,9 @@ var east:bool
 var south:bool
 var west:bool
 
+func _process(delta):
+	update()
+
 func update():
 	north = $CoverN.is_colliding() or $CoverNE.is_colliding() or $CoverNW.is_colliding()
 	east = $CoverE.is_colliding() or $CoverNE.is_colliding() or $CoverSE.is_colliding()

@@ -13,7 +13,7 @@ func _ready():
 	update_radius()
 
 func update_radius() -> void:
-	var r = unit.sensor_radius
+	var r = unit.sensor_radius * 10
 	radius.scale = Vector2(r,r)
 
 func update():

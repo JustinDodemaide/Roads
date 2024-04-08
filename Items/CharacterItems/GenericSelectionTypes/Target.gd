@@ -20,25 +20,10 @@ func start(_unit:Unit,_utility:Variant) -> void:
 		Global.mission.ui.add_target(button)
 
 func get_percent(target:Unit) -> int:
-	# Get angle
-	# Get direction based on angle
 	# Change percentage based on target cover
-	target.sensors.cover.update() # Not sure how necessary this is bc I haven't
-	# figured out when the sensors are going to be updated
-	var angle = rad_to_deg(unit.position.angle_to_point(target.position))
-	var direction = Global.deg_to_cardinal_string(angle)
-	if direction == "North" or direction == "Northwest" or direction == "Northeast":
-		if target.sensors.cover.north:
-			return 50
-	if direction == "East" or direction == "Northeast" or direction == "Southeast":
-		if target.sensors.cover.east:
-			return 50
-	if direction == "South" or direction == "Southeast" or direction == "Southwest":
-		if target.sensors.cover.south:
-			return 50
-	if direction == "West" or direction == "Northwest" or direction == "Southwest":
-		if target.sensors.cover.west:
-			return 50
+	var cardinal = Global.card_from_pos(unit.position,target.position)
+	if target.sensors.cover_sensor.has_cover_in_direction(cardinal):
+		return 50
 	return 100
 
 func target_selected(target:Unit,percent:int):

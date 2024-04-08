@@ -26,3 +26,7 @@ func is_valid(_actor:Unit) -> bool:
 		return false
 		
 	return true
+
+func ai_score(unit:Unit) -> Dictionary:
+	# Make sure the return dictionary has all the data necessary for execute
+	return {"score":0}
