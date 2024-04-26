@@ -31,9 +31,6 @@ func unit_selected(_unit:Unit):
 	transition_to("ChooseUtility")
 
 func _input(event):
-	if event.is_action_pressed("Space"):
-		Global.mission.emit_signal("turn_complete")
-		return
 	state.input(event)
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
@@ -47,7 +44,7 @@ func unit_turn_finished() -> void:
 	unit.action_points -= chosen_utility.action_point_cost
 	# Check if all units are done. If they are, end the turn
 	# Otherwise, select first unit with action points available
-	for unit in unit.team.units:
-		if unit.action_points > 0:
+	for u in unit.team.units:
+		if u.action_points > 0:
 			return
 	Global.mission.emit_signal("turn_complete")

@@ -70,18 +70,19 @@ func _process(delta):
 
 func make_decision() -> void:
 	# Go through all the utilities, execute the one with the highest score
-	var highest_score_utility:CharacterItem
-	var highest_score_utility_info:Dictionary
-	var highest_score:int = -1000000
-	for utility:CharacterItem in utilities:
-		var info = utility.ai_score(self)
-		var score = info["score"]
-		if score > highest_score:
-			highest_score = score
-			highest_score_utility = utility
-			highest_score_utility_info = info
-	highest_score_utility.execute(self,highest_score_utility_info)
-	await highest_score_utility.complete
+	while action_points > 0:
+		var highest_score_utility:CharacterItem
+		var highest_score_utility_info:Dictionary
+		var highest_score:int = -1000000
+		for utility:CharacterItem in utilities:
+			var info = utility.ai_score(self)
+			var score = info["score"]
+			if score > highest_score:
+				highest_score = score
+				highest_score_utility = utility
+				highest_score_utility_info = info
+		highest_score_utility.execute(self,highest_score_utility_info)
+		await highest_score_utility.complete
 	return
 	## 1. Get set of potential positions to move to
 	#var positions:PackedVector2Array

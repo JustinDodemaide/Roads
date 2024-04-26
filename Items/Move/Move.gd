@@ -79,5 +79,6 @@ func ai_score(unit:Unit) -> Dictionary:
 	#Global.mission.tilemap.add_child(sprite)
 	
 	if highest_score_position == position:
+		Log.prn("highest score position is position")
 		return {"score":-100000,"position":position}
 	return {"score":highest_score,"position":highest_score_position}

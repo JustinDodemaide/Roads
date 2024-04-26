@@ -93,6 +93,36 @@ script = ExtResource("2_1k1e8")
 
 [node name="MissionUI" parent="UI" instance=ExtResource("6_0uv3u")]
 
+[node name="Attackers" type="Label" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -11.5
+offset_right = 54.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Attackers Win"
+
+[node name="Defenders" type="Label" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Defenders Win"
+
 [node name="CursorArea" type="Area2D" parent="."]
 monitorable = false
 

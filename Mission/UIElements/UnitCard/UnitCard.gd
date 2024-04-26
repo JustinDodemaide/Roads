@@ -17,7 +17,7 @@ func init(_unit:Unit) -> void:
 func update(_unit) -> void:
 	# Assuming name and icon won't change during the mission
 	var tween = create_tween()
-	tween.tween_property(health_bar,"value",unit.health,3).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(health_bar,"value",unit.health,1.5).set_trans(Tween.TRANS_BOUNCE)
 	# health_bar.value = unit.health
 	if not unit.alive:
 		$Button.disabled = true

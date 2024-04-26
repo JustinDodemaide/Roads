@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgwb08byjwuxa"]
+[gd_scene load_steps=4 format=3 uid="uid://dgwb08byjwuxa"]
 
 [ext_resource type="Script" path="res://Mission/AI/Dummy/AIDummy.gd" id="1_e2yrg"]
 [ext_resource type="PackedScene" uid="uid://beual8nhf2442" path="res://Mission/Unit/Sensors/CoverSensor/CoverSensor.tscn" id="2_5jg01"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oywb1"]
 
 [node name="AIDummy" type="Node2D"]
 script = ExtResource("1_e2yrg")
@@ -10,3 +12,12 @@ script = ExtResource("1_e2yrg")
 collision_mask = 3
 
 [node name="CoverSensor" parent="." instance=ExtResource("2_5jg01")]
+
+[node name="ImpassDetection" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpassDetection"]
+shape = SubResource("RectangleShape2D_oywb1")
+
+[node name="ImpassDetection2" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)

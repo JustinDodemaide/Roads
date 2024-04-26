@@ -26,7 +26,7 @@ func _ready(): # Just for test purposes, remove later
 
 func enter(_msg:Dictionary = {})->void:
 	Global.mission = self
-	var chars1:Array[Character] = [Character.new(), Character.new()]
+	var chars1:Array[Character] = [Character.new()]#, Character.new()]
 	var chars2:Array[Character] = [Character.new()]#, Character.new()]
 	
 	make_new_team(chars1,true,true)
@@ -82,17 +82,34 @@ func start():
 	while true:
 		attacking_team.new_turn()
 		await turn_complete
+		if attacking_team.living_units == 0 or defending_team.living_units == 0:
+			break
+		
 		defending_team.new_turn()
 		await turn_complete
+		if attacking_team.living_units == 0 or defending_team.living_units == 0:
+			break
 
 func new_turn(team:Team):
 	team.new_turn()
 
 func team_is_out(team:Team) -> void:
+	# Ends the game
 	if team == attacking_team:
-		pass
+		attackers_win()
 	else:
-		pass
+		defenders_win()
+	# Display results? Or pass results into msg argument so they can
+	# be displayed by map
+	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",)
+
+func attackers_win() -> void:
+	$UI/Attackers.visible = true
+	world_object.faction = attacking_team.faction
+
+func defenders_win() -> void:
+	$UI/Defenders.visible = true
+
 #endregion
 
 #region idk

@@ -1,17 +1,13 @@
 extends Node2D
 
+@onready var impass_detection = $ImpassDetection2
 @onready var raycast = $RayCast2D
 @onready var cover_sensor = $CoverSensor
 
 var ideal_distance:int = 7
 var enemies:Array[Unit]
 
-var n # DEBUG, remove later
-
 func init(unit:Unit) -> void:
-	# circle.scale = Vector2(unit.sensor_radius,unit.sensor_radius)
-	n = unit.character.name
-	
 	if unit.team == Global.mission.attacking_team:
 		enemies = Global.mission.defending_team.units
 	else:
@@ -19,6 +15,9 @@ func init(unit:Unit) -> void:
 
 func get_score_at_position(pos:Vector2) -> int:
 	position = pos
+	if position_is_impassable():
+		return -1000000
+	
 	var score:int = 0
 	for enemy in enemies:
 		score += distance_score(enemy)
@@ -30,6 +29,11 @@ func get_score_at_position(pos:Vector2) -> int:
 	#label.scale *= 0.75
 	#Global.mission.tilemap.add_child(label)
 	return score
+
+func position_is_impassable() -> bool:
+	if impass_detection.is_colliding():
+		return true
+	return false
 
 func distance_score(enemy:Unit) -> int:
 	var distance = position.distance_to(enemy.position) / Global.mission.tilemap.tile_set.tile_size.x
@@ -60,7 +64,7 @@ func flanking_score(enemy:Unit) -> int:
 	if is_flanking(enemy):
 		score += 1
 	if is_being_flanked_by(enemy):
-		score -= 2 # This is very bad so it has a greater weight
+		score -= 4 # This is very bad so it has a greater weight
 	return score
 
 func is_flanking(enemy:Unit) -> bool:
@@ -72,7 +76,7 @@ func is_flanking(enemy:Unit) -> bool:
 	# Got the programming right, got the idea wrong. Decided that if a unit is
 	# looking at another unit from NE, SE, etc, the target is being flanked if
 	# either direction is uncovered (as opposed to only one direction needing
-	# to be covered
+	# to be covered)
 	return true
 
 func is_being_flanked_by(enemy:Unit) -> bool:
