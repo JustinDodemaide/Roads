@@ -15,7 +15,6 @@ var defending_team:Team
 @onready var player_state_machine:Node = $PlayerTurnStateMachine
 @onready var effect_areas:Node = $EffectAreas
 
-signal turn_complete
 signal unit_left_clicked(unit:Unit)
 signal position_left_clicked(pos:Vector2)
 
@@ -32,7 +31,7 @@ func enter(_msg:Dictionary = {})->void:
 	make_new_team(chars1,true,true)
 	make_new_team(chars2,false)
 	
-	start()
+	turn_complete(defending_team)
 	return
 	
 	world_object = _msg["location"]
@@ -77,18 +76,11 @@ func load_tilemap() -> void:
 
 #region gameplay loop
 
-func start():
-	# Player goes first
-	while true:
-		attacking_team.new_turn()
-		await turn_complete
-		if attacking_team.living_units == 0 or defending_team.living_units == 0:
-			break
-		
+func turn_complete(team:Team):
+	if team == attacking_team:
 		defending_team.new_turn()
-		await turn_complete
-		if attacking_team.living_units == 0 or defending_team.living_units == 0:
-			break
+	else:
+		attacking_team.new_turn()
 
 func new_turn(team:Team):
 	team.new_turn()

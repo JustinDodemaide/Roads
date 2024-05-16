@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Mission/PlayerTurnStateMachine/Observation.gd" id="2_n8q0y"]
 [ext_resource type="Script" path="res://Mission/PlayerTurnStateMachine/Option.gd" id="2_yq2gd"]
 [ext_resource type="Script" path="res://Mission/PlayerTurnStateMachine/MakeSelection.gd" id="3_ynhsm"]
-[ext_resource type="Script" path="res://Mission/PlayerTurnStateMachine/Confirm.gd" id="4_womrc"]
+[ext_resource type="Script" path="res://Mission/PlayerTurnStateMachine/AddToQueue.gd" id="5_pmjwc"]
 
 [node name="PlayerTurnStateMachine" type="Node"]
 script = ExtResource("1_i51fo")
@@ -18,5 +18,5 @@ script = ExtResource("2_yq2gd")
 [node name="MakeSelection" type="Node" parent="."]
 script = ExtResource("3_ynhsm")
 
-[node name="Confirm" type="Node" parent="."]
-script = ExtResource("4_womrc")
+[node name="AddToQueue" type="Node" parent="."]
+script = ExtResource("5_pmjwc")

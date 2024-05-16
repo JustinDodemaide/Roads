@@ -6,7 +6,7 @@ var selection_script
 func enter(_msg:Dictionary={}) -> void:
 	state_machine.selection_info = {}
 	if state_machine.chosen_utility.selection_type == null:
-		state_machine.transition_to("Confirm")
+		state_machine.transition_to("AddToQueue")
 		return
 	selection_script = state_machine.chosen_utility.selection_type.new()
 	selection_script.selection_made.connect(selection_made)
@@ -17,7 +17,7 @@ func selection_made(info:Dictionary) -> void:
 	selection_script.clear()
 	selection_script = null
 	state_machine.selection_info = info
-	state_machine.transition_to("Confirm")
+	state_machine.transition_to("AddToQueue")
 
 func exit() -> void:
 	if selection_script != null:
