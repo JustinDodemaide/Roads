@@ -32,6 +32,8 @@ func unit_selected(_unit:Unit):
 	Global.mission.ui.execute_button.disabled = true
 	unit.sensors.update()
 	Global.mission.ui.unit_selected(unit)
+	if not Global.mission.ui.execute_button.pressed.is_connected(execute):
+		Global.mission.ui.execute_button.pressed.connect(execute)
 	transition_to("ChooseUtility")
 
 func _input(event):
@@ -52,3 +54,11 @@ func unit_turn_finished() -> void:
 		if u.action_points > 0:
 			return
 	Global.mission.emit_signal("turn_complete")
+
+func execute():
+	for action in actions:
+		var utility = action["utility"]
+		var info = action["selection_info"]
+		utility.execute(unit,info)
+		await utility.complete
+	print("execute")

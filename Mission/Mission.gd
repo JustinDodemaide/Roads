@@ -93,7 +93,7 @@ func team_is_out(team:Team) -> void:
 		defenders_win()
 	# Display results? Or pass results into msg argument so they can
 	# be displayed by map
-	Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",)
+	# Global.scene_handler.transition_to("res://WorldMap/WorldMap.tscn",)
 
 func attackers_win() -> void:
 	$UI/Attackers.visible = true

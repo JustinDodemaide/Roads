@@ -16,13 +16,6 @@ func add_button_pressed():
 	state_machine.mission.ui.execute_button.disabled = false
 	state_machine.transition_to("ChooseUtility")
 	return
-	
-	var unit = state_machine.unit
-	var utility = state_machine.chosen_utility
-	var info = state_machine.selection_info
-	in_progress = true
-	utility.complete.connect(utility_complete)
-	utility.execute(unit,info)
 
 var in_progress:bool = false
 func utility_complete() -> void:
