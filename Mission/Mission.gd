@@ -38,6 +38,7 @@ func enter(_msg:Dictionary = {})->void:
 		$Units.add_child(new_unit)
 		units.append(new_unit)
 	attacking_team = Team.new(Faction.new(true),units)
+	ui.init(attacking_team)
 	units.clear()
 	
 	start_positions = tilemap.get_start_positions(1)
@@ -64,29 +65,6 @@ func exit()->void:
 
 func assign_tilemap() -> void:
 	pass
-
-func make_new_team(characters:Array[Character],attacker:bool,player:bool = false) -> void:
-	var team_number = 0
-	if attacker:
-		team_number = 1
-	var start_positions:Array[Vector2] = tilemap.get_start_positions(team_number)
-	
-	var unit_scene:PackedScene = preload("res://Mission/Unit/Unit.tscn")
-	var units:Array[Unit] = []
-	for character in characters:
-		var new_unit = unit_scene.instantiate()
-		new_unit.position = start_positions.pop_back()
-		new_unit.init(character)
-		$Units.add_child(new_unit)
-		units.append(new_unit)
-	var team = Team.new(units,player)
-	if attacker:
-		attacking_team = team
-	else:
-		defending_team = team
-	if player:
-		ui.init(team)
-	
 
 func load_tilemap() -> void:
 	var file_path:String = "res://Mission/Missiontilemaps/" + str(world_object.mission_id) + ".tres"
