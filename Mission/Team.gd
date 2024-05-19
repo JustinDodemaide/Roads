@@ -5,8 +5,8 @@ var units:Array[Unit]
 var is_player:bool
 var living_units:int
 
-func _init(_units:Array[Unit],player:bool):
-	is_player = player
+func _init(faction:Faction,_units:Array[Unit]):
+	is_player = faction.is_player
 	units = _units
 	for i in units:
 		i.team = self

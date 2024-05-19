@@ -28,8 +28,26 @@ func enter(_msg:Dictionary = {})->void:
 	var chars1:Array[Character] = [Character.new()]#, Character.new()]
 	var chars2:Array[Character] = [Character.new()]#, Character.new()]
 	
-	make_new_team(chars1,true,true)
-	make_new_team(chars2,false)
+	var unit_scene:PackedScene = preload("res://Mission/Unit/Unit.tscn")
+	var start_positions:Array[Vector2] = tilemap.get_start_positions(0)
+	var units:Array[Unit]
+	for character in chars1:
+		var new_unit = unit_scene.instantiate()
+		new_unit.position = start_positions.pop_back()
+		new_unit.init(character)
+		$Units.add_child(new_unit)
+		units.append(new_unit)
+	attacking_team = Team.new(Faction.new(true),units)
+	units.clear()
+	
+	start_positions = tilemap.get_start_positions(1)
+	for character in chars2:
+		var new_unit = unit_scene.instantiate()
+		new_unit.position = start_positions.pop_back()
+		new_unit.init(character)
+		$Units.add_child(new_unit)
+		units.append(new_unit)
+	defending_team = Team.new(Faction.new(false),units)
 	
 	turn_complete(defending_team)
 	return
